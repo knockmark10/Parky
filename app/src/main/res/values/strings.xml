@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Parky</string>
+    <string name="server_preference_url">http://192.168.1.74:9090</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Generics-->
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="grant">Grant</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <!--Permissions-->
+    <string name="camera_permission_rationale">Camera permission is required so that a picture of your car parking gets taken.</string>
+    <string name="contact_permission_rationale">TBD</string>
+    <string name="microphone_permission_rationale">TBD</string>
+    <string name="phone_permission_rationale">TBD</string>
+    <string name="storage_permission_rationale">TBD</string>
+    <string name="location_permission_title">Location permission required</string>
+    <string name="location_permission_rationale">To detect your parking location, the app needs that the location is enabled.</string>
+    <string name="location_background_permission_title">Background location required</string>
+    <string name="location_background_permission_rationale">To detect your parking location, the app needs that the location is set to <b>Allow all the time.</b></string>
+    <string name="location_permission_denied">Location permission was not granted.</string>
+</resources>

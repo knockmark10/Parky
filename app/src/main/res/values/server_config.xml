@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Global Endpoints-->
+    <string name="server_bigcloud_url" translatable="false">https://api.bigdatacloud.net</string>
+    <string name="server_position_stack_url" translatable="false">http://api.positionstack.com</string>
+
+    <!--Api Key for Position Stack Server-->
+    <string name="geocoding_api_key_one" translatable="false">4b581a5eb7de54973fa70cda394959c1</string>
+    <string name="geocoding_api_key_two" translatable="false">d01b6061d6e1c08a9e72cdc535a185e8</string>
+
+</resources>
