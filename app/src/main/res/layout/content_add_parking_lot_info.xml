@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/parking_lot_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Parking Lot Information"
+            android:textColor="@color/md_black_1000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/floor_type_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4sp"
+            android:layout_marginEnd="4dp"
+            android:hint="Floor Type"
+            android:textColorHint="@color/md_blue_700"
+            app:layout_constraintEnd_toStartOf="@+id/floor_number_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parking_lot_title">
+
+            <com.markoid.parky.core.presentation.views.InstantView
+                android:id="@+id/floor_type_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:completionThreshold="0"
+                android:inputType="none"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/floor_number_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4sp"
+            android:hint="Floor Number"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_white_1000"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/floor_type_container"
+            app:layout_constraintTop_toBottomOf="@+id/parking_lot_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/floor_number_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/color_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="floor_type_container, floor_number_container" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/color_value"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4sp"
+            android:layout_marginEnd="4dp"
+            android:hint="Color"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_white_1000"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintEnd_toStartOf="@+id/lot_identifier_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/color_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_parking_lot_color_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lot_identifier_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:hint="Lot Identifier"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_white_1000"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/color_value"
+            app:layout_constraintTop_toTopOf="@+id/color_value">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lot_indentifier_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/lot_identifier_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="color_value, lot_identifier_container" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fare_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Fare"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_white_1000"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintTop_toBottomOf="@+id/lot_identifier_barrier">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fare_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

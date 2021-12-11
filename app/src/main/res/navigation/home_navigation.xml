@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/home_parking_history">
+
+    <fragment
+        android:id="@+id/home_parking_history"
+        android:name="com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_parking_history">
+
+        <action
+            android:id="@+id/action_home_parking_history_to_home_add_parking"
+            app:destination="@id/home_add_parking" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/home_add_parking"
+        android:name="com.markoid.parky.home.presentation.fragments.AddParkingFragment"
+        android:label="@string/menu_add_parking"
+        tools:layout="@layout/fragment_add_parking" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.markoid.parky.home.presentation.fragments.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+</navigation>

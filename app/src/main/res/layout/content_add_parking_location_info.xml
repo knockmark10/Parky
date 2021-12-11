@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/location_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Location Information"
+            android:textColor="@color/md_black_1000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location_address_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:descendantFocusability="blocksDescendants"
+            android:hint="Address"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_blue_700"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintTop_toBottomOf="@+id/location_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/location_address_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location_latitude_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4sp"
+            android:layout_marginEnd="4dp"
+            android:descendantFocusability="blocksDescendants"
+            android:hint="Latitude"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_blue_700"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintEnd_toStartOf="@+id/location_longitude_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_address_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/location_latitude_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location_longitude_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:descendantFocusability="blocksDescendants"
+            android:hint="Longitude"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_blue_700"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/location_latitude_container"
+            app:layout_constraintTop_toBottomOf="@+id/location_address_container"
+            app:layout_constraintTop_toTopOf="@+id/location_latitude_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/location_longitude_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/add_parking_location_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="location_latitude_container, location_longitude_container" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/parking_time_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4sp"
+            android:descendantFocusability="blocksDescendants"
+            android:hint="Parking Time"
+            android:textColorHint="@color/md_blue_700"
+            app:endIconDrawable="@drawable/add_location"
+            app:endIconMode="custom"
+            app:endIconTint="@color/md_blue_700"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintTop_toBottomOf="@+id/add_parking_location_barrier">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/parking_time_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/parking_type_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4sp"
+            android:hint="Parking Type"
+            android:textColorHint="@color/md_blue_700"
+            app:layout_constraintTop_toBottomOf="@+id/parking_time_container">
+
+            <com.markoid.parky.core.presentation.views.InstantView
+                android:id="@+id/parking_type_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:completionThreshold="0"
+                android:inputType="none"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
