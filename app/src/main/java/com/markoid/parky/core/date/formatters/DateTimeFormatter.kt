@@ -15,5 +15,4 @@ object DateTimeFormatter {
             .toFormatter()
         return dateTime.toString(formatter).capitalizeWords()
     }
-
 }

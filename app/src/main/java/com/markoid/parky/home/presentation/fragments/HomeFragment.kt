@@ -33,7 +33,6 @@ class HomeFragment : AbstractFragment<FragmentHomeBinding>() {
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
 
         setupMap()
-
     }
 
     private fun setupMap() {

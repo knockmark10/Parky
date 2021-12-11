@@ -115,4 +115,3 @@ fun Context.getMarkerBitmapFromView(@DrawableRes resourceId: Int): BitmapDescrip
 
 fun GoogleMap.setMarker(context: Context, position: LatLng, @DrawableRes resId: Int): Marker =
     addMarker(MarkerOptions().position(position).icon(context.getMarkerBitmapFromView(resId)))
-

@@ -22,6 +22,4 @@ data class PositionEntity(
 
     val dateFormatted: String
         get() = dateTime.formatWith(FormatType.WEEK_MONTH_DAY_YEAR_HOUR)
-
-
 }

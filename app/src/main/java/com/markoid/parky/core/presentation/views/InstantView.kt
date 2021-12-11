@@ -21,5 +21,4 @@ class InstantView : AppCompatAutoCompleteTextView {
             performFiltering("", 0)
         }
     }
-
 }

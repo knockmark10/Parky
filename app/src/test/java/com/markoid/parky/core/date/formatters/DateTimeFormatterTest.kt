@@ -34,5 +34,4 @@ class DateTimeFormatterTest {
         val result = SUT.format(FormatType.WEEK_MONTH_DAY_YEAR_HOUR, subjectTime)
         assertEquals("Jueves Mayo 06 2021 14:23", result)
     }
-
 }

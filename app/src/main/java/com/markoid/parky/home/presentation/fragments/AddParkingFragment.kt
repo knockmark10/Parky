@@ -38,7 +38,6 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
 
         setupMap()
-
     }
 
     private fun setupMap() {
