@@ -14,7 +14,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.R
 
 fun GoogleMap.drawCircle(

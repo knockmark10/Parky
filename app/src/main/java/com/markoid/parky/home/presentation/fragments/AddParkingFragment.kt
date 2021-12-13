@@ -14,13 +14,10 @@ import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
-import com.markoid.parky.core.presentation.extensions.findMapById
-import com.markoid.parky.core.presentation.extensions.show
-import com.markoid.parky.core.presentation.extensions.toDouble
-import com.markoid.parky.core.presentation.extensions.value
+import com.markoid.parky.core.presentation.extensions.*
 import com.markoid.parky.core.presentation.states.LoadingState
 import com.markoid.parky.databinding.FragmentAddParkingBinding
-import com.markoid.parky.home.domain.usecases.request.ValidateParkingRequest
+import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
 import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
@@ -30,6 +27,7 @@ import com.markoid.parky.position.data.entities.PositionEntity
 import com.markoid.parky.position.presentation.extensions.setCameraPosition
 import com.markoid.parky.position.presentation.extensions.setMarker
 import dagger.hilt.android.AndroidEntryPoint
+import org.joda.time.DateTime
 
 @AndroidEntryPoint
 class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
@@ -40,18 +38,21 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     private val loadingDialog by lazy { LoadingDialog() }
 
-    private val parkingRequest: ValidateParkingRequest
-        get() = ValidateParkingRequest(
+    private var parkingTime: DateTime = DateTime.now()
+
+    private val parkingRequest: ParkingSpotRequest
+        get() = ParkingSpotRequest(
             address = binding.locationInfoContainer.locationAddressValue.value,
+            color = binding.locationLotInfoContainer.colorValue.value,
+            fare = binding.locationLotInfoContainer.fareValue.value.toDouble(-0.1),
+            floorNumber = binding.locationLotInfoContainer.floorNumberValue.value,
+            floorType = binding.locationLotInfoContainer.floorTypeValue.value,
             latitude = binding.locationInfoContainer.locationLatitudeValue.value.toDouble(0.0),
             longitude = binding.locationInfoContainer.locationLongitudeValue.value.toDouble(0.0),
-            parkingTime = binding.locationInfoContainer.parkingTimeValue.value,
-            parkingType = binding.locationInfoContainer.parkingTypeValue.value,
-            floorType = binding.locationLotInfoContainer.floorTypeValue.value,
-            floorNumber = binding.locationLotInfoContainer.floorNumberValue.value,
-            color = binding.locationLotInfoContainer.colorValue.value,
             lotIdentifier = binding.locationLotInfoContainer.lotIndentifierValue.value,
-            fare = binding.locationLotInfoContainer.fareValue.value.toDouble(-0.1)
+            parkingTime = parkingTime,
+            parkingTimeFormatted = binding.locationInfoContainer.parkingTimeValue.value,
+            parkingType = binding.locationInfoContainer.parkingTypeValue.value
         )
 
     override fun getViewBinding(
@@ -69,14 +70,19 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     private fun setClickListeners() {
         binding.saveParkingBtn.setOnClickListener {
-            homeViewModel.validateNewParking(parkingRequest)
-                .getResult()
-                .observe(viewLifecycleOwner, {
-                    when (it) {
-                        is DataState.Data -> handleValidationResult(it.data)
-                        is DataState.Error -> showError(it.error)
-                    }
-                })
+            val response = homeViewModel.saveParkingSpot(parkingRequest)
+            response.getResult().subscribe(viewLifecycleOwner) {
+                when (it) {
+                    is DataState.Data -> handleValidationResult(it.data)
+                    is DataState.Error -> showError(it.error)
+                }
+            }
+            response.getLoading().subscribe(viewLifecycleOwner) {
+                when (it) {
+                    LoadingState.Show -> loadingDialog.show(childFragmentManager)
+                    LoadingState.Dismiss -> loadingDialog.dismiss()
+                }
+            }
         }
     }
 
@@ -131,21 +137,22 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     private fun getCurrentLocation() {
         val response = homeViewModel.getCurrentLocation()
-        response.getResult().observe(viewLifecycleOwner, {
+        response.getResult().subscribe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Data -> onLocationReceived(it.data)
                 is DataState.Error -> showError(it.error)
             }
-        })
-        response.getLoading().observe(viewLifecycleOwner, {
+        }
+        response.getLoading().subscribe(viewLifecycleOwner) {
             when (it) {
                 LoadingState.Show -> this.loadingDialog.show(childFragmentManager)
                 LoadingState.Dismiss -> this.loadingDialog.dismiss()
             }
-        })
+        }
     }
 
     private fun onLocationReceived(position: PositionEntity) {
+        this.parkingTime = position.dateTime
         // Setting address information
         binding.locationInfoContainer.apply {
             locationAddressValue.setText(position.streetAddress)
@@ -165,36 +172,24 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     }
 
     private fun populateColors() {
-        val colorTypes: List<String> = ParkingColor.values().map { getString(it.colorId) }
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_expandable_list_item_1,
-            colorTypes
-        )
-        (binding.locationLotInfoContainer.colorContainer.editText as? AutoCompleteTextView?)?.apply {
-            setAdapter(adapter)
-        }
+        (binding.locationLotInfoContainer.colorContainer.editText as? AutoCompleteTextView?)
+            ?.setAdapter(ParkingColor
+                .values()
+                .map { getString(it.colorId) }
+                .buildArrayAdapter())
     }
 
     private fun populateParkingFloor() {
-        val types: List<String> = ParkingFloorType.values().map { getString(it.typeId) }
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_expandable_list_item_1,
-            types
-        )
-        (binding.locationLotInfoContainer.floorTypeContainer.editText as? AutoCompleteTextView?)?.apply {
-            setAdapter(adapter)
-        }
+        (binding.locationLotInfoContainer.floorTypeContainer.editText as? AutoCompleteTextView?)
+            ?.setAdapter(ParkingFloorType
+                .values()
+                .map { getString(it.typeId) }
+                .buildArrayAdapter())
     }
 
     private fun populateParkingTypes() {
         val parkingTypes: List<String> = ParkingType.values().map { getString(it.typeId) }
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_expandable_list_item_1,
-            parkingTypes
-        )
+        val adapter = parkingTypes.buildArrayAdapter()
         (binding.locationInfoContainer.parkingTypeContainer.editText as? AutoCompleteTextView?)?.apply {
             setAdapter(adapter)
             setOnItemClickListener { _, _, position, _ ->
@@ -203,6 +198,12 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
             }
         }
     }
+
+    private fun List<String>.buildArrayAdapter(): ArrayAdapter<String> = ArrayAdapter(
+        requireContext(),
+        android.R.layout.simple_expandable_list_item_1,
+        this
+    )
 
     private fun showError(error: String) {
         Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()

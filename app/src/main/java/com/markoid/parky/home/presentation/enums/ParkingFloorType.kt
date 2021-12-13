@@ -15,5 +15,8 @@ enum class ParkingFloorType(@StringRes val typeId: Int) {
     companion object {
         fun exists(res: Resources, type: String): Boolean =
             values().any { it.getValue(res) == type }
+
+        fun forValue(res: Resources, value: String): ParkingFloorType? =
+            values().firstOrNull { it.getValue(res) == value }
     }
 }

@@ -15,6 +15,6 @@ enum class ParkingType(@StringRes val typeId: Int) {
             values().any { it.getValue(res) == type }
 
         fun forValue(res: Resources, value: String): ParkingType? =
-            values().firstOrNull { res.getString(it.typeId) == value }
+            values().firstOrNull { it.getValue(res) == value }
     }
 }

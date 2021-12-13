@@ -34,7 +34,6 @@ class GetCurrentLocationUseCase
         val currentLocation: LatLng = trackingRepository.getCurrentLocation()
         // Validate that we are getting valid coordinates
         if (currentLocation.isValid.not()) throw InvalidPositionException()
-        delay(3000L)
         // Translate the coordinates that we got
         return trackingRepository.translateCoordinates(currentLocation)
     }
