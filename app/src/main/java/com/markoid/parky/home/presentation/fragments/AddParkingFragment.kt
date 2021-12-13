@@ -69,19 +69,21 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     }
 
     private fun setClickListeners() {
-        binding.saveParkingBtn.setOnClickListener {
-            val response = homeViewModel.saveParkingSpot(parkingRequest)
-            response.getResult().subscribe(viewLifecycleOwner) {
-                when (it) {
-                    is DataState.Data -> handleValidationResult(it.data)
-                    is DataState.Error -> showError(it.error)
-                }
+        binding.saveParkingBtn.setOnClickListener { saveParkingSpot() }
+    }
+
+    private fun saveParkingSpot() {
+        val response = homeViewModel.saveParkingSpot(parkingRequest)
+        response.getResult().subscribe(viewLifecycleOwner) {
+            when (it) {
+                is DataState.Data -> handleValidationResult(it.data)
+                is DataState.Error -> showError(it.error)
             }
-            response.getLoading().subscribe(viewLifecycleOwner) {
-                when (it) {
-                    LoadingState.Show -> loadingDialog.show(childFragmentManager)
-                    LoadingState.Dismiss -> loadingDialog.dismiss()
-                }
+        }
+        response.getLoading().subscribe(viewLifecycleOwner) {
+            when (it) {
+                LoadingState.Show -> loadingDialog.show(childFragmentManager)
+                LoadingState.Dismiss -> loadingDialog.dismiss()
             }
         }
     }
