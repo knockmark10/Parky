@@ -42,7 +42,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:completionThreshold="0"
+                android:enabled="false"
                 android:inputType="none"
+                android:textColor="@color/edittext_disabled_state_color"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -56,9 +58,9 @@
             android:layout_marginTop="4sp"
             android:hint="Floor Number"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
+            app:endIconDrawable="@drawable/ic_number"
             app:endIconMode="custom"
-            app:endIconTint="@color/md_white_1000"
+            app:endIconTint="@color/md_blue_700"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,39 +71,39 @@
                 android:id="@+id/floor_number_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/color_container"
+            android:id="@+id/floor_type_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="floor_type_container, floor_number_container" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/color_value"
-            style="@style/TextInputLayout_OutlinedBox"
+            android:id="@+id/color_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
             android:layout_marginEnd="4dp"
             android:hint="Color"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
-            app:endIconMode="custom"
-            app:endIconTint="@color/md_white_1000"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toStartOf="@+id/lot_identifier_container"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/color_container">
+            app:layout_constraintTop_toBottomOf="@+id/floor_type_barrier">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_parking_lot_color_value"
+            <com.markoid.parky.core.presentation.views.InstantView
+                android:id="@+id/color_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="none"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -114,19 +116,21 @@
             android:layout_marginStart="4dp"
             android:hint="Lot Identifier"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
+            app:endIconDrawable="@drawable/ic_key"
             app:endIconMode="custom"
-            app:endIconTint="@color/md_white_1000"
+            app:endIconTint="@color/md_blue_700"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/color_value"
-            app:layout_constraintTop_toTopOf="@+id/color_value">
+            app:layout_constraintStart_toEndOf="@+id/color_container"
+            app:layout_constraintTop_toTopOf="@+id/color_container">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lot_indentifier_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textCapCharacters"
+                android:maxLength="6"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -136,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="color_value, lot_identifier_container" />
+            app:constraint_referenced_ids="color_container, lot_identifier_container" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fare_container"
@@ -146,9 +150,9 @@
             android:layout_marginTop="4dp"
             android:hint="Fare"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
+            app:endIconDrawable="@drawable/ic_money"
             app:endIconMode="custom"
-            app:endIconTint="@color/md_white_1000"
+            app:endIconTint="@color/md_blue_700"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintTop_toBottomOf="@+id/lot_identifier_barrier">
@@ -157,6 +161,7 @@
                 android:id="@+id/fare_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -24,6 +24,12 @@ class DateTimeFormatterTest {
     }
 
     @Test
+    fun format_monthDayYearHour_mustReturnCorrectValue() {
+        val result = SUT.format(FormatType.MONTH_DAY_YEAR_HOUR, subjectTime)
+        assertEquals("Mayo 06 2021 14:23", result)
+    }
+
+    @Test
     fun format_weekMonthDayHour_mustReturnCorrectValue() {
         val result = SUT.format(FormatType.WEEK_MONTH_DAY_HOUR, subjectTime)
         assertEquals("Jueves Mayo 06 14:23", result)

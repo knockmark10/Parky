@@ -30,10 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8sp"
-            android:descendantFocusability="blocksDescendants"
             android:hint="Address"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
+            app:endIconDrawable="@drawable/ic_address"
             app:endIconMode="custom"
             app:endIconTint="@color/md_blue_700"
             app:hintAnimationEnabled="true"
@@ -44,6 +43,8 @@
                 android:id="@+id/location_address_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/edittext_disabled_state_color"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -55,10 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
             android:layout_marginEnd="4dp"
-            android:descendantFocusability="blocksDescendants"
             android:hint="Latitude"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
+            app:endIconDrawable="@drawable/ic_location"
             app:endIconMode="custom"
             app:endIconTint="@color/md_blue_700"
             app:hintAnimationEnabled="true"
@@ -71,6 +71,9 @@
                 android:id="@+id/location_latitude_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="text"
+                android:textColor="@color/edittext_disabled_state_color"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -81,10 +84,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:descendantFocusability="blocksDescendants"
             android:hint="Longitude"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
+            app:endIconDrawable="@drawable/ic_location"
             app:endIconMode="custom"
             app:endIconTint="@color/md_blue_700"
             app:hintAnimationEnabled="true"
@@ -98,6 +100,9 @@
                 android:id="@+id/location_longitude_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="text"
+                android:textColor="@color/edittext_disabled_state_color"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -115,10 +120,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
-            android:descendantFocusability="blocksDescendants"
             android:hint="Parking Time"
             android:textColorHint="@color/md_blue_700"
-            app:endIconDrawable="@drawable/add_location"
+            app:endIconDrawable="@drawable/ic_clock"
             app:endIconMode="custom"
             app:endIconTint="@color/md_blue_700"
             app:hintAnimationEnabled="true"
@@ -129,6 +133,8 @@
                 android:id="@+id/parking_time_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/edittext_disabled_state_color"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -148,7 +154,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:completionThreshold="0"
+                android:enabled="false"
                 android:inputType="none"
+                android:textColor="@color/edittext_disabled_state_color"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

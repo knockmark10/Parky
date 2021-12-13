@@ -29,4 +29,35 @@
     <string name="location_background_permission_title">Background location required</string>
     <string name="location_background_permission_rationale">To detect your parking location, the app needs that the location is set to <b>Allow all the time.</b></string>
     <string name="location_permission_denied">Location permission was not granted.</string>
+
+    <!--Add Parking-->
+    <string name="parking_type_street">Street-Parking</string>
+    <string name="parking_type_lot">Parking Lot</string>
+    <string name="parking_floor_type_lobby">Lobby</string>
+    <string name="parking_floor_type_floor">Floor</string>
+    <string name="parking_floor_type_roof">Roof</string>
+    <string name="parking_floor_type_basement">Basement</string>
+    <string name="invalid_address_message">Enter a valid address</string>
+    <string name="invalid_location_message">Enter a valid location</string>
+    <string name="invalid_parking_time_message">Enter a valid time</string>
+    <string name="invalid_parking_type_message">Enter a valid parking type</string>
+    <string name="invalid_floor_type_message">Enter a valid floor type</string>
+    <string name="invalid_floor_number_message">Enter a valid floor number</string>
+    <string name="invalid_color_message">Enter a valid color</string>
+    <string name="invalid_lot_identifier_message">Enter a valid lot identifier</string>
+    <string name="invalid_fare_message">Enter a valid fare</string>
+
+    <!--Colors-->
+    <string name="yellow">Yellow</string>
+    <string name="blue">Blue</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="orange">Orange</string>
+    <string name="brown">Brown</string>
+    <string name="grey">Grey</string>
+    <string name="pink">Pink</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
+    <string name="purple">Purple</string>
+
 </resources>

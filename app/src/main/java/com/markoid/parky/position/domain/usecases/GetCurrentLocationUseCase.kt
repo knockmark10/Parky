@@ -9,6 +9,7 @@ import com.markoid.parky.position.data.repositories.TrackingRepository
 import com.markoid.parky.position.domain.exceptions.GpsNotAvailableException
 import com.markoid.parky.position.domain.exceptions.InvalidPositionException
 import com.markoid.parky.position.presentation.extensions.isValid
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class GetCurrentLocationUseCase
@@ -33,6 +34,7 @@ class GetCurrentLocationUseCase
         val currentLocation: LatLng = trackingRepository.getCurrentLocation()
         // Validate that we are getting valid coordinates
         if (currentLocation.isValid.not()) throw InvalidPositionException()
+        delay(3000L)
         // Translate the coordinates that we got
         return trackingRepository.translateCoordinates(currentLocation)
     }

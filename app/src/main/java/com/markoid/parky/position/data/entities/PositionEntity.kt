@@ -21,5 +21,5 @@ data class PositionEntity(
         get() = LatLng(latitude, longitude)
 
     val dateFormatted: String
-        get() = dateTime.formatWith(FormatType.WEEK_MONTH_DAY_YEAR_HOUR)
+        get() = dateTime.formatWith(FormatType.MONTH_DAY_YEAR_HOUR)
 }
