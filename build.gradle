@@ -39,3 +39,11 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task copyPreCommit {
+    copy {
+        from 'pre-commit'
+        into '.git/hooks'
+    }
+}
+copyPreCommit

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+echo "\n================================================"
+echo "          CHECKING CODE FORMATTING                "
+echo "================================================\n"
+
+./gradlew ktlintCheck
+
+status=$?
+
+if [[ "$status" = 0 ]] ; then
+  echo "\n================================================================="
+  echo "NO FORMATTING ISSUES FOUND. Your files were committed successfully."
+  echo "=================================================================\n"
+  exit 0
+else
+  echo "\n===================================================================="
+  echo 1>&2 "FORMATTING ISSUES WERE DETECTED. Executing auto-formatting now..."
+  echo "====================================================================\n"
+  ./gradlew ktlintFormat
+  format=$?
+  if [[ "$format" = 0 ]] ; then
+    echo "\n============================================================================================"
+    echo "AUTO-FORMATTING SUCCEEDED. Please 'git add' the files back and try to 'git commit' them again."
+    echo "============================================================================================\n"
+    exit 1
+  else
+    echo "\n============================================================="
+    echo "* AUTO-FORMATTING FAILED. Please address the issues manually..."
+    echo "=============================================================\n"
+    exit 1
+  fi
+fi
