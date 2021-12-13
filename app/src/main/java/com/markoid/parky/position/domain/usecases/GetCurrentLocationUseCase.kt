@@ -9,7 +9,6 @@ import com.markoid.parky.position.data.repositories.TrackingRepository
 import com.markoid.parky.position.domain.exceptions.GpsNotAvailableException
 import com.markoid.parky.position.domain.exceptions.InvalidPositionException
 import com.markoid.parky.position.presentation.extensions.isValid
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class GetCurrentLocationUseCase

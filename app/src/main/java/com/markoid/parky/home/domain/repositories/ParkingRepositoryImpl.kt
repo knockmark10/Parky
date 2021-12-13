@@ -1,9 +1,9 @@
 package com.markoid.parky.home.domain.repositories
 
-import com.markoid.parky.home.data.mappers.ParkingSpotMapper
 import com.markoid.parky.home.data.datasources.ParkingDataSource
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.entities.ParkingSpotStatus
+import com.markoid.parky.home.data.mappers.ParkingSpotMapper
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import javax.inject.Inject
 

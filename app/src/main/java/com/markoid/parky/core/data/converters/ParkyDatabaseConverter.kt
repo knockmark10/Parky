@@ -32,5 +32,4 @@ class ParkyDatabaseConverter {
 
     @TypeConverter
     fun stringFromDateTime(millis: Long): DateTime = DateTime(millis)
-
 }
