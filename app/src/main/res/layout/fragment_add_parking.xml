@@ -60,7 +60,7 @@
             android:layout_marginBottom="12dp"
             android:textColor="@color/primary_button_text"
             android:text="@string/save_parking_lot"
-            app:backgroundTint="@color/primary_button" />
+            app:backgroundTint="@color/colorPrimary" />
 
     </LinearLayout>
 

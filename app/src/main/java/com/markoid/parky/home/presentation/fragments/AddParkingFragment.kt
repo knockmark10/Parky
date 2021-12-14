@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
@@ -27,6 +28,7 @@ import com.markoid.parky.position.data.entities.PositionEntity
 import com.markoid.parky.position.presentation.extensions.setCameraPosition
 import com.markoid.parky.position.presentation.extensions.setMarker
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import org.joda.time.DateTime
 
 @AndroidEntryPoint
@@ -63,9 +65,11 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
 
-        setupMap()
-
-        setClickListeners()
+        lifecycleScope.launchWhenStarted {
+            delay(1000L)
+            setupMap()
+            setClickListeners()
+        }
     }
 
     private fun setClickListeners() {
@@ -213,5 +217,6 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     private fun showError(error: String) {
         Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
+        requireActivity().onBackPressed()
     }
 }

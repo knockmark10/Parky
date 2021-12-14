@@ -5,7 +5,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_subtitle">Save your parking spot</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -17,6 +17,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_add_parking">Add Parking</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_settings">Settings</string>
 
     <!--Permissions-->
     <string name="camera_permission_rationale">Camera permission is required so that a picture of your car parking gets taken.</string>
@@ -73,5 +74,11 @@
     <string name="black">Black</string>
     <string name="white">White</string>
     <string name="purple">Purple</string>
+    <string name="dark_mode_summary">Enables dark mode</string>
+    <string name="dark_mode_title">Dark Mode</string>
+    <string name="auto_detection_title">Auto-Parking Detection</string>
+    <string name="auto_detection_summary">Detects auto-parking by using bluetooth</string>
+    <string name="background_location_title">Background Location</string>
+    <string name="background_location_summary">Use background location to find your car</string>
 
 </resources>

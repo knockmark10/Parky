@@ -13,7 +13,11 @@
 
         <action
             android:id="@+id/action_home_parking_history_to_home_add_parking"
-            app:destination="@id/home_add_parking" />
+            app:destination="@id/home_add_parking"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out" />
 
     </fragment>
 
@@ -28,4 +32,10 @@
         android:name="com.markoid.parky.home.presentation.fragments.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/home_settings"
+        android:name="com.markoid.parky.settings.presentation.fragments.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_home" />
 </navigation>

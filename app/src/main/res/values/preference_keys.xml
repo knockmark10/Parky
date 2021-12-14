@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="dark_mode_key">dark_mode</string>
+    <string name="auto_detection_enabled_key">auto_detection_enabled</string>
+    <string name="background_location_enabled_key">background_location_enabled</string>
+
+</resources>

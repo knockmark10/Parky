@@ -9,7 +9,9 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
+import java.util.*
 
 abstract class AbstractDialog<T : ViewBinding> : DialogFragment() {
 
@@ -24,6 +26,8 @@ abstract class AbstractDialog<T : ViewBinding> : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): T
+
+    private val stateStack: Stack<DialogState> = Stack()
 
     abstract fun initView(view: View, savedInstanceState: Bundle?)
 
@@ -46,9 +50,38 @@ abstract class AbstractDialog<T : ViewBinding> : DialogFragment() {
         initView(view, savedInstanceState)
     }
 
+    override fun show(manager: FragmentManager, tag: String?) {
+        if (stateStack.empty() || stateStack.peek() == DialogState.Dismiss) {
+            stateStack.push(DialogState.Show)
+            super.show(manager, tag)
+        } else {
+            stateStack.clear()
+            stateStack.push(DialogState.Show)
+        }
+    }
+
+    override fun dismiss() {
+        if (stateStack.empty().not() && stateStack.peek() == DialogState.Show) {
+            stateStack.push(DialogState.Dismiss)
+            super.dismiss()
+        } else {
+            stateStack.clear()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stateStack.clear()
+    }
+
     open fun getResolvedColor(@ColorRes color: Int): Int =
         ContextCompat.getColor(requireContext(), color)
 
     open fun getResolvedDrawable(@DrawableRes resId: Int): Drawable? =
         ContextCompat.getDrawable(requireContext(), resId)
+
+    enum class DialogState {
+        Show,
+        Dismiss
+    }
 }

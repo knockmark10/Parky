@@ -40,7 +40,12 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.home_parking_history, R.id.home_add_parking, R.id.nav_slideshow),
+            setOf(
+                R.id.home_parking_history,
+                R.id.home_add_parking,
+                R.id.nav_slideshow,
+                R.id.home_settings
+            ),
             drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
