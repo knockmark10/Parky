@@ -50,4 +50,9 @@
         <item name="boxStrokeWidth">1dp</item>
     </style>
 
+    <style name="PrimaryToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/md_grey_200</item>
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
 </resources>

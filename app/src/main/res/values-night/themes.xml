@@ -36,4 +36,14 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
+    <style name="TextInputLayout_OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary_contrast</item>
+        <item name="boxStrokeWidth">1dp</item>
+    </style>
+
+    <style name="PrimaryToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/md_blue_grey_800</item>
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
 </resources>
