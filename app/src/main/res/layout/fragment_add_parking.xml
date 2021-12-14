@@ -8,7 +8,7 @@
         android:id="@+id/content_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/md_grey_100"
+        android:background="@color/grey_background"
         app:layout_constraintBottom_toTopOf="@+id/save_parking_container"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -46,7 +46,7 @@
         android:id="@+id/save_parking_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_white_1000"
+        android:background="@color/grey_background"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
@@ -56,8 +56,11 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
+            app:rippleColor="@color/colorPrimaryVariant"
             android:layout_marginBottom="12dp"
-            android:text="Save Parking Lot" />
+            android:textColor="@color/primary_button_text"
+            android:text="@string/save_parking_lot"
+            app:backgroundTint="@color/primary_button" />
 
     </LinearLayout>
 

@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.Parky" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/md_blue_500</item>
-        <item name="colorPrimaryVariant">@color/md_blue_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/md_orange_700</item>
-        <item name="colorSecondaryVariant">@color/md_orange_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -46,7 +46,7 @@
     </style>
 
     <style name="TextInputLayout_OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/md_blue_700</item>
+        <item name="boxStrokeColor">@color/primary_contrast</item>
         <item name="boxStrokeWidth">1dp</item>
     </style>
 

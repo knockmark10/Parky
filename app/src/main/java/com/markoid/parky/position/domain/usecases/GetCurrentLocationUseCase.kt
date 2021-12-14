@@ -9,6 +9,7 @@ import com.markoid.parky.position.data.repositories.TrackingRepository
 import com.markoid.parky.position.domain.exceptions.GpsNotAvailableException
 import com.markoid.parky.position.domain.exceptions.InvalidPositionException
 import com.markoid.parky.position.presentation.extensions.isValid
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class GetCurrentLocationUseCase
@@ -18,6 +19,8 @@ class GetCurrentLocationUseCase
 ) : UseCase<PositionEntity, Unit>() {
 
     override suspend fun onExecute(request: Unit): PositionEntity {
+        // Add some initial delay
+        delay(800L)
         // Make sure that location permissions are handled
         val locationPermissionGranted =
             locationPermissionController.onRequestPermission(LocationPermissions.RegularLocation)
