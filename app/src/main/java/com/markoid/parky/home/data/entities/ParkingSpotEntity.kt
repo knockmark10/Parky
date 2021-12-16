@@ -1,5 +1,6 @@
 package com.markoid.parky.home.data.entities
 
+import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -43,6 +44,9 @@ data class ParkingSpotEntity(
 
     @ColumnInfo(name = "parkingType")
     val parkingType: ParkingType,
+
+    @ColumnInfo(name = "photo")
+    val photo: Uri?,
 
     @ColumnInfo(name = "status")
     val status: ParkingSpotStatus

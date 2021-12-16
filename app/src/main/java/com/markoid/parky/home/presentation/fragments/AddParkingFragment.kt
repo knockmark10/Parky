@@ -1,5 +1,7 @@
 package com.markoid.parky.home.presentation.fragments
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +17,12 @@ import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
-import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
+import com.markoid.parky.core.presentation.extensions.*
 import com.markoid.parky.core.presentation.states.LoadingState
 import com.markoid.parky.databinding.FragmentAddParkingBinding
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
+import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
@@ -42,6 +45,10 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     private var parkingTime: DateTime = DateTime.now()
 
+    private var navigationListener: HomeNavigationCallbacks? = null
+
+    private var carPhotoUri: Uri? = null
+
     private val parkingRequest: ParkingSpotRequest
         get() = ParkingSpotRequest(
             address = binding.locationInfoContainer.locationAddressValue.value,
@@ -54,7 +61,8 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
             lotIdentifier = binding.locationLotInfoContainer.lotIndentifierValue.value,
             parkingTime = parkingTime,
             parkingTimeFormatted = binding.locationInfoContainer.parkingTimeValue.value,
-            parkingType = binding.locationInfoContainer.parkingTypeValue.value
+            parkingType = binding.locationInfoContainer.parkingTypeValue.value,
+            photo = carPhotoUri
         )
 
     override fun getViewBinding(
@@ -64,7 +72,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
         .inflate(inflater, container, false)
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
-
+        this.navigationListener?.onNavigationChanged()
         lifecycleScope.launchWhenStarted {
             delay(1000L)
             setupMap()
@@ -81,7 +89,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
         response.getResult().subscribe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Data -> handleValidationResult(it.data)
-                is DataState.Error -> showError(it.error)
+                is DataState.Error -> showError(it.error, false)
             }
         }
         response.getLoading().subscribe(viewLifecycleOwner) {
@@ -160,13 +168,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     private fun onLocationReceived(position: PositionEntity) {
         this.parkingTime = position.dateTime
         // Setting address information
-        binding.locationInfoContainer.apply {
-            locationAddressValue.setText(position.streetAddress)
-            locationLatitudeValue.setText(position.latitude.toString())
-            locationLongitudeValue.setText(position.longitude.toString())
-            parkingTimeValue.setText(position.dateFormatted)
-            populateParkingTypes()
-        }
+        setAddressInformation(position)
 
         // Setting parking lot information
         populateParkingFloor()
@@ -175,6 +177,16 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
         // Setting map information
         mGoogleMap.setCameraPosition(position.latLng, 18f)
         mGoogleMap.setMarker(requireContext(), position.latLng, R.drawable.ic_user_marker)
+    }
+
+    private fun setAddressInformation(position: PositionEntity) {
+        binding.locationInfoContainer.apply {
+            locationAddressValue.setText(position.streetAddress)
+            locationLatitudeValue.setText(position.latitude.toString())
+            locationLongitudeValue.setText(position.longitude.toString())
+            parkingTimeValue.setText(position.dateFormatted)
+            populateParkingTypes()
+        }
     }
 
     private fun populateColors() {
@@ -215,8 +227,33 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
         this
     )
 
-    private fun showError(error: String) {
+    private fun showError(error: String, exit: Boolean = true) {
         Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
-        requireActivity().onBackPressed()
+        if (exit) requireActivity().onBackPressed()
+    }
+
+    fun takePhoto() {
+        homeViewModel.takeCarPicture().getResult().subscribe(viewLifecycleOwner) {
+            when (it) {
+                is DataState.Data -> displayCarImage(it.data)
+                is DataState.Error -> handlePictureError(it.error)
+            }
+        }
+    }
+
+    private fun displayCarImage(uri: Uri) {
+        this.carPhotoUri = uri
+        binding.carPictureContainer.root.isVisible = true
+        binding.carPictureContainer.vehiclePicture.setImageURI(uri)
+    }
+
+    private fun handlePictureError(error: String) {
+        binding.carPictureContainer.root.isVisible = false
+        showError(error, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is HomeNavigationCallbacks) navigationListener = context
     }
 }

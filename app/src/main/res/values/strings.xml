@@ -14,13 +14,18 @@
     <string name="cancel">Cancel</string>
     <string name="grant">Grant</string>
 
+    <!--Menu-->
     <string name="menu_home">Home</string>
     <string name="menu_add_parking">Add Parking</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_settings">Settings</string>
+    <string name="take_photo">Take photo</string>
+    <string name="schedule_alarm">Schedule alarm</string>
 
     <!--Permissions-->
     <string name="camera_permission_rationale">Camera permission is required so that a picture of your car parking gets taken.</string>
+    <string name="camera_permission_title">Camera permission required</string>
+    <string name="camera_permission_denied">Camera permission was not granted.</string>
     <string name="contact_permission_rationale">TBD</string>
     <string name="microphone_permission_rationale">TBD</string>
     <string name="phone_permission_rationale">TBD</string>
@@ -61,6 +66,7 @@
     <string name="lot_identifier">Lot Identifier</string>
     <string name="fare">Fare</string>
     <string name="map_view">Map View</string>
+    <string name="car_picture">Car Picture</string>
 
     <!--Colors-->
     <string name="yellow">Yellow</string>
@@ -74,6 +80,8 @@
     <string name="black">Black</string>
     <string name="white">White</string>
     <string name="purple">Purple</string>
+
+    <!--Settings-->
     <string name="dark_mode_summary">Enables dark mode</string>
     <string name="dark_mode_title">Dark Mode</string>
     <string name="auto_detection_title">Auto-Parking Detection</string>

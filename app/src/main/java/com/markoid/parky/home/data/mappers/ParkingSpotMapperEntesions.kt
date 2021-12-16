@@ -23,5 +23,6 @@ fun ParkingSpotRequest.toEntity(
     parkingTime = parkingTime,
     parkingType = ParkingType.forValue(res, parkingType)
         ?: throw IllegalStateException("Parking type was not found for value: $parkingType"),
+    photo = photo,
     status = status
 )

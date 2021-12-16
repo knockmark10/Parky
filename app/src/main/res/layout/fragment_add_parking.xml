@@ -21,7 +21,9 @@
                 android:id="@+id/location_info_container"
                 layout="@layout/content_add_parking_location_info"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <include
                 android:id="@+id/location_lot_info_container"
@@ -32,11 +34,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/location_info_container" />
 
             <include
+                android:id="@+id/car_picture_container"
+                layout="@layout/content_add_parking_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/location_lot_info_container" />
+
+            <include
                 android:id="@+id/parking_map_container"
                 layout="@layout/content_add_parking_map"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_lot_info_container" />
+                app:layout_constraintTop_toBottomOf="@+id/car_picture_container" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -56,11 +66,11 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            app:rippleColor="@color/colorPrimaryVariant"
             android:layout_marginBottom="12dp"
-            android:textColor="@color/primary_button_text"
             android:text="@string/save_parking_lot"
-            app:backgroundTint="@color/colorPrimary" />
+            android:textColor="@color/primary_button_text"
+            app:backgroundTint="@color/colorPrimary"
+            app:rippleColor="@color/colorPrimaryVariant" />
 
     </LinearLayout>
 

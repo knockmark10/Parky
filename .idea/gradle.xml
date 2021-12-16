@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/app/permissions" />
+            <option value="$PROJECT_DIR$/files" />
             <option value="$PROJECT_DIR$/permissions" />
           </set>
         </option>

@@ -1,5 +1,6 @@
 package com.markoid.parky.core.data.converters
 
+import android.net.Uri
 import androidx.room.TypeConverter
 import com.markoid.parky.home.data.entities.ParkingSpotStatus
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
@@ -28,8 +29,14 @@ class ParkyDatabaseConverter {
         ParkingSpotStatus.valueOf(value)
 
     @TypeConverter
-    fun dateTimeToString(time: DateTime): Long = time.millis
+    fun dateTimeToLong(time: DateTime): Long = time.millis
 
     @TypeConverter
-    fun stringFromDateTime(millis: Long): DateTime = DateTime(millis)
+    fun longFromDateTime(millis: Long): DateTime = DateTime(millis)
+
+    @TypeConverter
+    fun uriToString(uri: Uri?): String? = uri?.toString()
+
+    @TypeConverter
+    fun uriFromString(uriString: String?): Uri? = uriString?.let { Uri.parse(it) }
 }
