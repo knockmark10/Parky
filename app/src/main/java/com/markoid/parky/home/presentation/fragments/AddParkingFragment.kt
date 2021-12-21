@@ -12,12 +12,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
-import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
+import com.markoid.parky.core.presentation.extensions.*
 import com.markoid.parky.core.presentation.states.LoadingState
 import com.markoid.parky.databinding.FragmentAddParkingBinding
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
@@ -51,9 +50,6 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     private var navigationListener: HomeNavigationCallbacks? = null
 
     private var carPhotoUri: Uri? = null
-
-    private val now: DateTime
-        get() = DateTime.now()
 
     private val parkingRequest: ParkingSpotRequest
         get() = ParkingSpotRequest(
@@ -136,9 +132,20 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     }
 
     private fun goToUserLocation() {
-        this.navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_add_parking, false)
-        this.navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_user_location, true)
-        requireActivity().onBackPressed()
+        appAlert {
+            message = "Parking spot has been saved successfully!"
+            positiveListener = {
+                navigationListener?.onUpdateDrawerMenuItemVisibility(
+                    R.id.home_add_parking,
+                    false
+                )
+                navigationListener?.onUpdateDrawerMenuItemVisibility(
+                    R.id.home_user_location,
+                    true
+                )
+                requireActivity().onBackPressed()
+            }
+        }
     }
 
     private fun clearErrors() {
@@ -242,8 +249,13 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     )
 
     private fun showError(error: String, exit: Boolean = true) {
-        Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
-        if (exit) requireActivity().onBackPressed()
+        appAlert {
+            message = error
+            positiveListener = {
+                dismiss()
+                if (exit) requireActivity().onBackPressed()
+            }
+        }
     }
 
     fun takePhoto() {
@@ -266,7 +278,6 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     // https://medium.com/android-news/using-alarmmanager-like-a-pro-20f89f4ca720
     private fun scheduleAlarm() {
         alarmTime?.let { AlarmUtils.setAlarm(requireContext(), it) }
-        longToast("Alarm has been set!")
     }
 
     private fun displayCarImage(uri: Uri) {

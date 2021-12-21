@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.markoid.parky.core.presentation.dialogs.alert.AppDialog
 import org.joda.time.DateTime
 
 @Suppress("UNCHECKED_CAST")
@@ -90,4 +91,10 @@ fun Fragment.shortToast(message: String) {
 
 fun Fragment.longToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+}
+
+fun Fragment.appAlert(block: AppDialog.() -> Unit) {
+    val appDialog = AppDialog()
+    block(appDialog)
+    appDialog.show(childFragmentManager, this::class.java.name)
 }

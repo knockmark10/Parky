@@ -1,7 +1,9 @@
 package com.markoid.parky.home.presentation.callbacks
 
+import com.markoid.parky.home.data.entities.ParkingSpotEntity
+
 interface ParkingHistoryAdapterCallback {
-    fun onDeleteParkingSpot(parkingSpotId: Long)
+    fun onRequestDeleteParkingSpot(spot: ParkingSpotEntity)
     fun onGoToUserLocation()
     fun onDisplayEmptyState()
 }

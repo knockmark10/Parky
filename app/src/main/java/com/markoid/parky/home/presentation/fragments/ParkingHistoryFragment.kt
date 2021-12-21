@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
+import com.markoid.parky.core.presentation.enums.AlertType
+import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.subscribe
 import com.markoid.parky.databinding.FragmentParkingHistoryBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
@@ -65,9 +67,18 @@ class ParkingHistoryFragment :
         homeViewModel.getParkingHistory().getResult().subscribe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Data -> displayHistoryList(it.data)
-                is DataState.Error -> displayEmptyState()
+                is DataState.Error -> showError(it.error)
             }
         }
+    }
+
+    private fun showError(message: String) {
+        appAlert {
+            this.message = message
+            type = AlertType.Error
+            positiveListener = { dismiss() }
+        }
+        displayEmptyState()
     }
 
     private fun displayHistoryList(historyList: List<ParkingSpotEntity>) {
@@ -100,9 +111,18 @@ class ParkingHistoryFragment :
         binding.actionAddParkingSpot.isVisible = false
     }
 
-    override fun onDeleteParkingSpot(parkingSpotId: Long) {
-        devicePreferences.isParkingSpotActive = false
-        homeViewModel.deleteParkingSpot(parkingSpotId)
+    override fun onRequestDeleteParkingSpot(spot: ParkingSpotEntity) {
+        appAlert {
+            message = "Do you really want to delete this parking spot?"
+            type = AlertType.Warning
+            positiveListener = {
+                devicePreferences.isParkingSpotActive = false
+                homeViewModel.deleteParkingSpot(spot.id)
+                historyAdapter.deleteParkingSpot(spot)
+                dismiss()
+            }
+            negativeListener = { dismiss() }
+        }
     }
 
     override fun onGoToUserLocation() {

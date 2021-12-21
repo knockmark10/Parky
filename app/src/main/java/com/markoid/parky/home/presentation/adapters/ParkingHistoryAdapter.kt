@@ -47,11 +47,10 @@ class ParkingHistoryAdapter : RecyclerView.Adapter<ParkingHistoryAdapter.ViewHol
         this.mListener = listener
     }
 
-    private fun deleteParkingSpot(spot: ParkingSpotEntity) {
+    fun deleteParkingSpot(spot: ParkingSpotEntity) {
         if (history.remove(spot)) {
             notifyItemRemoved(history.indexOf(spot))
             notifyItemRangeChanged(history.indexOf(spot), itemCount)
-            mListener?.onDeleteParkingSpot(spot.id)
         }
         if (history.isEmpty()) mListener?.onDisplayEmptyState()
     }
@@ -71,7 +70,7 @@ class ParkingHistoryAdapter : RecyclerView.Adapter<ParkingHistoryAdapter.ViewHol
             coordinates.text = spot.latLng.format(5)
             address.text = spot.address
             actionDelete.isVisible = spot.status.isActive
-            actionDelete.setOnClickListener { deleteParkingSpot(spot) }
+            actionDelete.setOnClickListener { mListener?.onRequestDeleteParkingSpot(spot) }
             carPhoto.isVisible = spot.photo != null
             carPhoto.setImageURI(spot.photo)
             if (spot.status.isActive)

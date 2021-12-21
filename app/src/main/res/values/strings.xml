@@ -13,6 +13,10 @@
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="grant">Grant</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
+    <string name="warning">Warning</string>
+    <string name="info">Information</string>
 
     <!--Menu-->
     <string name="menu_home">Home</string>
