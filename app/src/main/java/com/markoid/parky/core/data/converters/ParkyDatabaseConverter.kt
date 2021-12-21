@@ -10,10 +10,11 @@ import org.joda.time.DateTime
 class ParkyDatabaseConverter {
 
     @TypeConverter
-    fun floorTypeToString(type: ParkingFloorType): String = type.name
+    fun floorTypeToString(type: ParkingFloorType?): String? = type?.name
 
     @TypeConverter
-    fun stringFromFloorType(value: String): ParkingFloorType = ParkingFloorType.valueOf(value)
+    fun stringFromFloorType(value: String?): ParkingFloorType? =
+        value?.let { ParkingFloorType.valueOf(value) }
 
     @TypeConverter
     fun parkingTypeToString(type: ParkingType): String = type.name

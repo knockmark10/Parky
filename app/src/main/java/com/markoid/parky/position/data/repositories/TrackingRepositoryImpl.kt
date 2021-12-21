@@ -1,9 +1,11 @@
 package com.markoid.parky.position.data.repositories
 
+import android.location.Location
 import com.google.android.gms.maps.model.LatLng
 import com.markoid.parky.position.data.datasources.TrackingDataSource
 import com.markoid.parky.position.data.entities.PositionEntity
 import com.markoid.parky.position.data.mappers.toPositionEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TrackingRepositoryImpl @Inject constructor(
@@ -17,6 +19,9 @@ class TrackingRepositoryImpl @Inject constructor(
         val location = this.trackingDataSource.getCurrentLocation()
         return LatLng(location?.latitude ?: 0.0, location?.longitude ?: 0.0)
     }
+
+    override fun getRealTimeLocation(): Flow<Location> =
+        trackingDataSource.getRealTimeLocation()
 
     /**
      * Translates the provided [LatLng] with the Android Library. This may fall in several cases,

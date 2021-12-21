@@ -11,3 +11,10 @@ val Location.isValid: Boolean
 
 val LatLng.isValid: Boolean
     get() = latitude.isValid && longitude.isValid
+
+fun LatLng.format(precision: Int = 2): String = StringBuilder()
+    .append(String.format("%.${precision}f", latitude))
+    .append(",")
+    .append(" ")
+    .append(String.format("%.${precision}f", longitude))
+    .toString()

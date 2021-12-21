@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +18,7 @@ import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
-import com.markoid.parky.core.presentation.extensions.*
+import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.core.presentation.states.LoadingState
 import com.markoid.parky.databinding.FragmentAddParkingBinding
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
@@ -72,7 +73,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
         .inflate(inflater, container, false)
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
-        this.navigationListener?.onNavigationChanged()
+        this.navigationListener?.onUpdateToolbarMenuItems()
         lifecycleScope.launchWhenStarted {
             delay(1000L)
             setupMap()
@@ -123,8 +124,14 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
                 binding.locationInfoContainer.parkingTimeContainer.error = result.message
             is ParkingValidationStatus.Failure.InvalidParkingType ->
                 binding.locationInfoContainer.parkingTypeContainer.error = result.message
-            ParkingValidationStatus.Success -> showError("Nice dick, bro!")
+            ParkingValidationStatus.Success -> goToUserLocation()
         }
+    }
+
+    private fun goToUserLocation() {
+        this.navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_add_parking, false)
+        this.navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_user_location, true)
+        requireActivity().onBackPressed()
     }
 
     private fun clearErrors() {
@@ -239,6 +246,10 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
                 is DataState.Error -> handlePictureError(it.error)
             }
         }
+    }
+
+    fun scheduleAlarm() {
+        Toast.makeText(requireContext(), "Coming soon...", Toast.LENGTH_LONG).show()
     }
 
     private fun displayCarImage(uri: Uri) {

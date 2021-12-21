@@ -1,6 +1,7 @@
 package com.markoid.parky
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.markoid.parky.core.presentation.providers.ActivityProvider
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
@@ -14,5 +15,6 @@ class ParkyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         activityProvider.init(this)
+        Stetho.initializeWithDefaults(this)
     }
 }

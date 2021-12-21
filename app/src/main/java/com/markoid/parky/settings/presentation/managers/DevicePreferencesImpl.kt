@@ -1,33 +1,38 @@
 package com.markoid.parky.settings.presentation.managers
 
+import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatDelegate
 import com.markoid.parky.R
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class DevicePreferencesImpl
 @Inject constructor(
-    private val resources: Resources,
-    private val sharedPreferences: SharedPreferences
-) : DevicePreferences {
+    @ApplicationContext context: Context,
+    sharedPreferences: SharedPreferences
+) : AbstractPreferences(context, sharedPreferences), DevicePreferences {
 
-    override fun isAutoParkingDetectionEnabled(): Boolean =
-        sharedPreferences.getBoolean(
-            resources.getString(R.string.auto_detection_enabled_key),
-            false
-        )
+    override var currentTheme: Int
+        get() = getSharedPreference(R.string.dark_mode_key, false).asTheme()
+        set(value) = setSharedPreference(R.string.dark_mode_key, value.asBoolean())
 
-    override fun isBackgroundLocationEnabled(): Boolean =
-        sharedPreferences.getBoolean(
-            resources.getString(R.string.background_location_enabled_key),
-            false
-        )
+    override var isAutoParkingDetectionEnabled: Boolean
+        get() = getSharedPreference(R.string.auto_detection_enabled_key, false)
+        set(value) = setSharedPreference(R.string.auto_detection_enabled_key, value)
 
-    override fun getCurrentTheme(): Int =
-        if (sharedPreferences.getBoolean(resources.getString(R.string.dark_mode_key), false)) {
-            AppCompatDelegate.MODE_NIGHT_YES
-        } else {
-            AppCompatDelegate.MODE_NIGHT_NO
-        }
+    override var isBackgroundLocationEnabled: Boolean
+        get() = getSharedPreference(R.string.background_location_enabled_key, false)
+        set(value) = setSharedPreference(R.string.background_location_enabled_key, value)
+
+    override var isParkingSpotActive: Boolean
+        get() = getSharedPreference(R.string.parking_spot_active, false)
+        set(value) = setSharedPreference(R.string.parking_spot_active, value)
+
+    private fun Boolean.asTheme(): Int =
+        if (this) AppCompatDelegate.MODE_NIGHT_YES
+        else AppCompatDelegate.MODE_NIGHT_NO
+
+    private fun Int.asBoolean(): Boolean =
+        this == AppCompatDelegate.MODE_NIGHT_YES
 }

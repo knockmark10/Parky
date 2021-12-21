@@ -16,10 +16,15 @@ import com.markoid.parky.core.presentation.extensions.findFragmentByClassName
 import com.markoid.parky.databinding.ActivityHomeBinding
 import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.fragments.AddParkingFragment
+import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCallbacks {
+
+    @Inject
+    lateinit var devicePreferences: DevicePreferences
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -44,6 +49,7 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_take_photo -> addParkingFragment?.takePhoto()
+            R.id.action_schedule_alarm -> addParkingFragment?.scheduleAlarm()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -64,13 +70,25 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
             setOf(
                 R.id.home_parking_history,
                 R.id.home_add_parking,
-                R.id.nav_slideshow,
+                R.id.home_user_location,
                 R.id.home_settings
             ),
             drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        checkMenuItemsVisibility()
+    }
+
+    private fun checkMenuItemsVisibility() {
+        onUpdateDrawerMenuItemVisibility(
+            R.id.home_add_parking,
+            devicePreferences.isParkingSpotActive.not()
+        )
+        onUpdateDrawerMenuItemVisibility(
+            R.id.home_user_location,
+            devicePreferences.isParkingSpotActive
+        )
     }
 
     override fun onBackPressed() {
@@ -78,7 +96,12 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
         invalidateOptionsMenu()
     }
 
-    override fun onNavigationChanged() {
+    override fun onUpdateToolbarMenuItems() {
         invalidateOptionsMenu()
+    }
+
+    override fun onUpdateDrawerMenuItemVisibility(itemId: Int, isVisible: Boolean) {
+        val navigationView: NavigationView? = findViewById(R.id.home_navigation_view)
+        navigationView?.menu?.findItem(itemId)?.isVisible = isVisible
     }
 }

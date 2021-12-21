@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/card_background"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp">
+
+        <View
+            android:id="@+id/status_icon"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/bg_active_spot"
+            app:layout_constraintBottom_toBottomOf="@+id/status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/status" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/status_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Active" />
+
+        <ImageView
+            android:id="@+id/action_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_delete"
+            app:tint="@color/md_red_800" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/md_grey_300"
+            app:layout_constraintTop_toBottomOf="@+id/status" />
+
+        <ImageView
+            android:id="@+id/car_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/parking_type" />
+
+        <TextView
+            android:id="@+id/parking_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="4dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            app:drawableStartCompat="@drawable/ic_parking"
+            app:drawableTint="@color/primary_contrast"
+            app:layout_constraintEnd_toStartOf="@+id/car_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            tools:text="Street Parking" />
+
+        <TextView
+            android:id="@+id/coordinates"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="4dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            app:drawableStartCompat="@drawable/ic_location"
+            app:drawableTint="@color/primary_contrast"
+            app:layout_constraintEnd_toStartOf="@+id/car_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parking_type"
+            tools:text="19.2973123, -101.23812379123" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="4dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            app:drawableStartCompat="@drawable/ic_address"
+            app:drawableTint="@color/primary_contrast"
+            app:layout_constraintEnd_toStartOf="@+id/car_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coordinates"
+            tools:text="Calle Rincón de Copitero #247 Col. Rincón Quieto" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

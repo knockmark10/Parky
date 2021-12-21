@@ -10,12 +10,12 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/home_add_parking"
-            android:icon="@drawable/ic_add_location"
+            android:icon="@drawable/ic_car"
             android:title="@string/menu_add_parking" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/home_user_location"
+            android:icon="@drawable/ic_location"
+            android:title="@string/menu_user_location" />
         <item
             android:id="@+id/home_settings"
             android:icon="@drawable/ic_settings"

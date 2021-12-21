@@ -15,8 +15,7 @@ fun ParkingSpotRequest.toEntity(
     color = color,
     fare = fare,
     floorNumber = floorNumber,
-    floorType = ParkingFloorType.forValue(res, floorType)
-        ?: throw IllegalStateException("Floor type was not found for value: $parkingType"),
+    floorType = ParkingFloorType.forValue(res, floorType),
     latitude = latitude,
     longitude = longitude,
     lotIdentifier = lotIdentifier,

@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val TIMEOUT = 120L
+private const val TIMEOUT = 10L
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -45,6 +45,7 @@ class NetModule {
     fun providesOkHttpClient(cache: Cache): OkHttpClient = OkHttpClient.Builder()
         .readTimeout(TIMEOUT, TimeUnit.SECONDS)
         .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+        .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .cache(cache)
         .build()

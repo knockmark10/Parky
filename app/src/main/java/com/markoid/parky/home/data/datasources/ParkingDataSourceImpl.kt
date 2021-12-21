@@ -10,15 +10,19 @@ class ParkingDataSourceImpl
     private val parkingSpotDao: ParkingSpotDao
 ) : ParkingDataSource {
 
+    override suspend fun deleteParkingSpot(parkingSpotId: Long) {
+        parkingSpotDao.deleteParkingSpotById(parkingSpotId)
+    }
+
     override suspend fun getActiveParkingSpot(): ParkingSpotEntity = this.parkingSpotDao
-        .getParkingSpotByType(ParkingSpotStatus.Active.name)
-        ?.firstOrNull() ?: throw IllegalStateException("No parking spot saved into database")
+        .getParkingSpotByStatus(ParkingSpotStatus.Active.name)
+        ?.firstOrNull() ?: throw IllegalStateException("No parking spot saved into database, ")
 
     override suspend fun getAllParkingSpots(): List<ParkingSpotEntity> = this.parkingSpotDao
         .getAllParkingSpots() ?: emptyList()
 
     override suspend fun getArchivedParkingSpots(): List<ParkingSpotEntity> = this.parkingSpotDao
-        .getParkingSpotByType(ParkingSpotStatus.Archived.name) ?: emptyList()
+        .getParkingSpotByStatus(ParkingSpotStatus.Archived.name) ?: emptyList()
 
     override suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotEntity) {
         this.parkingSpotDao.insert(parkingSpot)

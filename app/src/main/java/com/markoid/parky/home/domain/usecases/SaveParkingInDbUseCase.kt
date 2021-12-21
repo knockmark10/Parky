@@ -11,5 +11,6 @@ class SaveParkingInDbUseCase
 ) : UseCase<Unit, ParkingSpotRequest>() {
 
     override suspend fun onExecute(request: ParkingSpotRequest) {
+        parkingRepository.saveParkingSpotIntoDatabase(request)
     }
 }

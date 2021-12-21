@@ -12,6 +12,8 @@
     <color name="card_title">@color/md_black_1000</color>
     <color name="primary_contrast">@color/md_blue_700</color>
     <color name="primary_button_text">@color/md_white_1000</color>
+    <color name="background_shadow">@color/md_grey_300</color>
+    <color name="background_time">@color/md_black_1000</color>
 
     <!--This overrides outline box color-->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/md_blue_700

@@ -14,7 +14,8 @@ buildscript {
     ext.jcenter = "https://jcenter.bintray.com"
     ext.m2 = "https://plugins.gradle.org/m2"
     ext.atlassian = "https://maven.atlassian.com/content/repositories/atlassian-public/"
-    ext.repos = "google,central,jcenter,m2,atlassian".split(',')
+    ext.jitpack = "https://jitpack.io"
+    ext.repos = "google,central,jcenter,m2,atlassian,jitpack".split(',')
 
     repositories {
         repos.each { repo -> maven { url project.property(repo).toString() } }

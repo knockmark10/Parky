@@ -10,6 +10,7 @@ import com.markoid.parky.position.data.entities.positionstack.PositionStackRespo
 import com.markoid.parky.position.data.services.BigDataCloudService
 import com.markoid.parky.position.data.services.PositionStackService
 import com.markoid.parky.position.presentation.managers.PositionManager
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TrackingDataSourceImpl
@@ -22,6 +23,9 @@ class TrackingDataSourceImpl
 
     override suspend fun getCurrentLocation(): Location? =
         this.positionManager.requestSingleLocation()
+
+    override fun getRealTimeLocation(): Flow<Location> =
+        positionManager.observeLocationUpdates()
 
     override suspend fun translateCoordinatesWithAndroidApi(location: LatLng): List<Address> =
         this.positionManager.getAddressFromLocation(location) ?: emptyList()

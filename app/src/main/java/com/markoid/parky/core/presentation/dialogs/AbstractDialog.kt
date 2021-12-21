@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
-import java.util.*
+import java.util.* // ktlint-disable no-wildcard-imports
 
 abstract class AbstractDialog<T : ViewBinding> : DialogFragment() {
 

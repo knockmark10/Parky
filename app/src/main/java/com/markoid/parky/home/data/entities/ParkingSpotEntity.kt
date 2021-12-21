@@ -24,7 +24,7 @@ data class ParkingSpotEntity(
     val floorNumber: String,
 
     @ColumnInfo(name = "floorType")
-    val floorType: ParkingFloorType,
+    val floorType: ParkingFloorType?,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

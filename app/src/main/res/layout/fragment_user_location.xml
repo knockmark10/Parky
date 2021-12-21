@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/user_location_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/card_background"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/card_title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/car_location_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="My Car"
+                android:textColor="@color/md_white_1000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_car"
+                app:drawableTint="@color/md_white_1000"
+                app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/card_title_bar" />
+
+            <ImageView
+                android:id="@+id/action_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
+                app:layout_constraintEnd_toStartOf="@+id/action_alarm"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_money"
+                app:tint="@color/md_white_1000" />
+
+            <ImageView
+                android:id="@+id/action_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
+                app:layout_constraintEnd_toStartOf="@+id/action_camera"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_clock"
+                app:tint="@color/md_white_1000" />
+
+            <ImageView
+                android:id="@+id/action_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
+                app:layout_constraintEnd_toStartOf="@+id/action_delete"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_menu_camera"
+                app:tint="@color/md_white_1000" />
+
+            <ImageView
+                android:id="@+id/action_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
+                app:layout_constraintEnd_toStartOf="@+id/action_collapse"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_delete"
+                app:tint="@color/md_white_1000" />
+
+            <ImageView
+                android:id="@+id/action_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_down_arrow"
+                app:tint="@color/md_white_1000" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/location_expandable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="600"
+                app:el_expanded="true"
+                app:el_parallax="0.5"
+                app:layout_constraintTop_toBottomOf="@+id/card_title_bar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/distance"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:padding="2dp"
+                        app:drawableStartCompat="@drawable/ic_walk"
+                        app:drawableTint="@color/colorPrimary"
+                        app:layout_constraintEnd_toStartOf="@+id/navigation_barrier"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="2.4 km" />
+
+                    <TextView
+                        android:id="@+id/car_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="12dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:padding="2dp"
+                        app:drawableStartCompat="@drawable/ic_address"
+                        app:drawableTint="@color/colorPrimary"
+                        app:layout_constraintEnd_toStartOf="@+id/navigation_barrier"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/distance"
+                        tools:text="Avenido Hidalgo #219 Int. 23 Col. Campos del Toreo, Morelia, Michoacán, México. CP: 58069" />
+
+
+                    <!--https://dribbble.com/shots/15883730-Transit-Concept-Application-->
+
+                    <ImageButton
+                        android:id="@+id/navigation_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:backgroundTint="@color/md_green_600"
+                        app:layout_constraintBottom_toTopOf="@+id/time"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:srcCompat="@drawable/ic_navigation"
+                        app:tint="@color/md_white_1000" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_time"
+                        android:padding="4dp"
+                        tools:text="24 min"
+                        android:textColor="@color/md_white_1000"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/car_address"
+                        app:layout_constraintEnd_toEndOf="@+id/navigation_btn"
+                        app:layout_constraintStart_toStartOf="@+id/navigation_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/navigation_btn" />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/navigation_barrier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="start"
+                        app:constraint_referenced_ids="navigation_btn, time" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

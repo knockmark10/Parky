@@ -17,7 +17,7 @@
     <!--Menu-->
     <string name="menu_home">Home</string>
     <string name="menu_add_parking">Add Parking</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_user_location">User Location</string>
     <string name="menu_settings">Settings</string>
     <string name="take_photo">Take photo</string>
     <string name="schedule_alarm">Schedule alarm</string>
@@ -88,5 +88,9 @@
     <string name="auto_detection_summary">Detects auto-parking by using bluetooth</string>
     <string name="background_location_title">Background Location</string>
     <string name="background_location_summary">Use background location to find your car</string>
+
+    <!--Animations-->
+    <string name="loading">Loading…</string>
+    <string name="parking_empty_state_message">No parking spots around here…</string>
 
 </resources>

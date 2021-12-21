@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        AppCompatDelegate.setDefaultNightMode(devicePreferences.getCurrentTheme())
+        AppCompatDelegate.setDefaultNightMode(devicePreferences.currentTheme)
 
         startActivity(Intent(this, HomeActivity::class.java))
 

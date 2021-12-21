@@ -19,23 +19,32 @@
             app:popEnterAnim="@anim/right_in"
             app:popExitAnim="@anim/right_out" />
 
+        <action
+            android:id="@+id/action_home_parking_history_to_home_user_location"
+            app:destination="@id/home_user_location"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out" />
+
     </fragment>
 
     <fragment
         android:id="@+id/home_add_parking"
         android:name="com.markoid.parky.home.presentation.fragments.AddParkingFragment"
         android:label="@string/menu_add_parking"
-        tools:layout="@layout/fragment_add_parking" />
+        tools:layout="@layout/fragment_add_parking">
+
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.markoid.parky.home.presentation.fragments.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/home_user_location"
+        android:name="com.markoid.parky.home.presentation.fragments.UserLocationFragment"
+        android:label="@string/menu_user_location"
+        tools:layout="@layout/fragment_user_location" />
 
     <fragment
         android:id="@+id/home_settings"
         android:name="com.markoid.parky.settings.presentation.fragments.SettingsFragment"
-        android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/menu_settings" />
 </navigation>

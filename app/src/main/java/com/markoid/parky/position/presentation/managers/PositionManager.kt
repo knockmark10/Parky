@@ -6,6 +6,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Looper
+import android.util.Log
 import com.google.android.gms.location.* // ktlint-disable no-wildcard-imports
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.channels.awaitClose
@@ -67,16 +68,18 @@ class PositionManager(
      * Request location updates. This will emit a new location every given interval.
      */
     fun observeLocationUpdates(): Flow<Location> = callbackFlow {
+        Log.d("PositionManager", "observing location updates")
         val client = LocationServices.getFusedLocationProviderClient(mContext)
         val locationRequest = LocationRequest
             .create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            .setInterval(0)
-            .setFastestInterval(0)
+            .setInterval(Duration.standardSeconds(10).millis)
+            .setFastestInterval(Duration.standardSeconds(10).millis)
 
         val locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null) {
+                    Log.d("PositionManager", "got location ${locationResult.lastLocation}")
                     trySend(locationResult.lastLocation)
                 }
             }
@@ -89,6 +92,7 @@ class PositionManager(
         )
 
         awaitClose {
+            Log.d("PositionManager", "stop observing location updates")
             client.removeLocationUpdates(locationCallback)
         }
     }
@@ -118,26 +122,28 @@ class PositionManager(
         this.mGeocoder.getFromLocationName(locationName, maxResults)
 
     /**
-     * Returns the straight-line distance in meters between two locations
-     */
-    fun getDistanceFromLocations(firstLocation: LatLng, secondLocation: LatLng): Double {
-        val results = FloatArray(1)
-        Location.distanceBetween(
-            firstLocation.latitude,
-            firstLocation.longitude,
-            secondLocation.latitude,
-            secondLocation.longitude,
-            results
-        )
-        return results.firstOrNull()?.toDouble() ?: 0.0
-    }
-
-    /**
      * Stop receiving location updates (turn off gps use)
      */
     fun stopLocationUpdates() {
         if (mLocationCallback != null) {
             this.mFusedClient?.removeLocationUpdates(mLocationCallback)
+        }
+    }
+
+    companion object {
+        /**
+         * Returns the straight-line distance in meters between two locations
+         */
+        fun getDistanceFromLocations(firstLocation: LatLng, secondLocation: LatLng): Double {
+            val results = FloatArray(1)
+            Location.distanceBetween(
+                firstLocation.latitude,
+                firstLocation.longitude,
+                secondLocation.latitude,
+                secondLocation.longitude,
+                results
+            )
+            return results.firstOrNull()?.toDouble() ?: 0.0
         }
     }
 }

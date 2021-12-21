@@ -18,6 +18,10 @@ class ParkingRepositoryImpl
         this.parkingDataSource.updateParkingSpot(archivedParkingSpot)
     }
 
+    override suspend fun deleteParkingSpot(spotId: Long) {
+        parkingDataSource.deleteParkingSpot(spotId)
+    }
+
     override suspend fun getActiveParkingSpot(): ParkingSpotEntity =
         this.parkingDataSource.getActiveParkingSpot()
 
