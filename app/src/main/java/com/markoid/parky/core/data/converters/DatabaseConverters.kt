@@ -7,7 +7,7 @@ import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
 import org.joda.time.DateTime
 
-class ParkyDatabaseConverter {
+class DatabaseConverters {
 
     @TypeConverter
     fun floorTypeToString(type: ParkingFloorType?): String? = type?.name
@@ -30,10 +30,10 @@ class ParkyDatabaseConverter {
         ParkingSpotStatus.valueOf(value)
 
     @TypeConverter
-    fun dateTimeToLong(time: DateTime): Long = time.millis
+    fun dateTimeToLong(time: DateTime?): Long? = time?.millis
 
     @TypeConverter
-    fun longFromDateTime(millis: Long): DateTime = DateTime(millis)
+    fun longFromDateTime(millis: Long?): DateTime? = millis?.let { DateTime(millis) }
 
     @TypeConverter
     fun uriToString(uri: Uri?): String? = uri?.toString()

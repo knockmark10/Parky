@@ -49,7 +49,7 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_take_photo -> addParkingFragment?.takePhoto()
-            R.id.action_schedule_alarm -> addParkingFragment?.scheduleAlarm()
+            R.id.action_schedule_alarm -> addParkingFragment?.displayDatePicker()
         }
         return super.onOptionsItemSelected(item)
     }

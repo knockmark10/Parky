@@ -1,8 +1,15 @@
 package com.markoid.parky.core.presentation.extensions
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.DialogInterface
+import android.widget.DatePicker
+import android.widget.TimePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import org.joda.time.DateTime
 
 @Suppress("UNCHECKED_CAST")
 fun <F : Fragment> AppCompatActivity.findFragmentByClassName(fragmentClass: Class<F>): F? {
@@ -18,4 +25,69 @@ fun <F : Fragment> AppCompatActivity.findFragmentByClassName(fragmentClass: Clas
         }
     }
     return null
+}
+
+fun Fragment.timePicker(
+    is24HourView: Boolean,
+    block: TimePicker.(XTime) -> Unit,
+    cancelBlock: DialogInterface.() -> Unit = {}
+): TimePickerDialog {
+    val now = DateTime.now()
+    return TimePickerDialog(
+        requireContext(),
+        { timePicker, hourOfDay, minute ->
+            block(timePicker, XTime(hourOfDay, minute))
+        },
+        now.hourOfDay,
+        now.minuteOfHour,
+        true
+    ).apply { setOnCancelListener { cancelBlock(it) } }
+}
+
+fun Fragment.datePicker(
+    block: DatePicker.(XDate) -> Unit,
+    cancelBlock: DialogInterface.() -> Unit = {}
+): DatePickerDialog {
+    val now = DateTime.now()
+    return DatePickerDialog(
+        requireContext(),
+        { datePicker, year, month, dayOfMonth ->
+            block(datePicker, XDate(dayOfMonth, month, year))
+        },
+        now.year,
+        now.monthOfYear - 1,
+        now.dayOfMonth
+    ).apply { setOnCancelListener { cancelBlock(it) } }
+}
+
+fun Fragment.dateAndTimePickers(
+    is24HourView: Boolean,
+    onSelectedBlock: DateTime.() -> Unit,
+    cancelBlock: () -> Unit = {}
+) {
+    datePicker({ date: XDate ->
+        timePicker(is24HourView, { time: XTime ->
+            onSelectedBlock(
+                DateTime(
+                    date.year,
+                    date.month + 1,
+                    date.dayOfMonth,
+                    time.hourOfDay,
+                    time.minute
+                )
+            )
+        }, {
+            cancelBlock()
+        }).show()
+    }, {
+        cancelBlock()
+    }).show()
+}
+
+fun Fragment.shortToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.longToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
 }

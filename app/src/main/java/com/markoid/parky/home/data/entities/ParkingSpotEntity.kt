@@ -14,16 +14,19 @@ data class ParkingSpotEntity(
     @ColumnInfo(name = "address")
     val address: String,
 
+    @ColumnInfo(name = "alarm_time")
+    val alarmTime: DateTime?,
+
     @ColumnInfo(name = "color")
     val color: String,
 
     @ColumnInfo(name = "fare")
     val fare: Double,
 
-    @ColumnInfo(name = "floorNumber")
+    @ColumnInfo(name = "floor_number")
     val floorNumber: String,
 
-    @ColumnInfo(name = "floorType")
+    @ColumnInfo(name = "floor_type")
     val floorType: ParkingFloorType?,
 
     @PrimaryKey(autoGenerate = true)
@@ -36,13 +39,13 @@ data class ParkingSpotEntity(
     @ColumnInfo(name = "longitude")
     val longitude: Double,
 
-    @ColumnInfo(name = "lotIdentifier")
+    @ColumnInfo(name = "lot_identifier")
     val lotIdentifier: String,
 
-    @ColumnInfo(name = "parkingTime")
+    @ColumnInfo(name = "parking_time")
     val parkingTime: DateTime,
 
-    @ColumnInfo(name = "parkingType")
+    @ColumnInfo(name = "parking_type")
     val parkingType: ParkingType,
 
     @ColumnInfo(name = "photo")

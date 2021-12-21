@@ -5,6 +5,7 @@ import org.joda.time.DateTime
 
 data class ParkingSpotRequest(
     val address: String,
+    val alarmTime: DateTime?,
     val color: String,
     val fare: Double,
     val floorNumber: String,

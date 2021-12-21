@@ -56,6 +56,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
                 app:layout_constraintEnd_toStartOf="@+id/action_alarm"
                 app:layout_constraintTop_toTopOf="parent"
@@ -67,6 +70,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
                 app:layout_constraintEnd_toStartOf="@+id/action_camera"
                 app:layout_constraintTop_toTopOf="parent"
@@ -78,6 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
                 app:layout_constraintEnd_toStartOf="@+id/action_delete"
                 app:layout_constraintTop_toTopOf="parent"
@@ -89,6 +98,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
                 app:layout_constraintEnd_toStartOf="@+id/action_collapse"
                 app:layout_constraintTop_toTopOf="parent"
@@ -136,6 +148,21 @@
                         tools:text="2.4 km" />
 
                     <TextView
+                        android:id="@+id/speed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:padding="2dp"
+                        app:drawableStartCompat="@drawable/ic_speed"
+                        app:drawableTint="@color/colorPrimary"
+                        app:layout_constraintEnd_toStartOf="@+id/navigation_barrier"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/distance"
+                        tools:text="2.4 km/hr" />
+
+                    <TextView
                         android:id="@+id/car_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -148,7 +175,7 @@
                         app:drawableTint="@color/colorPrimary"
                         app:layout_constraintEnd_toStartOf="@+id/navigation_barrier"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/distance"
+                        app:layout_constraintTop_toBottomOf="@+id/speed"
                         tools:text="Avenido Hidalgo #219 Int. 23 Col. Campos del Toreo, Morelia, Michoacán, México. CP: 58069" />
 
 
@@ -172,13 +199,13 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_time"
                         android:padding="4dp"
-                        tools:text="24 min"
                         android:textColor="@color/md_white_1000"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/car_address"
                         app:layout_constraintEnd_toEndOf="@+id/navigation_btn"
                         app:layout_constraintStart_toStartOf="@+id/navigation_btn"
-                        app:layout_constraintTop_toBottomOf="@+id/navigation_btn" />
+                        app:layout_constraintTop_toBottomOf="@+id/navigation_btn"
+                        tools:text="24 min" />
 
                     <androidx.constraintlayout.widget.Barrier
                         android:id="@+id/navigation_barrier"

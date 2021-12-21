@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +26,7 @@ import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
+import com.markoid.parky.home.presentation.utils.AlarmUtils
 import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
 import com.markoid.parky.position.data.entities.PositionEntity
 import com.markoid.parky.position.presentation.extensions.setCameraPosition
@@ -46,13 +46,19 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     private var parkingTime: DateTime = DateTime.now()
 
+    private var alarmTime: DateTime? = null
+
     private var navigationListener: HomeNavigationCallbacks? = null
 
     private var carPhotoUri: Uri? = null
 
+    private val now: DateTime
+        get() = DateTime.now()
+
     private val parkingRequest: ParkingSpotRequest
         get() = ParkingSpotRequest(
             address = binding.locationInfoContainer.locationAddressValue.value,
+            alarmTime = alarmTime,
             color = binding.locationLotInfoContainer.colorValue.value,
             fare = binding.locationLotInfoContainer.fareValue.value.toDouble(-0.1),
             floorNumber = binding.locationLotInfoContainer.floorNumberValue.value,
@@ -86,6 +92,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     }
 
     private fun saveParkingSpot() {
+        scheduleAlarm()
         val response = homeViewModel.saveParkingSpot(parkingRequest)
         response.getResult().subscribe(viewLifecycleOwner) {
             when (it) {
@@ -248,8 +255,18 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
         }
     }
 
-    fun scheduleAlarm() {
-        Toast.makeText(requireContext(), "Coming soon...", Toast.LENGTH_LONG).show()
+    fun displayDatePicker() {
+        dateAndTimePickers(true, {
+            alarmTime = this
+        }, {
+            longToast("Alarm was not set")
+        })
+    }
+
+    // https://medium.com/android-news/using-alarmmanager-like-a-pro-20f89f4ca720
+    private fun scheduleAlarm() {
+        alarmTime?.let { AlarmUtils.setAlarm(requireContext(), it) }
+        longToast("Alarm has been set!")
     }
 
     private fun displayCarImage(uri: Uri) {

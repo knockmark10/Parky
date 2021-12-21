@@ -5,5 +5,6 @@ import com.google.android.gms.maps.model.LatLng
 data class LocationUpdatesResponse(
     val distance: String,
     val userLocation: LatLng,
-    val time: String
+    val time: String,
+    val speedKph: String
 )

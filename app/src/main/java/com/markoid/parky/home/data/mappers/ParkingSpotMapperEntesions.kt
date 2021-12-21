@@ -12,6 +12,7 @@ fun ParkingSpotRequest.toEntity(
     status: ParkingSpotStatus
 ): ParkingSpotEntity = ParkingSpotEntity(
     address = address,
+    alarmTime = alarmTime,
     color = color,
     fare = fare,
     floorNumber = floorNumber,
