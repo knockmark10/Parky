@@ -31,9 +31,8 @@ class ParkingRepositoryImpl
     override suspend fun getArchivedParkingSpots(): List<ParkingSpotEntity> =
         this.parkingDataSource.getArchivedParkingSpots()
 
-    override suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotRequest) {
+    override suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotRequest): Long =
         this.parkingDataSource.saveParkingSpotIntoDatabase(
             this.parkingSpotMapper.mapFromRequestToEntity(parkingSpot, ParkingSpotStatus.Active)
         )
-    }
 }

@@ -6,7 +6,7 @@ import com.markoid.parky.R
 const val EMPTY_STRING = ""
 
 sealed class ParkingValidationStatus(val message: String) {
-    object Success : ParkingValidationStatus(EMPTY_STRING)
+    data class Success(val spotId: Long) : ParkingValidationStatus(EMPTY_STRING)
 
     sealed class Failure(errorMessage: String) : ParkingValidationStatus(errorMessage) {
         data class EmptyAddress(val res: Resources) :

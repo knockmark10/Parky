@@ -7,6 +7,6 @@ interface ParkingDataSource {
     suspend fun getActiveParkingSpot(): ParkingSpotEntity
     suspend fun getAllParkingSpots(): List<ParkingSpotEntity>
     suspend fun getArchivedParkingSpots(): List<ParkingSpotEntity>
-    suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotEntity)
+    suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotEntity): Long
     suspend fun updateParkingSpot(parkingSpot: ParkingSpotEntity)
 }

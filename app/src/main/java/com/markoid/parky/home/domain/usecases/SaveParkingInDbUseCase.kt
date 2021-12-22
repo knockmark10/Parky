@@ -8,9 +8,8 @@ import javax.inject.Inject
 class SaveParkingInDbUseCase
 @Inject constructor(
     private val parkingRepository: ParkingRepository
-) : UseCase<Unit, ParkingSpotRequest>() {
+) : UseCase<Long, ParkingSpotRequest>() {
 
-    override suspend fun onExecute(request: ParkingSpotRequest) {
+    override suspend fun onExecute(request: ParkingSpotRequest): Long =
         parkingRepository.saveParkingSpotIntoDatabase(request)
-    }
 }

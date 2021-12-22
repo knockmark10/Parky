@@ -41,6 +41,9 @@ class ParkingHistoryFragment :
 
     private var navigationListener: HomeNavigationCallbacks? = null
 
+    private val parkingSpotId: Long
+        get() = historyAdapter.getActiveSpot()?.id ?: 0L
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -49,11 +52,17 @@ class ParkingHistoryFragment :
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
 
+        refreshToolbarItems()
+
         setAddParkingSpotClickListener()
 
         setupHistoryAdapter()
 
         getHistoryList()
+    }
+
+    private fun refreshToolbarItems() {
+        this.navigationListener?.onUpdateToolbarMenuItems()
     }
 
     private fun setupHistoryAdapter() {
@@ -76,7 +85,6 @@ class ParkingHistoryFragment :
         appAlert {
             this.message = message
             type = AlertType.Error
-            positiveListener = { dismiss() }
         }
         displayEmptyState()
     }
@@ -86,7 +94,8 @@ class ParkingHistoryFragment :
             historyAdapter.setParkingSpotHistory(historyList)
             hideEmptyState()
         } else {
-            displayEmptyState()
+            historyAdapter.flush()
+            onDisplayEmptyState()
         }
     }
 
@@ -94,7 +103,7 @@ class ParkingHistoryFragment :
         binding.actionAddParkingSpot.setOnClickListener {
             binding.parkingHistoryEmptyStateContainer.parkingHistoryEmptyAnimation.cancelAnimation()
             navController.navigate(
-                ParkingHistoryFragmentDirections.actionHomeParkingHistoryToHomeAddParking()
+                ParkingHistoryFragmentDirections.actionToAddParking()
             )
         }
     }
@@ -113,21 +122,25 @@ class ParkingHistoryFragment :
 
     override fun onRequestDeleteParkingSpot(spot: ParkingSpotEntity) {
         appAlert {
-            message = "Do you really want to delete this parking spot?"
+            message = getString(R.string.parking_spot_delete_title)
             type = AlertType.Warning
             positiveListener = {
                 devicePreferences.isParkingSpotActive = false
                 homeViewModel.deleteParkingSpot(spot.id)
                 historyAdapter.deleteParkingSpot(spot)
-                dismiss()
+                close()
             }
-            negativeListener = { dismiss() }
+            negativeListener = { close() }
         }
     }
 
     override fun onGoToUserLocation() {
         findNavController()
-            .navigate(ParkingHistoryFragmentDirections.actionHomeParkingHistoryToHomeUserLocation())
+            .navigate(
+                ParkingHistoryFragmentDirections
+                    .actionToUserLocation()
+                    .setSpotId(parkingSpotId)
+            )
     }
 
     override fun onDisplayEmptyState() {
@@ -141,5 +154,9 @@ class ParkingHistoryFragment :
         if (context is HomeNavigationCallbacks) {
             this.navigationListener = context
         }
+    }
+
+    companion object {
+        const val SPOT_ID = "spot.id"
     }
 }

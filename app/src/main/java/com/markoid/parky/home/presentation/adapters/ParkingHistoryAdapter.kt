@@ -43,6 +43,11 @@ class ParkingHistoryAdapter : RecyclerView.Adapter<ParkingHistoryAdapter.ViewHol
         notifyDataSetChanged()
     }
 
+    fun flush() {
+        history.clear()
+        notifyDataSetChanged()
+    }
+
     fun setAdapterListener(listener: ParkingHistoryAdapterCallback) {
         this.mListener = listener
     }
@@ -54,6 +59,8 @@ class ParkingHistoryAdapter : RecyclerView.Adapter<ParkingHistoryAdapter.ViewHol
         }
         if (history.isEmpty()) mListener?.onDisplayEmptyState()
     }
+
+    fun getActiveSpot(): ParkingSpotEntity? = history.firstOrNull { it.status.isActive }
 
     inner class ViewHolder(
         private val binding: ItemParkingHistoryBinding

@@ -24,9 +24,8 @@ class ParkingDataSourceImpl
     override suspend fun getArchivedParkingSpots(): List<ParkingSpotEntity> = this.parkingSpotDao
         .getParkingSpotByStatus(ParkingSpotStatus.Archived.name) ?: emptyList()
 
-    override suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotEntity) {
+    override suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotEntity): Long =
         this.parkingSpotDao.insert(parkingSpot)
-    }
 
     override suspend fun updateParkingSpot(parkingSpot: ParkingSpotEntity) {
         this.parkingSpotDao.update(parkingSpot)

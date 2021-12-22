@@ -42,10 +42,10 @@ class ValidateNewParkingUseCase
 
                 request.fare < 0.0 -> ParkingValidationStatus.Failure.InvalidFare(resources)
 
-                else -> ParkingValidationStatus.Success
+                else -> ParkingValidationStatus.Success(0L)
             }
         } else {
-            ParkingValidationStatus.Success
+            ParkingValidationStatus.Success(0L)
         }
     }
 }

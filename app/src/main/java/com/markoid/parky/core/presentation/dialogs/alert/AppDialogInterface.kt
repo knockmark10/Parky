@@ -11,4 +11,5 @@ interface AppDialogInterface {
     var type: AlertType
     var positiveListener: OnPositiveListener?
     var negativeListener: OnNegativeListener?
+    fun close()
 }

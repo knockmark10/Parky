@@ -77,7 +77,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
         this.navigationListener?.onUpdateToolbarMenuItems()
         lifecycleScope.launchWhenStarted {
-            delay(1000L)
+            delay(1500L)
             setupMap()
             setClickListeners()
         }
@@ -127,7 +127,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
                 binding.locationInfoContainer.parkingTimeContainer.error = result.message
             is ParkingValidationStatus.Failure.InvalidParkingType ->
                 binding.locationInfoContainer.parkingTypeContainer.error = result.message
-            ParkingValidationStatus.Success -> goToUserLocation()
+            is ParkingValidationStatus.Success -> goToUserLocation()
         }
     }
 
@@ -252,7 +252,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
         appAlert {
             message = error
             positiveListener = {
-                dismiss()
+                close()
                 if (exit) requireActivity().onBackPressed()
             }
         }

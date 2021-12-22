@@ -38,11 +38,12 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
     private val toolbarMenu: Int
         get() = when (currentDestination) {
             getString(R.string.menu_add_parking) -> R.menu.add_parking_menu
-            else -> R.menu.home_menu
+            else -> -1
         }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(toolbarMenu, menu)
+        val inflateMenu = toolbarMenu != -1
+        if (inflateMenu) menuInflater.inflate(toolbarMenu, menu)
         return true
     }
 

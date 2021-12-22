@@ -39,4 +39,8 @@ class AppDialog : AbstractBottomSheetDialog<DialogAppBinding>(), AppDialogInterf
         binding.alertNegativeButton
             .setOnClickListener { negativeListener?.invoke(this) ?: dismiss() }
     }
+
+    override fun close() {
+        super.dismiss()
+    }
 }

@@ -8,6 +8,6 @@ interface ParkingRepository {
     suspend fun getActiveParkingSpot(): ParkingSpotEntity
     suspend fun getAllParkingSpots(): List<ParkingSpotEntity>
     suspend fun getArchivedParkingSpots(): List<ParkingSpotEntity>
-    suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotRequest)
+    suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotRequest): Long
     suspend fun archiveParkingSpot(parkingSpot: ParkingSpotEntity)
 }

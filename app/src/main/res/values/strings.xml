@@ -97,4 +97,8 @@
     <string name="loading">Loading…</string>
     <string name="parking_empty_state_message">No parking spots around here…</string>
 
+    <!--User Location-->
+    <string name="parking_spot_delete_title">Are you sure you want to delete this parking spot?</string>
+    <string name="parking_spot_deleted_successful_message">Parking spot deleted successfully!</string>
+
 </resources>

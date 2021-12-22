@@ -17,11 +17,11 @@ class SaveParkingSpotUseCase
         // Get validation status
         val validationStatus = validateNewParkingUseCase.onExecute(request)
         // If validations fail, return the validation status
-        if (validationStatus != ParkingValidationStatus.Success) return validationStatus
+        if (validationStatus !is ParkingValidationStatus.Success) return validationStatus
         // Save parking spot into database
-        saveParkingInDbUseCase.onExecute(request)
+        val parkingSpotId: Long = saveParkingInDbUseCase.onExecute(request)
         // Set flag on preferences
         devicePreferences.isParkingSpotActive = true
-        return ParkingValidationStatus.Success
+        return ParkingValidationStatus.Success(parkingSpotId)
     }
 }

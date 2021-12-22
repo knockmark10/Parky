@@ -6,7 +6,7 @@ import androidx.room.* // ktlint-disable no-wildcard-imports
 interface AbstractDao<T> {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item: T)
+    suspend fun insert(item: T): Long
 
     @Update
     suspend fun update(item: T)

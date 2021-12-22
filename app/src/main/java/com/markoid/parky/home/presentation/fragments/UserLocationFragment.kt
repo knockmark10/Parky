@@ -14,14 +14,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
-import com.markoid.parky.core.presentation.extensions.findMapById
-import com.markoid.parky.core.presentation.extensions.latLng
-import com.markoid.parky.core.presentation.extensions.launchWhenStartedCatching
-import com.markoid.parky.core.presentation.extensions.subscribe
+import com.markoid.parky.core.presentation.enums.AlertType
+import com.markoid.parky.core.presentation.extensions.*
 import com.markoid.parky.databinding.FragmentUserLocationBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
 import com.markoid.parky.home.presentation.CarPhotoDialog
+import com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment.Companion.SPOT_ID
 import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
 import com.markoid.parky.position.presentation.extensions.centerMarkers
 import com.markoid.parky.position.presentation.extensions.setMarker
@@ -32,6 +31,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
+
+    private val parkingSpotId: Long
+        get() = arguments?.getLong(SPOT_ID) ?: 0L
 
     private lateinit var mGoogleMap: GoogleMap
 
@@ -57,22 +59,53 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
     }
 
     private fun setClickListener() {
-        binding.actionDelete.setOnClickListener { deleteParkingSpot() }
-
+        binding.actionDelete.setOnClickListener { displayAlertToDeleteParkingSpot() }
         binding.actionAlarm.setOnClickListener { displayAlarmInfo() }
-
         binding.actionCamera.setOnClickListener { displayCarPhoto() }
-
         binding.actionRate.setOnClickListener { displayRate() }
-
         binding.actionCollapse.setOnClickListener { collapseCard() }
     }
 
     private fun deleteParkingSpot() {
+        viewModel.deleteParkingSpot(parkingSpotId).getResult().react(viewLifecycleOwner) {
+            when (this) {
+                is DataState.Data -> displayParkingSpotDeletedSuccessfully()
+                is DataState.Error -> showError(error)
+            }
+        }
     }
 
+    private fun displayParkingSpotDeletedSuccessfully() {
+        appAlert {
+            message = getString(R.string.parking_spot_deleted_successful_message)
+            positiveListener = {
+                close()
+                requireActivity().onBackPressed()
+            }
+        }
+    }
+
+    private fun showError(error: String) {
+        appAlert {
+            message = error
+            type = AlertType.Error
+        }
+    }
+
+    private fun displayAlertToDeleteParkingSpot() {
+        appAlert {
+            message = getString(R.string.parking_spot_delete_title)
+            type = AlertType.Warning
+            positiveListener = {
+                deleteParkingSpot()
+                close()
+            }
+            negativeListener = { close() }
+        }
+    }
+
+    // https://medium.com/android-news/using-alarmmanager-like-a-pro-20f89f4ca720
     private fun displayAlarmInfo() {
-        // https://medium.com/android-news/using-alarmmanager-like-a-pro-20f89f4ca720
     }
 
     private fun displayCarPhoto() {
