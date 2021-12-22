@@ -1,5 +1,6 @@
 package com.markoid.parky.home.presentation.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,20 +10,21 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.enums.AlertType
-import com.markoid.parky.core.presentation.extensions.*
+import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.databinding.FragmentUserLocationBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
+import com.markoid.parky.home.data.extensions.getAlarmTimeFormatted
+import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
 import com.markoid.parky.home.presentation.CarPhotoDialog
 import com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment.Companion.SPOT_ID
 import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
-import com.markoid.parky.position.presentation.extensions.centerMarkers
+import com.markoid.parky.position.presentation.extensions.centerWithLatLngList
 import com.markoid.parky.position.presentation.extensions.setMarker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -40,8 +42,6 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
     private val viewModel by viewModels<HomeViewModel>()
 
     private var parkingSpot: ParkingSpotEntity? = null
-
-    private val markerManager = MarkerManager()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -128,9 +128,11 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
         mapFragment?.getMapAsync { handleMap(it) }
     }
 
+    @SuppressLint("MissingPermission")
     private fun handleMap(map: GoogleMap) {
         this.mGoogleMap = map
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
+        map.isMyLocationEnabled = true
         getActiveParkingSpot()
     }
 
@@ -151,13 +153,14 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
         this.parkingSpot = parkingSpot
 
         // Displaying parking spot marker
-        markerManager.addMarker(Type.ParkingSpot, parkingSpot.latLng)
+        mGoogleMap.setMarker(requireContext(), parkingSpot.latLng, R.drawable.ic_parking_marker)
 
         // Setting up card information
         binding.actionRate.isVisible = parkingSpot.fare >= 0.0
-        binding.actionAlarm.isVisible = false
+        binding.actionAlarm.isVisible = parkingSpot.alarmTime != null
         binding.actionCamera.isVisible = parkingSpot.photo != null
         binding.carAddress.text = parkingSpot.address
+        binding.alarmTime.text = parkingSpot.getAlarmTimeFormatted()
         getUserLocation(parkingSpot.latLng)
     }
 
@@ -179,39 +182,8 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
         binding.time.text = data.time
         binding.distance.text = data.distance
         binding.speed.text = data.speedKph
-        markerManager.addMarker(Type.UserLocation, data.userLocation)
-        markerManager.centerMarkers()
-    }
-
-    inner class MarkerManager {
-
-        private val markerMap: HashMap<Type, Marker> = hashMapOf()
-
-        fun addMarker(type: Type, position: LatLng) {
-            val marker = if (type == Type.ParkingSpot) {
-                mGoogleMap.setMarker(
-                    requireContext(),
-                    position,
-                    R.drawable.ic_parking
-                )
-            } else {
-                markerMap[type]?.remove()
-                mGoogleMap.setMarker(
-                    requireContext(),
-                    position,
-                    R.drawable.ic_current_location
-                )
-            }
-            markerMap[type] = marker
-        }
-
-        fun centerMarkers() {
-            mGoogleMap.centerMarkers(resources, markerMap.values.map { it.position })
-        }
-    }
-
-    enum class Type {
-        UserLocation,
-        ParkingSpot
+        val locationList: List<LatLng> = parkingSpot?.let { listOf(it.latLng, data.userLocation) }
+            ?: listOf(data.userLocation)
+        mGoogleMap.centerWithLatLngList(resources, locationList)
     }
 }

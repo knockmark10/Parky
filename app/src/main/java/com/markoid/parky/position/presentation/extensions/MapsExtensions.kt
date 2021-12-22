@@ -35,7 +35,7 @@ fun GoogleMap.drawCircle(
     return this.addCircle(circleOptions)
 }
 
-fun GoogleMap.centerMarkers(resources: Resources, latLngList: List<LatLng>) {
+fun GoogleMap.centerWithLatLngList(resources: Resources, latLngList: List<LatLng>) {
     val latLngBounds = LatLngBounds.Builder()
 
     latLngList.forEach { latLngBounds.include(it) }
@@ -54,7 +54,7 @@ fun GoogleMap.setCameraPosition(position: LatLng, zoom: Float) {
     this.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 }
 
-fun GoogleMap.centerAddedMarkers(listMarker: List<Marker>, zoom: Float) {
+fun GoogleMap.centerWithMarkers(listMarker: List<Marker>, zoom: Float) {
     var latitude = 0.0
     var longitude = 0.0
     for (marker in listMarker) {

@@ -73,8 +73,8 @@ class PositionManager(
         val locationRequest = LocationRequest
             .create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            .setInterval(Duration.standardSeconds(0).millis)
-            .setFastestInterval(Duration.standardSeconds(0).millis)
+            .setInterval(Duration.standardSeconds(15).millis)
+            .setFastestInterval(Duration.standardSeconds(10).millis)
 
         val locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {

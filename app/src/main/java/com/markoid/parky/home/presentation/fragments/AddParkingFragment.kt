@@ -16,7 +16,8 @@ import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
-import com.markoid.parky.core.presentation.extensions.*
+import com.markoid.parky.core.presentation.enums.AlertType
+import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.core.presentation.states.LoadingState
 import com.markoid.parky.databinding.FragmentAddParkingBinding
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
@@ -251,6 +252,7 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
     private fun showError(error: String, exit: Boolean = true) {
         appAlert {
             message = error
+            type = AlertType.Error
             positiveListener = {
                 close()
                 if (exit) requireActivity().onBackPressed()

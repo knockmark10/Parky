@@ -9,10 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.markoid.parky.R
-import com.markoid.parky.core.presentation.extensions.latLng
 import com.markoid.parky.databinding.ItemParkingHistoryBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.entities.isActive
+import com.markoid.parky.home.data.extensions.getAlarmTimeFormatted
+import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.presentation.callbacks.ParkingHistoryAdapterCallback
 import com.markoid.parky.position.presentation.extensions.format
 
@@ -80,6 +81,8 @@ class ParkingHistoryAdapter : RecyclerView.Adapter<ParkingHistoryAdapter.ViewHol
             actionDelete.setOnClickListener { mListener?.onRequestDeleteParkingSpot(spot) }
             carPhoto.isVisible = spot.photo != null
             carPhoto.setImageURI(spot.photo)
+            alarmTime.isVisible = spot.alarmTime != null
+            alarmTime.text = spot.getAlarmTimeFormatted()
             if (spot.status.isActive)
                 binding.root.setOnClickListener { mListener?.onGoToUserLocation() }
         }
