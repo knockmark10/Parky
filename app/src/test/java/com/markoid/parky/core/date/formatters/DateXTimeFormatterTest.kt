@@ -1,14 +1,7 @@
 package com.markoid.parky.core.date.formatters
 
 import com.markoid.parky.core.date.enums.FormatType
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.test.runBlockingTest
 import org.joda.time.DateTime
-import org.joda.time.Duration
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
