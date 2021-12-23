@@ -1,19 +1,18 @@
 package com.markoid.parky.home.presentation.fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
-import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.databinding.FragmentUserLocationBinding
@@ -23,8 +22,8 @@ import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
 import com.markoid.parky.home.presentation.AlarmDialog
 import com.markoid.parky.home.presentation.CarPhotoDialog
+import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment.Companion.SPOT_ID
-import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
 import com.markoid.parky.position.presentation.extensions.centerWithLatLngList
 import com.markoid.parky.position.presentation.extensions.setMarker
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,14 +32,12 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
+class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
 
     private val parkingSpotId: Long
         get() = arguments?.getLong(SPOT_ID) ?: 0L
 
     private lateinit var mGoogleMap: GoogleMap
-
-    private val viewModel by viewModels<HomeViewModel>()
 
     private var parkingSpot: ParkingSpotEntity? = null
 
@@ -51,8 +48,6 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
         .inflate(inflater, container, false)
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
-
-        viewModel.startObservingLifecycle(viewLifecycleOwner.lifecycle)
 
         setupMap()
 
@@ -68,7 +63,7 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
     }
 
     private fun deleteParkingSpot() {
-        viewModel.deleteParkingSpot(parkingSpotId).getResult().react(viewLifecycleOwner) {
+        homeViewModel.deleteParkingSpot(parkingSpotId).getResult().react(viewLifecycleOwner) {
             when (this) {
                 is DataState.Data -> displayParkingSpotDeletedSuccessfully()
                 is DataState.Error -> showError(error)
@@ -140,7 +135,7 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
     }
 
     private fun getActiveParkingSpot() {
-        viewModel.getActiveParkingSpot().getResult().subscribe(viewLifecycleOwner) {
+        homeViewModel.getActiveParkingSpot().getResult().subscribe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Data -> setCardInformation(it.data)
                 is DataState.Error ->
@@ -176,7 +171,7 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
     }
 
     private fun CoroutineScope.observeUserLocationUpdates(parkingSpotLocation: LatLng) {
-        viewModel.getUserLocationUpdates(parkingSpotLocation)
+        homeViewModel.getUserLocationUpdates(parkingSpotLocation)
             .onEach { setRealTimeData(it) }
             .launchIn(this)
     }
@@ -188,5 +183,10 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
         val locationList: List<LatLng> = parkingSpot?.let { listOf(it.latLng, data.userLocation) }
             ?: listOf(data.userLocation)
         mGoogleMap.centerWithLatLngList(resources, locationList)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is HomeNavigationCallbacks) navigationListener = context
     }
 }

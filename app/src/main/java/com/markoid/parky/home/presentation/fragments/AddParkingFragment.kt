@@ -9,12 +9,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.GoogleMap
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
-import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
@@ -27,7 +25,6 @@ import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
 import com.markoid.parky.home.presentation.utils.AlarmUtils
-import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
 import com.markoid.parky.position.data.entities.PositionEntity
 import com.markoid.parky.position.presentation.extensions.setCameraPosition
 import com.markoid.parky.position.presentation.extensions.setMarker
@@ -36,19 +33,15 @@ import kotlinx.coroutines.delay
 import org.joda.time.DateTime
 
 @AndroidEntryPoint
-class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
+class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
 
     private lateinit var mGoogleMap: GoogleMap
-
-    private val homeViewModel by viewModels<HomeViewModel>()
 
     private val loadingDialog by lazy { LoadingDialog() }
 
     private var parkingTime: DateTime = DateTime.now()
 
     private var alarmTime: DateTime? = null
-
-    private var navigationListener: HomeNavigationCallbacks? = null
 
     private var carPhotoUri: Uri? = null
 

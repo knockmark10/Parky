@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
-import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.subscribe
@@ -20,14 +18,13 @@ import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.presentation.adapters.ParkingHistoryAdapter
 import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.callbacks.ParkingHistoryAdapterCallback
-import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ParkingHistoryFragment :
-    AbstractFragment<FragmentParkingHistoryBinding>(),
+    HomeBaseFragment<FragmentParkingHistoryBinding>(),
     ParkingHistoryAdapterCallback {
 
     @Inject
@@ -36,10 +33,6 @@ class ParkingHistoryFragment :
     private val navController by lazy { findNavController() }
 
     private val historyAdapter by lazy { ParkingHistoryAdapter() }
-
-    private val homeViewModel by viewModels<HomeViewModel>()
-
-    private var navigationListener: HomeNavigationCallbacks? = null
 
     private val parkingSpotId: Long
         get() = historyAdapter.getActiveSpot()?.id ?: 0L
@@ -52,17 +45,11 @@ class ParkingHistoryFragment :
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
 
-        refreshToolbarItems()
-
         setAddParkingSpotClickListener()
 
         setupHistoryAdapter()
 
         getHistoryList()
-    }
-
-    private fun refreshToolbarItems() {
-        this.navigationListener?.onUpdateToolbarMenuItems()
     }
 
     private fun setupHistoryAdapter() {
