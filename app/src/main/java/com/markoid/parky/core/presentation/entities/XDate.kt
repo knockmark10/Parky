@@ -1,4 +1,4 @@
-package com.markoid.parky.core.presentation.extensions
+package com.markoid.parky.core.presentation.entities
 
 data class XDate(
     val dayOfMonth: Int,

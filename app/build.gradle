@@ -91,6 +91,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:4.2.2'
     implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+    implementation 'com.github.samlss:ClockView:1.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

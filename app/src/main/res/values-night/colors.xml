@@ -16,6 +16,8 @@
     <color name="background_time">@color/md_grey_700</color>
     <color name="grey_text_title">@color/md_white_1000</color>
     <color name="grey_text_subtitle">@color/md_white_1000</color>
+    <color name="alarm_field_border">@color/md_white_1000</color>
+    <color name="ripple_contrast">@color/md_grey_400</color>
 
     <!--This overrides outline box color-->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/md_white_1000

@@ -21,6 +21,7 @@ import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.extensions.getAlarmTimeFormatted
 import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
+import com.markoid.parky.home.presentation.AlarmDialog
 import com.markoid.parky.home.presentation.CarPhotoDialog
 import com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment.Companion.SPOT_ID
 import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
@@ -77,6 +78,7 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
 
     private fun displayParkingSpotDeletedSuccessfully() {
         appAlert {
+            type = AlertType.Success
             message = getString(R.string.parking_spot_deleted_successful_message)
             positiveListener = {
                 close()
@@ -106,6 +108,7 @@ class UserLocationFragment : AbstractFragment<FragmentUserLocationBinding>() {
 
     // https://medium.com/android-news/using-alarmmanager-like-a-pro-20f89f4ca720
     private fun displayAlarmInfo() {
+        parkingSpot?.alarmTime?.let { AlarmDialog.newInstance(it).show(childFragmentManager) }
     }
 
     private fun displayCarPhoto() {

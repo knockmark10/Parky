@@ -15,7 +15,7 @@ class AppDialog : AbstractBottomSheetDialog<DialogAppBinding>(), AppDialogInterf
 
     override var message: String = ""
 
-    override var type: AlertType = AlertType.Success
+    override var type: AlertType = AlertType.Error
 
     override var positiveListener: OnPositiveListener? = null
 

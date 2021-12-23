@@ -134,7 +134,8 @@ class AddParkingFragment : AbstractFragment<FragmentAddParkingBinding>() {
 
     private fun goToUserLocation() {
         appAlert {
-            message = "Parking spot has been saved successfully!"
+            type = AlertType.Success
+            message = getString(R.string.parking_spot_saved_successfully)
             positiveListener = {
                 navigationListener?.onUpdateDrawerMenuItemVisibility(
                     R.id.home_add_parking,

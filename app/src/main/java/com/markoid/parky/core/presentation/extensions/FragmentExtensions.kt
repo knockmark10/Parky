@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.markoid.parky.core.presentation.dialogs.alert.AppDialog
 import com.markoid.parky.core.presentation.dialogs.alert.AppDialogInterface
+import com.markoid.parky.core.presentation.entities.XDate
+import com.markoid.parky.core.presentation.entities.XTime
 import org.joda.time.DateTime
 
 @Suppress("UNCHECKED_CAST")
