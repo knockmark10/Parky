@@ -20,24 +20,32 @@ import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.extensions.getAlarmTimeFormatted
 import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
-import com.markoid.parky.home.presentation.AlarmDialog
-import com.markoid.parky.home.presentation.CarPhotoDialog
 import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
+import com.markoid.parky.home.presentation.dialgos.AlarmDialog
+import com.markoid.parky.home.presentation.dialgos.CarPhotoDialog
+import com.markoid.parky.home.presentation.dialgos.MapTypeDialog
 import com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment.Companion.SPOT_ID
 import com.markoid.parky.position.presentation.extensions.centerWithLatLngList
+import com.markoid.parky.position.presentation.extensions.setDarkMode
 import com.markoid.parky.position.presentation.extensions.setMarker
+import com.markoid.parky.settings.presentation.managers.DevicePreferences
+import com.markoid.parky.settings.presentation.managers.isDarkMode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
 
+    @Inject
+    lateinit var devicePreferences: DevicePreferences
+
     private val parkingSpotId: Long
         get() = arguments?.getLong(SPOT_ID) ?: 0L
 
-    private lateinit var mGoogleMap: GoogleMap
+    private var mGoogleMap: GoogleMap? = null
 
     private var parkingSpot: ParkingSpotEntity? = null
 
@@ -89,6 +97,11 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         }
     }
 
+    private fun changeMapType(type: Int) {
+        mGoogleMap?.mapType = type
+        if (devicePreferences.currentTheme.isDarkMode) mGoogleMap?.setDarkMode(requireContext())
+    }
+
     private fun displayAlertToDeleteParkingSpot() {
         appAlert {
             message = getString(R.string.parking_spot_delete_title)
@@ -129,7 +142,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     @SuppressLint("MissingPermission")
     private fun handleMap(map: GoogleMap) {
         this.mGoogleMap = map
-        map.mapType = GoogleMap.MAP_TYPE_HYBRID
+        changeMapType(devicePreferences.mapType)
         map.isMyLocationEnabled = true
         getActiveParkingSpot()
     }
@@ -151,13 +164,14 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         this.parkingSpot = parkingSpot
 
         // Displaying parking spot marker
-        mGoogleMap.setMarker(requireContext(), parkingSpot.latLng, R.drawable.ic_parking_marker)
+        mGoogleMap?.setMarker(requireContext(), parkingSpot.latLng, R.drawable.ic_parking_marker)
 
         // Setting up card information
         binding.actionRate.isVisible = parkingSpot.fare >= 0.0
         binding.actionAlarm.isVisible = parkingSpot.alarmTime != null
         binding.actionCamera.isVisible = parkingSpot.photo != null
         binding.carAddress.text = parkingSpot.address
+        binding.alarmTime.isVisible = parkingSpot.alarmTime != null
         binding.alarmTime.text = parkingSpot.getAlarmTimeFormatted()
         getUserLocation(parkingSpot.latLng)
     }
@@ -182,7 +196,16 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         binding.speed.text = data.speedKph
         val locationList: List<LatLng> = parkingSpot?.let { listOf(it.latLng, data.userLocation) }
             ?: listOf(data.userLocation)
-        mGoogleMap.centerWithLatLngList(resources, locationList)
+        mGoogleMap?.centerWithLatLngList(resources, locationList)
+    }
+
+    fun displayMapTypeDialog() {
+        MapTypeDialog()
+            .setOnMapTypeSelectedListener { changeMapType(it) }
+            .show(childFragmentManager)
+    }
+
+    fun finishParking() {
     }
 
     override fun onAttach(context: Context) {

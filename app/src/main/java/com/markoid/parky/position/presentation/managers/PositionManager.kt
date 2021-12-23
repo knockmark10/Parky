@@ -29,18 +29,13 @@ class PositionManager(
 
     private var mFusedClient: FusedLocationProviderClient? = null
 
-    private var mLocationCallback: LocationCallback? = null
+    private val locationRequest = LocationRequest
+        .create()
+        .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+        .setInterval(Duration.standardSeconds(1L).millis)
+        .setFastestInterval(Duration.standardSeconds(1L).millis)
 
-    /**
-     * This request will be used for a one-time request
-     */
-    private val smartLocationRequest: LocationRequest by lazy {
-        LocationRequest().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = Duration.standardSeconds(15L).millis
-            fastestInterval = Duration.standardSeconds(10L).millis
-        }
-    }
+    private var locationCallback: LocationCallback? = null
 
     init {
         installLocationSettings()
@@ -50,18 +45,21 @@ class PositionManager(
      * Request and receive location once.
      */
     suspend fun requestSingleLocation(): Location? = suspendCancellableCoroutine { task ->
-        this.mLocationCallback = object : LocationCallback() {
-            override fun onLocationResult(p0: LocationResult?) {
-                super.onLocationResult(p0)
+        val client = LocationServices.getFusedLocationProviderClient(mContext)
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
                 // Ignore any null response
-                val location = p0?.lastLocation ?: return
+                val location: Location = locationResult?.lastLocation ?: return
                 stopLocationUpdates()
                 task.resume(location)
             }
         }
-        this.mFusedClient
-            ?.requestLocationUpdates(this.smartLocationRequest, mLocationCallback, this.mLooper)
-            ?.addOnFailureListener { task.resumeWithException(it) }
+
+        client.requestLocationUpdates(
+            locationRequest,
+            locationCallback!!,
+            Looper.getMainLooper()
+        ).addOnFailureListener { task.resumeWithException(it) }
     }
 
     /**
@@ -70,12 +68,6 @@ class PositionManager(
     fun observeLocationUpdates(): Flow<Location> = callbackFlow {
         Log.d("PositionManager", "observing location updates")
         val client = LocationServices.getFusedLocationProviderClient(mContext)
-        val locationRequest = LocationRequest
-            .create()
-            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            .setInterval(Duration.standardSeconds(15).millis)
-            .setFastestInterval(Duration.standardSeconds(10).millis)
-
         val locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null) {
@@ -103,7 +95,7 @@ class PositionManager(
             .checkLocationSettings(
                 LocationSettingsRequest
                     .Builder()
-                    .apply { addLocationRequest(smartLocationRequest) }
+                    .apply { addLocationRequest(locationRequest) }
                     .build()
             )
         this.mFusedClient = LocationServices.getFusedLocationProviderClient(this.mContext)
@@ -125,8 +117,8 @@ class PositionManager(
      * Stop receiving location updates (turn off gps use)
      */
     fun stopLocationUpdates() {
-        if (mLocationCallback != null) {
-            this.mFusedClient?.removeLocationUpdates(mLocationCallback)
+        if (locationCallback != null) {
+            this.mFusedClient?.removeLocationUpdates(locationCallback)
         }
     }
 

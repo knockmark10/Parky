@@ -111,4 +111,13 @@
     <string name="minutes">Minutes</string>
     <string name="seconds">Seconds</string>
 
+    <!--Map Type-->
+    <string name="map_type_title">Map Type</string>
+    <string name="map_none">None</string>
+    <string name="map_normal">Normal</string>
+    <string name="map_satellite">Satellite</string>
+    <string name="map_terrain">Terrain</string>
+    <string name="map_hybrid">Hybrid</string>
+    <string name="map_type_summary">Choose the type of map you want to be displayed</string>
+
 </resources>

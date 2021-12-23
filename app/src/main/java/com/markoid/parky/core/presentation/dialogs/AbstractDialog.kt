@@ -33,6 +33,7 @@ abstract class AbstractDialog<T : ViewBinding> : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isCancelable = false
         getStyle()?.let { setStyle(STYLE_NORMAL, it) }
     }
 

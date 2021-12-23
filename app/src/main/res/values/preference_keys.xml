@@ -4,6 +4,7 @@
     <string name="auto_detection_enabled_key">auto_detection_enabled</string>
     <string name="background_location_enabled_key">background_location_enabled</string>
     <string name="dark_mode_key">dark_mode</string>
+    <string name="map_type">map_type</string>
     <string name="parking_spot_active">parking_spot_active</string>
 
 </resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/card_background"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/map_type_title"
+        android:textColor="@color/card_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/map_type_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:checkedButton="@+id/hybrid"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <RadioButton
+            android:id="@+id/none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:buttonTint="@color/colorPrimary"
+            android:text="@string/map_none"
+            android:textColor="@color/card_title"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/normal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:buttonTint="@color/colorPrimary"
+            android:text="@string/map_normal"
+            android:textColor="@color/card_title"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/satellite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:buttonTint="@color/colorPrimary"
+            android:text="@string/map_satellite"
+            android:textColor="@color/card_title"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/terrain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:buttonTint="@color/colorPrimary"
+            android:text="@string/map_terrain"
+            android:textColor="@color/card_title"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/hybrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:buttonTint="@color/colorPrimary"
+            android:text="@string/map_hybrid"
+            android:textColor="@color/card_title"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_accept"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/accept"
+        android:textColor="@color/primary_contrast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map_type_group"
+        app:rippleColor="@color/ripple_contrast" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_cancel"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:text="@string/cancel"
+        android:textColor="@color/primary_contrast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/action_accept"
+        app:layout_constraintTop_toTopOf="@+id/action_accept"
+        app:rippleColor="@color/ripple_contrast" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

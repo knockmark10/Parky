@@ -1,4 +1,4 @@
-package com.markoid.parky.home.presentation
+package com.markoid.parky.home.presentation.dialgos
 
 import android.os.Bundle
 import android.view.LayoutInflater

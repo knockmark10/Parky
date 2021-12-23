@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -115,3 +116,15 @@ fun Context.getMarkerBitmapFromView(@DrawableRes resourceId: Int): BitmapDescrip
 
 fun GoogleMap.setMarker(context: Context, position: LatLng, @DrawableRes resId: Int): Marker =
     addMarker(MarkerOptions().position(position).icon(context.getMarkerBitmapFromView(resId)))
+
+fun GoogleMap.setTheme(context: Context, style: Int): Boolean = try {
+    setMapStyle(MapStyleOptions.loadRawResourceStyle(context, style))
+} catch (error: Resources.NotFoundException) {
+    error.printStackTrace()
+    false
+}
+
+fun GoogleMap.setDarkMode(context: Context) {
+    val themeApplied = setTheme(context, R.raw.night_map)
+    if (themeApplied.not()) Log.e("GOOGLEMAP", "Night mode not applied to map.")
+}

@@ -69,7 +69,6 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
         .inflate(inflater, container, false)
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
-        this.navigationListener?.onUpdateToolbarMenuItems()
         lifecycleScope.launchWhenStarted {
             delay(1500L)
             setupMap()

@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_take_photo"
+        android:id="@+id/action_change_map"
         android:icon="@drawable/ic_map"
         android:orderInCategory="100"
         android:title="@string/change_map_type"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_schedule_alarm"
+        android:id="@+id/action_finish_parking"
         android:icon="@drawable/ic_check"
         android:orderInCategory="101"
         android:title="@string/finish_parking"

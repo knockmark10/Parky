@@ -16,6 +16,7 @@ import com.markoid.parky.core.presentation.extensions.findFragmentByClassName
 import com.markoid.parky.databinding.ActivityHomeBinding
 import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.fragments.AddParkingFragment
+import com.markoid.parky.home.presentation.fragments.UserLocationFragment
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -31,6 +32,8 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
     private val navController by lazy { findNavController(R.id.home_navigation_host) }
 
     private val addParkingFragment by lazy { findFragmentByClassName(AddParkingFragment::class.java) }
+
+    private val userLocationFragment by lazy { findFragmentByClassName(UserLocationFragment::class.java) }
 
     private val currentDestination: String
         get() = navController.currentDestination?.label?.toString() ?: getString(R.string.menu_home)
@@ -51,6 +54,8 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
         when (item.itemId) {
             R.id.action_take_photo -> addParkingFragment?.takePhoto()
             R.id.action_schedule_alarm -> addParkingFragment?.displayDatePicker()
+            R.id.action_change_map -> userLocationFragment?.displayMapTypeDialog()
+            R.id.action_finish_parking -> userLocationFragment?.finishParking()
         }
         return super.onOptionsItemSelected(item)
     }

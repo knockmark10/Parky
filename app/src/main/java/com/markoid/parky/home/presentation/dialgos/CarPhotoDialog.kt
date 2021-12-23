@@ -1,4 +1,4 @@
-package com.markoid.parky.home.presentation
+package com.markoid.parky.home.presentation.dialgos
 
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +24,7 @@ class CarPhotoDialog : AbstractDialog<DialogCarPhotoBinding>() {
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         binding.carPhoto.setImageURI(photoUri)
+        binding.actionAccept.setOnClickListener { dismiss() }
     }
 
     companion object {

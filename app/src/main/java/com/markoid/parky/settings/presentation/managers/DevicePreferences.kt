@@ -5,4 +5,5 @@ interface DevicePreferences {
     var isAutoParkingDetectionEnabled: Boolean
     var isBackgroundLocationEnabled: Boolean
     var isParkingSpotActive: Boolean
+    var mapType: Int
 }
