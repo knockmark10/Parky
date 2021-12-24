@@ -30,7 +30,7 @@ class TrackingRepositoryImpl @Inject constructor(
     private suspend fun translatePositionWithAndroidApi(location: LatLng): PositionEntity = try {
         this.trackingDataSource.translateCoordinatesWithAndroidApi(location)
             .firstOrNull()
-            ?.toPositionEntity() ?: translatePositionWithPositionStack(location)
+            ?.toPositionEntity(location) ?: translatePositionWithPositionStack(location)
     } catch (e: Throwable) {
         e.printStackTrace()
         translatePositionWithPositionStack(location)

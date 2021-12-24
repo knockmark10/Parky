@@ -58,7 +58,7 @@ class PositionManager(
         client.requestLocationUpdates(
             locationRequest,
             locationCallback!!,
-            Looper.getMainLooper()
+            mLooper
         ).addOnFailureListener { task.resumeWithException(it) }
     }
 
@@ -80,7 +80,7 @@ class PositionManager(
         client.requestLocationUpdates(
             locationRequest,
             locationCallback,
-            Looper.getMainLooper()
+            mLooper
         )
 
         awaitClose {
