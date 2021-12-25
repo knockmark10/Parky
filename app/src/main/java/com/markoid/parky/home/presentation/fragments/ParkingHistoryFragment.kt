@@ -1,6 +1,5 @@
 package com.markoid.parky.home.presentation.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.markoid.parky.core.presentation.extensions.subscribe
 import com.markoid.parky.databinding.FragmentParkingHistoryBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.presentation.adapters.ParkingHistoryAdapter
-import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.callbacks.ParkingHistoryAdapterCallback
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -134,13 +132,6 @@ class ParkingHistoryFragment :
         navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_add_parking, true)
         navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_user_location, false)
         displayEmptyState()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is HomeNavigationCallbacks) {
-            this.navigationListener = context
-        }
     }
 
     companion object {

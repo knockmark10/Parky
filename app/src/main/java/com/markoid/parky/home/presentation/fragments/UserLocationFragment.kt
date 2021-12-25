@@ -1,7 +1,6 @@
 package com.markoid.parky.home.presentation.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +13,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
-import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
+import com.markoid.parky.core.presentation.extensions.*
 import com.markoid.parky.databinding.FragmentUserLocationBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.extensions.getAlarmTimeFormatted
 import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
-import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.dialgos.AlarmDialog
 import com.markoid.parky.home.presentation.dialgos.CarPhotoDialog
 import com.markoid.parky.home.presentation.dialgos.MapTypeDialog
@@ -206,10 +204,5 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     }
 
     fun finishParking() {
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is HomeNavigationCallbacks) navigationListener = context
     }
 }

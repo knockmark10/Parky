@@ -1,6 +1,5 @@
 package com.markoid.parky.home.presentation.fragments
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +19,6 @@ import com.markoid.parky.core.presentation.states.LoadingState
 import com.markoid.parky.databinding.FragmentAddParkingBinding
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
-import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
@@ -284,10 +282,5 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
     private fun handlePictureError(error: String) {
         binding.carPictureContainer.root.isVisible = false
         showError(error, false)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is HomeNavigationCallbacks) navigationListener = context
     }
 }
