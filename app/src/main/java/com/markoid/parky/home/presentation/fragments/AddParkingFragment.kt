@@ -189,7 +189,7 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
 
         // Setting map information
         mGoogleMap.setCameraPosition(position.latLng, 18f)
-        mGoogleMap.setMarker(requireContext(), position.latLng, R.drawable.ic_user_marker)
+        mGoogleMap.setMarker(requireContext(), position.latLng, R.drawable.ic_parking_marker)
     }
 
     private fun setAddressInformation(position: PositionEntity) {
