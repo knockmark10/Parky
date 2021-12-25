@@ -7,3 +7,6 @@ enum class ParkingSpotStatus {
 
 val ParkingSpotStatus.isActive: Boolean
     get() = this == ParkingSpotStatus.Active
+
+val ParkingSpotStatus.isArchived: Boolean
+    get() = this == ParkingSpotStatus.Archived

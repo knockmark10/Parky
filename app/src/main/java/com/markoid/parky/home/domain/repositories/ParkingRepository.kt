@@ -5,6 +5,7 @@ import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 
 interface ParkingRepository {
     suspend fun deleteParkingSpot(spotId: Long)
+    suspend fun finishParking(spotId: Long)
     suspend fun getActiveParkingSpot(): ParkingSpotEntity
     suspend fun getAllParkingSpots(): List<ParkingSpotEntity>
     suspend fun getArchivedParkingSpots(): List<ParkingSpotEntity>

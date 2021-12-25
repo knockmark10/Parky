@@ -21,6 +21,7 @@ import javax.inject.Inject
 class HomeViewModel
 @Inject constructor(
     deleteParkingSpotUseCase: DeleteParkingSpotUseCase,
+    finishParkingUseCase: FinishParkingUseCase,
     getCurrentLocationUseCase: GetCurrentLocationUseCase,
     getActiveParkingSpotUseCase: GetActiveParkingSpotUseCase,
     getParkingHistoryUseCase: GetParkingHistoryUseCase,
@@ -38,6 +39,9 @@ class HomeViewModel
 
     private val deleteSpotObserver =
         UseCaseObserver(deleteParkingSpotUseCase, dispatcherProvider, viewModelScope)
+
+    private val finishParkingObserver =
+        UseCaseObserver(finishParkingUseCase, dispatcherProvider, viewModelScope)
 
     private val parkingHistoryObserver =
         UseCaseObserver(getParkingHistoryUseCase, dispatcherProvider, viewModelScope)
@@ -57,6 +61,9 @@ class HomeViewModel
 
     fun deleteParkingSpot(parkingSpotId: Long): UseCaseObserver<Unit, Long> =
         deleteSpotObserver.execute(parkingSpotId)
+
+    fun finishParking(parkingSpotId: Long) =
+        finishParkingObserver.execute(parkingSpotId)
 
     fun getActiveParkingSpot(): UseCaseObserver<ParkingSpotEntity, Unit> =
         activeParkingSpotObserver.execute(Unit)

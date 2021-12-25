@@ -14,6 +14,8 @@ import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.subscribe
 import com.markoid.parky.databinding.FragmentParkingHistoryBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
+import com.markoid.parky.home.data.entities.isActive
+import com.markoid.parky.home.data.entities.isArchived
 import com.markoid.parky.home.presentation.adapters.ParkingHistoryAdapter
 import com.markoid.parky.home.presentation.callbacks.ParkingHistoryAdapterCallback
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
@@ -75,12 +77,24 @@ class ParkingHistoryFragment :
     }
 
     private fun displayHistoryList(historyList: List<ParkingSpotEntity>) {
-        if (historyList.isNotEmpty()) {
-            historyAdapter.setParkingSpotHistory(historyList)
-            hideEmptyState()
-        } else {
-            historyAdapter.flush()
-            onDisplayEmptyState()
+        when {
+            // There is an Active parking spot
+            historyList.any { it.status.isActive } -> {
+                historyAdapter.setParkingSpotHistory(historyList)
+                hideEmptyState()
+            }
+
+            // There is at least an Archived spot
+            historyList.any { it.status.isArchived } -> {
+                historyAdapter.setParkingSpotHistory(historyList)
+                hideEmptyState(true)
+            }
+
+            // There are no parking spots (neither Active nor Archived)
+            else -> {
+                historyAdapter.flush()
+                onDisplayEmptyState()
+            }
         }
     }
 
@@ -99,10 +113,10 @@ class ParkingHistoryFragment :
         binding.actionAddParkingSpot.isVisible = true
     }
 
-    private fun hideEmptyState() {
+    private fun hideEmptyState(isAddButtonVisible: Boolean = false) {
         binding.parkingHistoryEmptyStateContainer.root.isVisible = false
         binding.parkingHistoryEmptyStateContainer.parkingHistoryEmptyAnimation.cancelAnimation()
-        binding.actionAddParkingSpot.isVisible = false
+        binding.actionAddParkingSpot.isVisible = isAddButtonVisible
     }
 
     override fun onRequestDeleteParkingSpot(spot: ParkingSpotEntity) {

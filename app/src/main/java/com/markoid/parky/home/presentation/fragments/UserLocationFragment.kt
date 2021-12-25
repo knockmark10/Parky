@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
-import com.markoid.parky.core.presentation.extensions.*
+import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.databinding.FragmentUserLocationBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.extensions.getAlarmTimeFormatted
@@ -140,8 +140,8 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     @SuppressLint("MissingPermission")
     private fun handleMap(map: GoogleMap) {
         this.mGoogleMap = map
-        changeMapType(devicePreferences.mapType)
         map.isMyLocationEnabled = true
+        changeMapType(devicePreferences.mapType)
         getActiveParkingSpot()
     }
 
@@ -197,6 +197,22 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         mGoogleMap?.centerWithLatLngList(resources, locationList)
     }
 
+    private fun archiveParking() {
+        homeViewModel.finishParking(parkingSpotId).getResult().subscribe(viewLifecycleOwner) {
+            when (it) {
+                is DataState.Data -> appAlert {
+                    type = AlertType.Success
+                    message = "Your parking has been archived successfully."
+                    positiveListener = {
+                        close()
+                        requireActivity().onBackPressed()
+                    }
+                }
+                is DataState.Error -> showError(it.error)
+            }
+        }
+    }
+
     fun displayMapTypeDialog() {
         MapTypeDialog()
             .setOnMapTypeSelectedListener { changeMapType(it) }
@@ -204,5 +220,14 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     }
 
     fun finishParking() {
+        appAlert {
+            type = AlertType.Info
+            message = "Are you sure that you want to finish this parking spot and archive it?"
+            positiveListener = {
+                archiveParking()
+                close()
+            }
+            negativeListener = { close() }
+        }
     }
 }
