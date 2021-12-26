@@ -195,9 +195,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/alarm_time"
                         tools:text="Avenido Hidalgo #219 Int. 23 Col. Campos del Toreo, Morelia, Michoacán, México. CP: 58069" />
 
-
-                    <!--https://dribbble.com/shots/15883730-Transit-Concept-Application-->
-
                     <ImageButton
                         android:id="@+id/navigation_btn"
                         android:layout_width="60dp"
