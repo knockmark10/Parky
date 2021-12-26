@@ -9,7 +9,7 @@ import com.markoid.parky.home.data.entities.ParkingSpotEntity
 
 @Database(
     entities = [ParkingSpotEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(DatabaseConverters::class)
