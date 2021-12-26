@@ -34,6 +34,6 @@ sealed class ParkingValidationStatus(val message: String) {
             Failure(res.getString(R.string.invalid_lot_identifier_message))
 
         data class InvalidFare(val res: Resources) :
-            Failure(res.getString(R.string.invalid_fare_message))
+            Failure(res.getString(R.string.invalid_hour_rate_message))
     }
 }

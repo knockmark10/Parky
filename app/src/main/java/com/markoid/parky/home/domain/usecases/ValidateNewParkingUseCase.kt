@@ -40,7 +40,7 @@ class ValidateNewParkingUseCase
                 request.lotIdentifier.isEmpty() ->
                     ParkingValidationStatus.Failure.InvalidLotIdentifier(resources)
 
-                request.fare < 0.0 -> ParkingValidationStatus.Failure.InvalidFare(resources)
+                request.hourRate < 0.0 -> ParkingValidationStatus.Failure.InvalidFare(resources)
 
                 else -> ParkingValidationStatus.Success(0L)
             }

@@ -21,11 +21,11 @@ class GetHourRateDataUseCase
         return HourRateResponse(
             spot.address,
             getFloorLabel(spot.floorNumber, spot.floorType!!),
-            getHourRate(spot.fare),
+            getHourRate(spot.hourRate),
             spot.latLng,
             spot.lotIdentifier,
             getParkedTime(spot.parkingTime),
-            getTotal(spot.parkingTime, spot.fare)
+            getTotal(spot.parkingTime, spot.hourRate)
         )
     }
 

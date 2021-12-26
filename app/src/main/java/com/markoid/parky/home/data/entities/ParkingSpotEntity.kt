@@ -20,8 +20,8 @@ data class ParkingSpotEntity(
     @ColumnInfo(name = "color")
     val color: String,
 
-    @ColumnInfo(name = "fare")
-    val fare: Double,
+    @ColumnInfo(name = "hour_rate")
+    val hourRate: Double,
 
     @ColumnInfo(name = "floor_number")
     val floorNumber: String,

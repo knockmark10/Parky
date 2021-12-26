@@ -14,7 +14,7 @@ fun ParkingSpotRequest.toEntity(
     address = address,
     alarmTime = alarmTime,
     color = color,
-    fare = fare,
+    hourRate = hourRate,
     floorNumber = floorNumber,
     floorType = ParkingFloorType.forValue(res, floorType),
     latitude = latitude,

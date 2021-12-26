@@ -57,7 +57,7 @@
     <string name="invalid_floor_number_message">Enter a valid floor number</string>
     <string name="invalid_color_message">Enter a valid color</string>
     <string name="invalid_lot_identifier_message">Enter a valid lot identifier</string>
-    <string name="invalid_fare_message">Enter a valid fare</string>
+    <string name="invalid_hour_rate_message">Enter a valid hour rate</string>
     <string name="save_parking_lot">Save parking lot</string>
     <string name="location_information">Location Information</string>
     <string name="address">Address</string>
@@ -70,7 +70,7 @@
     <string name="floor_number">Floor Number</string>
     <string name="color">Color</string>
     <string name="lot_identifier">Lot Identifier</string>
-    <string name="fare">Fare</string>
+    <string name="hour_rate">Hour Rate</string>
     <string name="map_view">Map View</string>
     <string name="car_picture">Car Picture</string>
     <string name="parking_spot_saved_successfully">Parking spot has been saved successfully!</string>

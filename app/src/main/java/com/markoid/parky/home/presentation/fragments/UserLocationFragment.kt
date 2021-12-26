@@ -166,7 +166,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         mGoogleMap?.setMarker(requireContext(), parkingSpot.latLng, R.drawable.ic_parking_marker)
 
         // Setting up card information
-        binding.actionRate.isVisible = parkingSpot.fare >= 0.0
+        binding.actionRate.isVisible = parkingSpot.hourRate >= 0.0
         binding.actionAlarm.isVisible = parkingSpot.alarmTime != null
         binding.actionCamera.isVisible = parkingSpot.photo != null
         binding.carAddress.text = parkingSpot.address

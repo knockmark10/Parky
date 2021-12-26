@@ -48,7 +48,7 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
             address = binding.locationInfoContainer.locationAddressValue.value,
             alarmTime = alarmTime,
             color = binding.locationLotInfoContainer.colorValue.value,
-            fare = binding.locationLotInfoContainer.fareValue.value.toDouble(-0.1),
+            hourRate = binding.locationLotInfoContainer.hourRateValue.value.toDouble(-0.1),
             floorNumber = binding.locationLotInfoContainer.floorNumberValue.value,
             floorType = binding.locationLotInfoContainer.floorTypeValue.value,
             latitude = binding.locationInfoContainer.locationLatitudeValue.value.toDouble(0.0),
@@ -105,7 +105,7 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
             is ParkingValidationStatus.Failure.EmptyFloorNumber ->
                 binding.locationLotInfoContainer.floorNumberContainer.error = result.message
             is ParkingValidationStatus.Failure.InvalidFare ->
-                binding.locationLotInfoContainer.fareContainer.error = result.message
+                binding.locationLotInfoContainer.hourRateContainer.error = result.message
             is ParkingValidationStatus.Failure.InvalidFloorType ->
                 binding.locationLotInfoContainer.floorTypeContainer.error = result.message
             is ParkingValidationStatus.Failure.InvalidLocation -> {
@@ -144,7 +144,7 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
         binding.locationInfoContainer.locationAddressContainer.isErrorEnabled = false
         binding.locationLotInfoContainer.colorContainer.isErrorEnabled = false
         binding.locationLotInfoContainer.floorNumberContainer.isErrorEnabled = false
-        binding.locationLotInfoContainer.fareContainer.isErrorEnabled = false
+        binding.locationLotInfoContainer.hourRateContainer.isErrorEnabled = false
         binding.locationLotInfoContainer.floorTypeContainer.isErrorEnabled = false
         binding.locationInfoContainer.locationLatitudeContainer.isErrorEnabled = false
         binding.locationInfoContainer.locationLongitudeContainer.isErrorEnabled = false

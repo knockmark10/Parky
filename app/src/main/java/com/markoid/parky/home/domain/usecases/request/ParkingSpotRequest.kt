@@ -7,7 +7,7 @@ data class ParkingSpotRequest(
     val address: String,
     val alarmTime: DateTime?,
     val color: String,
-    val fare: Double,
+    val hourRate: Double,
     val floorNumber: String,
     val floorType: String,
     val latitude: Double,
