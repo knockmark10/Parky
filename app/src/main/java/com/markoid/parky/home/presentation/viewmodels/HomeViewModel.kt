@@ -9,6 +9,7 @@ import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.domain.usecases.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.GetUserLocationUpdatesUseCase
+import com.markoid.parky.home.domain.usecases.response.HourRateResponse
 import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
 import com.markoid.parky.position.data.entities.PositionEntity
 import com.markoid.parky.position.domain.usecases.GetCurrentLocationUseCase
@@ -22,8 +23,9 @@ class HomeViewModel
 @Inject constructor(
     deleteParkingSpotUseCase: DeleteParkingSpotUseCase,
     finishParkingUseCase: FinishParkingUseCase,
-    getCurrentLocationUseCase: GetCurrentLocationUseCase,
     getActiveParkingSpotUseCase: GetActiveParkingSpotUseCase,
+    getCurrentLocationUseCase: GetCurrentLocationUseCase,
+    getHourRateDataUseCase: GetHourRateDataUseCase,
     getParkingHistoryUseCase: GetParkingHistoryUseCase,
     private val getUserLocationUpdatesUseCase: GetUserLocationUpdatesUseCase,
     takeCarPictureUseCase: TakeCarPictureUseCase,
@@ -36,6 +38,9 @@ class HomeViewModel
 
     private val currentLocationObserver =
         UseCaseObserver(getCurrentLocationUseCase, dispatcherProvider, viewModelScope)
+
+    private val hourRateObserver =
+        UseCaseObserver(getHourRateDataUseCase, dispatcherProvider, viewModelScope)
 
     private val deleteSpotObserver =
         UseCaseObserver(deleteParkingSpotUseCase, dispatcherProvider, viewModelScope)
@@ -70,6 +75,9 @@ class HomeViewModel
 
     fun getCurrentLocation(): UseCaseObserver<PositionEntity, Unit> =
         currentLocationObserver.execute(Unit)
+
+    fun getHourRateData(): UseCaseObserver<HourRateResponse, Unit> =
+        hourRateObserver.execute(Unit)
 
     fun getParkingHistory(): UseCaseObserver<List<ParkingSpotEntity>, Unit> =
         parkingHistoryObserver.execute(Unit)

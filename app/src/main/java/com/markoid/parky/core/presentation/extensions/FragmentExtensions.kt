@@ -44,7 +44,7 @@ fun Fragment.timePicker(
         },
         now.hourOfDay,
         now.minuteOfHour,
-        true
+        is24HourView
     ).apply { setOnCancelListener { cancelBlock(it) } }
 }
 

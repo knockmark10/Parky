@@ -22,6 +22,7 @@ import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
 import com.markoid.parky.home.presentation.dialgos.AlarmDialog
 import com.markoid.parky.home.presentation.dialgos.CarPhotoDialog
 import com.markoid.parky.home.presentation.dialgos.MapTypeDialog
+import com.markoid.parky.home.presentation.dialgos.RateDialog
 import com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment.Companion.SPOT_ID
 import com.markoid.parky.position.presentation.extensions.centerWithLatLngList
 import com.markoid.parky.position.presentation.extensions.setDarkMode
@@ -112,7 +113,6 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         }
     }
 
-    // https://medium.com/android-news/using-alarmmanager-like-a-pro-20f89f4ca720
     private fun displayAlarmInfo() {
         parkingSpot?.alarmTime?.let { AlarmDialog.newInstance(it).show(childFragmentManager) }
     }
@@ -124,6 +124,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     }
 
     private fun displayRate() {
+        RateDialog().show(childFragmentManager)
     }
 
     private fun collapseCard() {
@@ -202,7 +203,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
             when (it) {
                 is DataState.Data -> appAlert {
                     type = AlertType.Success
-                    message = "Your parking has been archived successfully."
+                    message = getString(R.string.parking_spot_archived_successfully)
                     positiveListener = {
                         close()
                         requireActivity().onBackPressed()
@@ -222,7 +223,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     fun finishParking() {
         appAlert {
             type = AlertType.Info
-            message = "Are you sure that you want to finish this parking spot and archive it?"
+            message = getString(R.string.parking_spot_finish)
             positiveListener = {
                 archiveParking()
                 close()
