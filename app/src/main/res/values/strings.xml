@@ -127,4 +127,8 @@
     <string name="hour_rate_disclaimer">* Please note that the hour rate calculated is just an estimation and should not be considered as exact under any circumstances.</string>
     <string name="total">Total</string>
 
+    <!--Notifications-->
+    <string name="alarm_notification_title">Reminder alarm</string>
+    <string name="alarm_notification_message">Remember to pick up your car.</string>
+
 </resources>
