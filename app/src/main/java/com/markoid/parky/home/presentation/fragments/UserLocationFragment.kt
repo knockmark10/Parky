@@ -1,6 +1,8 @@
 package com.markoid.parky.home.presentation.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,6 +69,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         binding.actionCamera.setOnClickListener { displayCarPhoto() }
         binding.actionRate.setOnClickListener { displayRate() }
         binding.actionCollapse.setOnClickListener { collapseCard() }
+        binding.navigationBtn.setOnClickListener { startMapsNavigation() }
     }
 
     private fun deleteParkingSpot() {
@@ -131,6 +134,20 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         val degrees: Float = if (binding.locationExpandable.isExpanded) 180f else 0f
         binding.actionCollapse.rotation = degrees
         binding.locationExpandable.toggle()
+    }
+
+    private fun startMapsNavigation() {
+        parkingSpot?.let {
+            // Create a Uri from an intent string. Use the result to create an Intent.
+            val gmmIntentUri = Uri.parse("google.navigation:q=${it.latitude},${it.longitude}")
+            // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            // Make the Intent explicit by setting the Google Maps package
+            mapIntent.setPackage("com.google.android.apps.maps")
+            // Attempt to start an activity that can handle the Intent
+            mapIntent.resolveActivity(requireContext().packageManager)
+                ?.let { startActivity(mapIntent) }
+        }
     }
 
     private fun setupMap() {
