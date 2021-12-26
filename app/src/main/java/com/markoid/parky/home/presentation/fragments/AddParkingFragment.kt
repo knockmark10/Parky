@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.GoogleMap
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
+import com.markoid.parky.core.date.enums.FormatType
+import com.markoid.parky.core.date.formatters.DateTimeFormatter
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
@@ -76,6 +78,7 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
 
     private fun setClickListeners() {
         binding.saveParkingBtn.setOnClickListener { saveParkingSpot() }
+        binding.carPictureContainer.editBtn.setOnClickListener { takePhoto() }
     }
 
     private fun saveParkingSpot() {
@@ -263,6 +266,11 @@ class AddParkingFragment : HomeBaseFragment<FragmentAddParkingBinding>() {
     fun displayDatePicker() {
         dateAndTimePickers(true, {
             alarmTime = this
+            binding.locationInfoContainer.parkingAlarmContainer.isVisible = true
+            binding
+                .locationInfoContainer
+                .parkingAlarmValue
+                .setText(DateTimeFormatter.format(FormatType.MONTH_DAY_YEAR_HOUR, this))
         }, {
             longToast("Alarm was not set")
         })

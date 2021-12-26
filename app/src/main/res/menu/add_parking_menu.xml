@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/action_schedule_alarm"
-        android:icon="@drawable/ic_clock"
+        android:icon="@drawable/ic_alarm"
         android:orderInCategory="101"
         android:title="@string/schedule_alarm"
         app:showAsAction="ifRoom" />

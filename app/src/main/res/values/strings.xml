@@ -64,6 +64,7 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="parking_time">Parking Time</string>
+    <string name="parking_alarm_time">Alarm Time</string>
     <string name="parking_type">Parking Type</string>
     <string name="parking_lot_information">Parking Lot Information</string>
     <string name="floor_type">Floor Type</string>

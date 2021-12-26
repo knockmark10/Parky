@@ -141,6 +141,32 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/parking_alarm_container"
+            style="@style/TextInputLayout_OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4sp"
+            android:hint="@string/parking_alarm_time"
+            android:textColorHint="@color/primary_contrast"
+            android:visibility="gone"
+            app:endIconDrawable="@drawable/ic_alarm"
+            app:endIconMode="custom"
+            app:endIconTint="@color/primary_contrast"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintTop_toBottomOf="@+id/parking_time_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/parking_alarm_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/edittext_disabled_state_color"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/parking_type_container"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
@@ -148,7 +174,7 @@
             android:layout_marginTop="4sp"
             android:hint="@string/parking_type"
             android:textColorHint="@color/primary_contrast"
-            app:layout_constraintTop_toBottomOf="@+id/parking_time_container">
+            app:layout_constraintTop_toBottomOf="@+id/parking_alarm_container">
 
             <com.markoid.parky.core.presentation.views.InstantView
                 android:id="@+id/parking_type_value"

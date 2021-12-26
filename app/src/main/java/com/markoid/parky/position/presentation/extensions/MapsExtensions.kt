@@ -44,7 +44,7 @@ fun GoogleMap.centerWithLatLngList(resources: Resources, latLngList: List<LatLng
     val bounds = latLngBounds.build()
     val width = resources.displayMetrics.widthPixels
     val height = resources.displayMetrics.heightPixels
-    val padding = (width * 0.10).toInt()
+    val padding = (width * 0.25).toInt()
 
     val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding)
     this.animateCamera(cameraUpdate)

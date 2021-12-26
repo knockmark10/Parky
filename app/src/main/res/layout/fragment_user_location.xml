@@ -76,7 +76,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
                 app:layout_constraintEnd_toStartOf="@+id/action_camera"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_clock"
+                app:srcCompat="@drawable/ic_alarm"
                 app:tint="@color/md_white_1000" />
 
             <ImageView
@@ -172,7 +172,7 @@
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical"
                         android:padding="2dp"
-                        app:drawableStartCompat="@drawable/ic_clock"
+                        app:drawableStartCompat="@drawable/ic_alarm"
                         app:drawableTint="@color/colorPrimary"
                         app:layout_constraintEnd_toStartOf="@+id/navigation_barrier"
                         app:layout_constraintStart_toStartOf="parent"

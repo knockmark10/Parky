@@ -87,7 +87,7 @@
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:padding="4dp"
-            app:drawableStartCompat="@drawable/ic_clock"
+            app:drawableStartCompat="@drawable/ic_alarm"
             android:visibility="gone"
             app:drawableTint="@color/primary_contrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
