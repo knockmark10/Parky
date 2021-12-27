@@ -16,5 +16,8 @@ enum class ParkingType(@StringRes val typeId: Int) {
 
         fun forValue(res: Resources, value: String): ParkingType? =
             values().firstOrNull { it.getValue(res) == value }
+
+        fun getLocalizedValues(res: Resources): List<String> =
+            values().map { res.getString(it.typeId) }
     }
 }

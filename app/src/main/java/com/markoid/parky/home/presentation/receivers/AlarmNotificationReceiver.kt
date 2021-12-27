@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.markoid.parky.core.presentation.managers.NotificationManager
 
-class NotificationReceiver : BroadcastReceiver() {
+class AlarmNotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {

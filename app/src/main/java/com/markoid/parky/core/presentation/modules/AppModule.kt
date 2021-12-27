@@ -7,6 +7,7 @@ import androidx.preference.PreferenceManager
 import com.markoid.parky.core.data.database.ParkyDatabase
 import com.markoid.parky.core.presentation.dispatchers.CoroutineDispatcherProvider
 import com.markoid.parky.core.presentation.dispatchers.DefaultCoroutineDispatcherProvider
+import com.markoid.parky.core.presentation.managers.NotificationManager
 import com.markoid.parky.home.presentation.controllers.AlarmController
 import com.markoid.parky.home.presentation.receivers.helpers.AlarmControllerInjector
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
@@ -58,4 +59,10 @@ class AppModule {
         @ApplicationContext context: Context,
         database: ParkyDatabase
     ): AlarmController = AlarmControllerInjector(context, database).getAlarmController()
+
+    @Provides
+    @Singleton
+    fun providesNotificationManager(
+        @ApplicationContext context: Context
+    ): NotificationManager = NotificationManager(context)
 }

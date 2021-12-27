@@ -9,7 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -46,6 +49,10 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Parky.NoActionBar" />
 
+        <service
+            android:name=".home.presentation.services.BluetoothService"
+            android:enabled="true" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="@string/file_provider_authority"
@@ -64,11 +71,21 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".home.presentation.receivers.NotificationReceiver" />
+        <receiver android:name=".home.presentation.receivers.AlarmNotificationReceiver" />
 
         <receiver android:name=".home.presentation.receivers.TimeChangedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".home.presentation.receivers.BluetoothReceiver">
+            <intent-filter>
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED" />
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
             </intent-filter>
         </receiver>
 

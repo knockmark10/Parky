@@ -3,13 +3,15 @@ package com.markoid.parky.settings.presentation.managers
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.StringRes
+import com.markoid.parky.core.presentation.extensions.getDouble
+import com.markoid.parky.core.presentation.extensions.putDouble
 
 abstract class AbstractPreferences(
     private val context: Context,
     val preferences: SharedPreferences
 ) {
 
-    fun setSharedPreference(
+    fun setPreference(
         @StringRes key: Int,
         value: Any
     ) {
@@ -19,11 +21,12 @@ abstract class AbstractPreferences(
             is Long -> preferences.edit().putLong(getKey(key), value).apply()
             is Boolean -> preferences.edit().putBoolean(getKey(key), value).apply()
             is String -> preferences.edit().putString(getKey(key), value).apply()
-            else -> throw UnsupportedOperationException("Value type not supported.")
+            is Double -> preferences.edit().putDouble(getKey(key), value).apply()
+            else -> throw UnsupportedOperationException("Value type not supported. If required, you need to manually add it on AbstractPreferences class.")
         }
     }
 
-    inline fun <reified T : Any> getSharedPreference(
+    inline fun <reified T : Any> getPreference(
         @StringRes key: Int,
         defaultValue: T? = null
     ): T = when (T::class) {
@@ -34,8 +37,10 @@ abstract class AbstractPreferences(
             preferences.getBoolean(getKey(key), defaultValue as? Boolean ?: false) as T
         String::class ->
             preferences.getString(getKey(key), defaultValue as? String ?: "") as T
+        Double::class ->
+            preferences.getDouble(getKey(key), defaultValue as? Double ?: 0.0) as T
         else ->
-            throw UnsupportedOperationException("Value type not supported. You need to specify default value with proper type.")
+            throw UnsupportedOperationException("Value type not supported. You need to specify default value with proper type. If value is not supported, you need to manually add it on AbstractPreferences class.")
     }
 
     fun getKey(resId: Int): String = context.getString(resId)

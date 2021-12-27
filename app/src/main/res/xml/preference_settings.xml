@@ -16,15 +16,43 @@
 
         <SwitchPreference
             android:defaultValue="false"
+            android:key="@string/background_location_enabled_key"
+            android:summary="@string/background_location_summary"
+            android:title="@string/background_location_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Automatic Detection">
+
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="@string/auto_detection_enabled_key"
             android:summary="@string/auto_detection_summary"
             android:title="@string/auto_detection_title" />
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="@string/background_location_enabled_key"
-            android:summary="@string/background_location_summary"
-            android:title="@string/background_location_title" />
+        <ListPreference
+            android:enabled="false"
+            android:key="@string/bluetooth_device_key"
+            android:summary="@string/none"
+            android:title="@string/bluetooth_device_title" />
+
+        <ListPreference
+            android:enabled="false"
+            android:key="@string/favorite_parking_key"
+            android:summary="@string/parking_type_street"
+            android:title="@string/favorite_parking_title" />
+
+        <EditTextPreference
+            android:enabled="false"
+            android:key="@string/internal_hour_rate_key"
+            android:summary="$10.00"
+            android:title="@string/hour_rate" />
+
+        <Preference
+            android:enabled="false"
+            android:key="@string/exclusion_zone_key"
+            android:summary="@string/exclusion_zone_summary"
+            android:title="@string/exclusion_zone_title" />
 
     </PreferenceCategory>
 

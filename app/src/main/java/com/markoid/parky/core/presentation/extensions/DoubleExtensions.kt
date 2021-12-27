@@ -5,3 +5,5 @@ fun String.toDouble(defaultValue: Double): Double = try {
 } catch (error: Throwable) {
     defaultValue
 }
+
+fun Double.asMoney(): String = String.format("$%.2f", this)

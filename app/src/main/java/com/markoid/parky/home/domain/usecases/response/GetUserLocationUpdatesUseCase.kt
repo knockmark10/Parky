@@ -1,6 +1,5 @@
 package com.markoid.parky.home.domain.usecases.response
 
-import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import com.markoid.parky.core.presentation.extensions.latLng
 import com.markoid.parky.position.data.repositories.TrackingRepository
@@ -21,7 +20,6 @@ class GetUserLocationUpdatesUseCase
             .getRealTimeLocation()
             .map { Pair(it, getDistance(it.latLng, parkingSpotLocation)) }
             .map {
-                Log.d("leissue", "Distance: ${it.second}, Speed: ${it.first.speed}, Time: ${it.second / it.first.speed / 60}")
                 LocationUpdatesResponse(
                     getDistanceFormatted(it.second),
                     it.first.latLng,

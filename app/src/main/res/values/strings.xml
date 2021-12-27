@@ -17,6 +17,7 @@
     <string name="error">Error</string>
     <string name="warning">Warning</string>
     <string name="info">Information</string>
+    <string name="none">None</string>
 
     <!--Menu-->
     <string name="menu_home">Home</string>
@@ -93,9 +94,13 @@
     <string name="dark_mode_summary">Enables dark mode</string>
     <string name="dark_mode_title">Dark Mode</string>
     <string name="auto_detection_title">Auto-Parking Detection</string>
-    <string name="auto_detection_summary">Detects auto-parking by using bluetooth</string>
+    <string name="auto_detection_summary">Detects when you park your car by using bluetooth</string>
     <string name="background_location_title">Background Location</string>
     <string name="background_location_summary">Use background location to find your car</string>
+    <string name="exclusion_zone_title">Exclusion Zone</string>
+    <string name="exclusion_zone_summary">Add exclusion zones to avoid adding parking spots in your most frequent spaces</string>
+    <string name="bluetooth_device_title">Bluetooth Device</string>
+    <string name="favorite_parking_title">Favorite Parking Type</string>
 
     <!--Animations-->
     <string name="loading">Loading…</string>
@@ -131,5 +136,11 @@
     <!--Notifications-->
     <string name="alarm_notification_title">Reminder alarm</string>
     <string name="alarm_notification_message">Remember to pick up your car.</string>
+    <string name="bluetooth_notification_title">Bluetooth service running</string>
+    <string name="bluetooth_notification_message">We will make sure to save your parking spot next time you disconnect from your car.</string>
+    <string name="auto_parking_spot_notification_title">Parking spot saved</string>
+    <string name="auto_parking_spot_notification_message">Your parking spot has been saved automatically.</string>
+    <string name="auto_parking_missing_data_notification_title">Parking spot missing data</string>
+    <string name="auto_parking_missing_data_notification_message">Your parking spot is missing some parameters. Tap here to complete it.</string>
 
 </resources>

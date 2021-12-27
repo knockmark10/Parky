@@ -12,6 +12,8 @@ import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.subscribe
+import com.markoid.parky.core.presentation.managers.GO_TO_SETTINGS
+import com.markoid.parky.core.presentation.managers.GO_TO_USER_LOCATION
 import com.markoid.parky.databinding.FragmentParkingHistoryBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.entities.isActive
@@ -96,6 +98,14 @@ class ParkingHistoryFragment :
                 onDisplayEmptyState()
             }
         }
+        readPotentialNotificationIntent()
+    }
+
+    private fun readPotentialNotificationIntent() {
+        when (requireActivity().intent.action) {
+            GO_TO_USER_LOCATION -> onGoToUserLocation()
+            GO_TO_SETTINGS -> goToSettings()
+        }
     }
 
     private fun setAddParkingSpotClickListener() {
@@ -117,6 +127,12 @@ class ParkingHistoryFragment :
         binding.parkingHistoryEmptyStateContainer.root.isVisible = false
         binding.parkingHistoryEmptyStateContainer.parkingHistoryEmptyAnimation.cancelAnimation()
         binding.actionAddParkingSpot.isVisible = isAddButtonVisible
+    }
+
+    private fun goToSettings() {
+        navController.navigate(
+            ParkingHistoryFragmentDirections.actionToSettings()
+        )
     }
 
     override fun onRequestDeleteParkingSpot(spot: ParkingSpotEntity) {
