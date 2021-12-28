@@ -4,6 +4,7 @@ import com.markoid.parky.home.data.entities.ParkingSpotEntity
 
 interface ParkingHistoryAdapterCallback {
     fun onRequestDeleteParkingSpot(spot: ParkingSpotEntity)
+    fun onEditParkingSpot(spot: ParkingSpotEntity)
     fun onGoToUserLocation()
     fun onDisplayEmptyState()
 }

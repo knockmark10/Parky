@@ -12,7 +12,6 @@ class UpdateParkingSpotUseCase
     private val validateNewParkingUseCase: ValidateNewParkingUseCase
 ) : UseCase<ParkingValidationStatus, ParkingSpotRequest>() {
 
-    // TODO: This is fake news. Needs to update properly
     override suspend fun onExecute(request: ParkingSpotRequest): ParkingValidationStatus {
         // Get validation status
         val validationStatus = validateNewParkingUseCase.onExecute(request)

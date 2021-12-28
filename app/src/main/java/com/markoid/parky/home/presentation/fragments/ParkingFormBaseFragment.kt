@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -14,15 +13,25 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.markoid.parky.R
 import com.markoid.parky.core.date.enums.FormatType
-import com.markoid.parky.core.date.formatters.DateTimeFormatter
+import com.markoid.parky.core.date.extensions.formatWith
 import com.markoid.parky.core.presentation.enums.AlertType
-import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
+import com.markoid.parky.core.presentation.extensions.appAlert
+import com.markoid.parky.core.presentation.extensions.dateAndTimePickers
+import com.markoid.parky.core.presentation.extensions.findMapById
+import com.markoid.parky.core.presentation.extensions.longToast
+import com.markoid.parky.core.presentation.extensions.toDouble
+import com.markoid.parky.core.presentation.extensions.value
+import com.markoid.parky.core.presentation.views.InstantViewAdapter
 import com.markoid.parky.databinding.FragmentAddParkingBinding
+import com.markoid.parky.home.data.entities.ParkingSpotEntity
+import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
 import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
+import com.markoid.parky.home.presentation.enums.ParkingType.ParkingLot
+import com.markoid.parky.home.presentation.enums.ParkingType.values
 import com.markoid.parky.home.presentation.utils.AlarmUtils
 import com.markoid.parky.position.presentation.extensions.setCameraPosition
 import com.markoid.parky.position.presentation.extensions.setMarker
@@ -40,6 +49,7 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
             hourRate = binding.locationLotInfoContainer.hourRateValue.value.toDouble(-0.1),
             floorNumber = binding.locationLotInfoContainer.floorNumberValue.value,
             floorType = binding.locationLotInfoContainer.floorTypeValue.value,
+            id = parkingSpotToEdit?.id,
             latitude = binding.locationInfoContainer.locationLatitudeValue.value.toDouble(0.0),
             longitude = binding.locationInfoContainer.locationLongitudeValue.value.toDouble(0.0),
             lotIdentifier = binding.locationLotInfoContainer.lotIndentifierValue.value,
@@ -59,14 +69,17 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
 
     private var carPhotoUri: Uri? = null
 
+    private val parkingSpotToEdit: ParkingSpotEntity?
+        get() = navigationArgs.editParkingSpot
+
     private val isEditMode: Boolean
-        get() = navigationArgs.editMode
+        get() = parkingSpotToEdit != null
 
     private val incompleteRequest: ParkingSpotRequest?
         get() = navigationArgs.parkingSpotRequest
 
     private val initialDelay: Long
-        get() = if (incompleteRequest == null) 1500L else 0L
+        get() = if (incompleteRequest == null && parkingSpotToEdit == null) 1500L else 0L
 
     abstract fun onSaveParkingSpot()
 
@@ -98,16 +111,11 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
     }
 
     fun displayAlarmDialog() {
-        dateAndTimePickers(true, {
-            alarmTime = this
-            binding.locationInfoContainer.parkingAlarmContainer.isVisible = true
-            binding
-                .locationInfoContainer
-                .parkingAlarmValue
-                .setText(DateTimeFormatter.format(FormatType.MONTH_DAY_YEAR_HOUR, this))
-        }, {
-            longToast("Alarm was not set")
-        })
+        dateAndTimePickers(
+            true,
+            { setupAlarm(this) },
+            { longToast("Alarm was not set") }
+        )
     }
 
     fun handleValidationResult(result: ParkingValidationStatus) {
@@ -160,6 +168,7 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
                 ParkingColor
                     .values()
                     .map { getString(it.colorId) }
+                    .sorted()
                     .buildArrayAdapter()
             )
     }
@@ -170,40 +179,68 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
                 ParkingFloorType
                     .values()
                     .map { getString(it.typeId) }
+                    .sorted()
                     .buildArrayAdapter()
             )
     }
 
     private fun populateParkingTypes() {
-        val parkingTypes: List<String> = ParkingType.values().map { getString(it.typeId) }
+        val parkingTypes: List<String> = values().map { getString(it.typeId) }.sorted()
         val adapter = parkingTypes.buildArrayAdapter()
         (binding.locationInfoContainer.parkingTypeContainer.editText as? AutoCompleteTextView?)?.apply {
             setAdapter(adapter)
             setOnItemClickListener { _, _, position, _ ->
                 binding.locationLotInfoContainer.root.isVisible =
-                    parkingTypes[position] == getString(ParkingType.ParkingLot.typeId)
+                    parkingTypes[position] == getString(ParkingLot.typeId)
             }
         }
     }
 
-    private fun fillIncompleteRequestData(request: ParkingSpotRequest) {
-        binding.locationInfoContainer.locationAddressValue.setText(request.address)
-        binding.locationInfoContainer.locationLatitudeValue.setText(request.latitude.toString())
-        binding.locationInfoContainer.locationLongitudeValue.setText(request.longitude.toString())
-        binding.locationInfoContainer.parkingTimeValue.setText(request.parkingTimeFormatted)
-        request.alarmTime?.let {
-            alarmTime = it
-            binding.locationInfoContainer.parkingAlarmContainer.isVisible = true
-            binding
-                .locationInfoContainer
-                .parkingAlarmValue
-                .setText(DateTimeFormatter.format(FormatType.MONTH_DAY_YEAR_HOUR, it))
+    private fun fillIncompleteRequestData(request: ParkingSpotRequest) = with(binding) {
+        updateParkingTime(request.parkingTime)
+        locationInfoContainer.apply {
+            locationAddressValue.setText(request.address)
+            locationLatitudeValue.setText(request.latitude.toString())
+            locationLongitudeValue.setText(request.longitude.toString())
+            parkingTimeValue.setText(request.parkingTimeFormatted)
+            parkingTypeValue.setText(request.parkingType)
+            request.alarmTime?.let { setupAlarm(it) }
         }
-        binding.locationLotInfoContainer.root.isVisible =
-            ParkingType.forValue(resources, request.parkingType) == ParkingType.ParkingLot
-        binding.locationInfoContainer.parkingTypeValue.setText(request.parkingType)
-        binding.locationLotInfoContainer.hourRateValue.setText(request.hourRate.toString())
+        locationLotInfoContainer.apply {
+            root.isVisible = ParkingType.forValue(resources, request.parkingType) == ParkingLot
+            hourRateValue.setText(request.hourRate.toString())
+        }
         displayMarkerOnMap(LatLng(request.latitude, request.longitude))
+    }
+
+    private fun fillParkingSpotToEdit(spot: ParkingSpotEntity) = with(binding) {
+        updateParkingTime(spot.parkingTime)
+        locationInfoContainer.apply {
+            locationAddressValue.setText(spot.address)
+            locationLatitudeValue.setText(spot.latitude.toString())
+            locationLongitudeValue.setText(spot.longitude.toString())
+            parkingTimeValue.setText(spot.parkingTime.formatWith(FormatType.MONTH_DAY_YEAR_HOUR))
+            parkingTypeValue.setText(getString(spot.parkingType.typeId))
+            spot.alarmTime?.let { setupAlarm(it) }
+        }
+        locationLotInfoContainer.apply {
+            root.isVisible = spot.parkingType == ParkingLot
+            spot.floorType?.let { floorTypeValue.setText(getString(it.typeId)) }
+            floorNumberValue.setText(spot.floorNumber)
+            colorValue.setText(spot.color)
+            lotIndentifierValue.setText(spot.lotIdentifier)
+            if (spot.hourRate >= 0.0) hourRateValue.setText(spot.hourRate.toString())
+        }
+        spot.photo?.let { displayCarImage(it) }
+        displayMarkerOnMap(spot.latLng)
+    }
+
+    private fun setupAlarm(alarmTime: DateTime) {
+        this.alarmTime = alarmTime
+        binding.locationInfoContainer.apply {
+            parkingAlarmContainer.isVisible = true
+            parkingAlarmValue.setText(alarmTime.formatWith(FormatType.MONTH_DAY_YEAR_HOUR))
+        }
     }
 
     private fun setInitialDataWithDelay(): Job = lifecycleScope.launchWhenStarted {
@@ -220,8 +257,11 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
         childFragmentManager.findMapById(R.id.add_parking_map_view)?.getMapAsync {
             this.mGoogleMap = it
             it.mapType = GoogleMap.MAP_TYPE_HYBRID
-            incompleteRequest?.let { request -> fillIncompleteRequestData(request) }
-                ?: onGetCurrentLocation()
+            when {
+                incompleteRequest != null -> fillIncompleteRequestData(incompleteRequest!!)
+                isEditMode -> fillParkingSpotToEdit(parkingSpotToEdit!!)
+                else -> onGetCurrentLocation()
+            }
         }
 
     private fun handleValidationsSucceeded() {
@@ -258,19 +298,23 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
     }
 
     private fun clearErrors() {
-        binding.locationInfoContainer.locationAddressContainer.isErrorEnabled = false
-        binding.locationLotInfoContainer.colorContainer.isErrorEnabled = false
-        binding.locationLotInfoContainer.floorNumberContainer.isErrorEnabled = false
-        binding.locationLotInfoContainer.hourRateContainer.isErrorEnabled = false
-        binding.locationLotInfoContainer.floorTypeContainer.isErrorEnabled = false
-        binding.locationInfoContainer.locationLatitudeContainer.isErrorEnabled = false
-        binding.locationInfoContainer.locationLongitudeContainer.isErrorEnabled = false
-        binding.locationLotInfoContainer.lotIdentifierContainer.isErrorEnabled = false
-        binding.locationInfoContainer.parkingTimeContainer.isErrorEnabled = false
-        binding.locationInfoContainer.parkingTypeContainer.isErrorEnabled = false
+        binding.locationInfoContainer.apply {
+            locationAddressContainer.isErrorEnabled = false
+            locationLatitudeContainer.isErrorEnabled = false
+            locationLongitudeContainer.isErrorEnabled = false
+            parkingTimeContainer.isErrorEnabled = false
+            parkingTypeContainer.isErrorEnabled = false
+        }
+        binding.locationLotInfoContainer.apply {
+            colorContainer.isErrorEnabled = false
+            floorNumberContainer.isErrorEnabled = false
+            hourRateContainer.isErrorEnabled = false
+            floorTypeContainer.isErrorEnabled = false
+            lotIdentifierContainer.isErrorEnabled = false
+        }
     }
 
-    private fun List<String>.buildArrayAdapter(): ArrayAdapter<String> = ArrayAdapter(
+    private fun List<String>.buildArrayAdapter(): InstantViewAdapter = InstantViewAdapter(
         requireContext(),
         android.R.layout.simple_expandable_list_item_1,
         this

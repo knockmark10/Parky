@@ -88,7 +88,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@+id/card_title_bar"
-                app:layout_constraintEnd_toStartOf="@+id/action_delete"
+                app:layout_constraintEnd_toStartOf="@+id/action_more_options"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_menu_camera"
                 app:tint="@color/md_white_1000" />

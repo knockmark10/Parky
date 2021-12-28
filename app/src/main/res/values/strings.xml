@@ -17,7 +17,9 @@
     <string name="error">Error</string>
     <string name="warning">Warning</string>
     <string name="info">Information</string>
-    <string name="none">None</string>
+    <string name="any">Any</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 
     <!--Menu-->
     <string name="menu_home">Home</string>

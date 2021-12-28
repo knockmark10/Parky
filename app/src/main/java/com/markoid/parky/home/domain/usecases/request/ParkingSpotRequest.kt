@@ -17,5 +17,6 @@ data class ParkingSpotRequest(
     val parkingTime: DateTime,
     val parkingTimeFormatted: String,
     val parkingType: String,
-    val photo: Uri? = null
+    val photo: Uri? = null,
+    val id: Long? = null
 ) : Serializable

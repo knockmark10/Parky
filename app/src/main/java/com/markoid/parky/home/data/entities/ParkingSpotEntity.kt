@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
 import org.joda.time.DateTime
+import java.io.Serializable
 
 @Entity(tableName = "parking_spot")
 data class ParkingSpotEntity(
@@ -53,4 +54,4 @@ data class ParkingSpotEntity(
 
     @ColumnInfo(name = "status")
     val status: ParkingSpotStatus
-)
+) : Serializable

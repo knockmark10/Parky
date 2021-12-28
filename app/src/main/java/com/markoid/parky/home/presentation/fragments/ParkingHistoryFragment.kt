@@ -167,8 +167,14 @@ class ParkingHistoryFragment :
         }
     }
 
+    override fun onEditParkingSpot(spot: ParkingSpotEntity) {
+        navController.navigate(
+            ParkingHistoryFragmentDirections.actionToAddParking().setEditParkingSpot(spot)
+        )
+    }
+
     override fun onGoToUserLocation() {
-        findNavController().navigate(
+        navController.navigate(
             ParkingHistoryFragmentDirections
                 .actionToUserLocation()
                 .setSpotId(parkingSpotId)

@@ -16,7 +16,7 @@ class DevicePreferencesImpl
 ) : AbstractPreferences(context, sharedPreferences), DevicePreferences {
 
     override var bluetoothDevice: String
-        get() = getPreference(R.string.bluetooth_device_key, getKey(R.string.none))
+        get() = getPreference(R.string.bluetooth_device_key, getKey(R.string.any))
         set(value) = setPreference(R.string.bluetooth_device_key, value)
 
     override var currentTheme: Int

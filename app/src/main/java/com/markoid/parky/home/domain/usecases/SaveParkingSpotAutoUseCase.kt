@@ -23,8 +23,8 @@ class SaveParkingSpotAutoUseCase
     private val validateNewParkingUseCase: ValidateNewParkingUseCase
 ) : UseCase<AutoParkingSpotStatus, String>() {
 
-    private val none: String
-        get() = resources.getString(R.string.none)
+    private val any: String
+        get() = resources.getString(R.string.any)
 
     /**
      * This method will save the parking spot automatically upon bluetooth disconnection.
@@ -81,6 +81,6 @@ class SaveParkingSpotAutoUseCase
         devicePreferences.isParkingSpotActive
 
     private fun bluetoothDeviceDoesNotMatch(disconnectedDevice: String): Boolean =
-        devicePreferences.bluetoothDevice != none &&
+        devicePreferences.bluetoothDevice != any &&
             devicePreferences.bluetoothDevice != disconnectedDevice
 }

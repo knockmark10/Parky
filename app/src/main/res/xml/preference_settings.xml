@@ -33,7 +33,7 @@
         <ListPreference
             android:enabled="false"
             android:key="@string/bluetooth_device_key"
-            android:summary="@string/none"
+            android:summary="@string/any"
             android:title="@string/bluetooth_device_title" />
 
         <ListPreference

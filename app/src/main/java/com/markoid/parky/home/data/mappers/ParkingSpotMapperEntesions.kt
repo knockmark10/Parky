@@ -17,6 +17,7 @@ fun ParkingSpotRequest.toEntity(
     hourRate = hourRate,
     floorNumber = floorNumber,
     floorType = ParkingFloorType.forValue(res, floorType),
+    id = id ?: 0L,
     latitude = latitude,
     longitude = longitude,
     lotIdentifier = lotIdentifier,

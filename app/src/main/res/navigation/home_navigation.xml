@@ -20,9 +20,10 @@
             app:popExitAnim="@anim/right_out">
 
             <argument
-                android:name="edit.mode"
-                android:defaultValue="false"
-                app:argType="boolean" />
+                android:name="edit.parking.spot"
+                android:defaultValue="@null"
+                app:argType="com.markoid.parky.home.data.entities.ParkingSpotEntity"
+                app:nullable="true" />
 
             <argument
                 android:name="parking.spot.request"
@@ -64,9 +65,10 @@
         tools:layout="@layout/fragment_add_parking">
 
         <argument
-            android:name="edit.mode"
-            android:defaultValue="false"
-            app:argType="boolean" />
+            android:name="edit.parking.spot"
+            android:defaultValue="@null"
+            app:argType="com.markoid.parky.home.data.entities.ParkingSpotEntity"
+            app:nullable="true" />
 
         <argument
             android:name="parking.spot.request"
