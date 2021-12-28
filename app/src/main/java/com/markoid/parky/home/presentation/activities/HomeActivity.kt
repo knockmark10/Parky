@@ -122,6 +122,5 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
             setHomeAsUpIndicator(R.drawable.ic_back)
             setDisplayHomeAsUpEnabled(true)
         }
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 }
