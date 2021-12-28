@@ -79,6 +79,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setupAutoParkingPreference() {
         findPreference<SwitchPreference>(getString(R.string.auto_detection_enabled_key))?.let {
+            it.isEnabled = BluetoothAdapter.getDefaultAdapter() != null
             it.setOnPreferenceChangeListener { _, newValue ->
                 viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                     val isPermissionGranted: Boolean =
