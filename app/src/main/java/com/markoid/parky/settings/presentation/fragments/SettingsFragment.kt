@@ -35,7 +35,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         setPreferencesFromResource(R.xml.preference_settings, rootKey)
 
-        navigationListener?.onUpdateToolbarMenuItems()
+        setupToolbar()
 
         setupMapTypePreference()
 
@@ -48,6 +48,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupFavoriteParkingTypePreference()
 
         setupHourRatePreference()
+    }
+
+    private fun setupToolbar() {
+        navigationListener?.apply {
+            onUpdateToolbarMenuItems()
+            onSetBackArrowOnToolbar()
+        }
     }
 
     private fun setupMapTypePreference() {
@@ -143,8 +150,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun getBondedBluetoothDevices(): Array<String> {
-        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        return bluetoothAdapter.bondedDevices.map { it.name }.toTypedArray()
+        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        return bluetoothAdapter?.bondedDevices?.map { it.name }?.toTypedArray() ?: arrayOf()
     }
 
     override fun onAttach(context: Context) {

@@ -84,6 +84,8 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
 
+        navigationListener?.onSetBackArrowOnToolbar()
+
         setupView()
 
         setInitialDataWithDelay()

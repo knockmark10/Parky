@@ -56,7 +56,13 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
             R.id.action_schedule_alarm -> addParkingFragment?.displayAlarmDialog()
             R.id.action_change_map -> userLocationFragment?.displayMapTypeDialog()
             R.id.action_finish_parking -> userLocationFragment?.finishParking()
+            android.R.id.home -> if (currentDestination != getString(R.string.menu_home)) {
+                navController.popBackStack()
+                // This will prevent the drawer to open up
+                return true
+            }
         }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -109,5 +115,13 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
     override fun onUpdateDrawerMenuItemVisibility(itemId: Int, isVisible: Boolean) {
         val navigationView: NavigationView? = findViewById(R.id.home_navigation_view)
         navigationView?.menu?.findItem(itemId)?.isVisible = isVisible
+    }
+
+    override fun onSetBackArrowOnToolbar() {
+        supportActionBar?.apply {
+            setHomeAsUpIndicator(R.drawable.ic_back)
+            setDisplayHomeAsUpEnabled(true)
+        }
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 }

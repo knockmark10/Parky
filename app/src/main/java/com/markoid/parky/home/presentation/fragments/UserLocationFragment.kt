@@ -60,6 +60,8 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
 
     override fun onInitView(view: View, savedInstanceState: Bundle?) {
 
+        navigationListener?.onSetBackArrowOnToolbar()
+
         setupMap()
 
         setClickListener()
