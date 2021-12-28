@@ -105,7 +105,15 @@ class ParkingHistoryFragment :
     }
 
     private fun readPotentialNotificationIntent() {
-        when (requireActivity().intent.action) {
+        // Save the reference for the caught intent
+        val caughtIntent = requireActivity().intent
+        // Recover the action that we will use to determine what to do
+        val action = caughtIntent.action
+        // Clear the action from the caught intent
+        caughtIntent.action = null
+        // Set the activity's intent with the clear action one
+        requireActivity().intent = caughtIntent
+        when (action) {
             GO_TO_ADD_PARKING -> {
                 val request = requireActivity().intent
                     .getSerializableExtra(PARKING_SPOT_REQUEST) as? ParkingSpotRequest?
