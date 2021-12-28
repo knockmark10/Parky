@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.markoid.parky.core.data.enums.DataState
-import com.markoid.parky.core.presentation.managers.NotificationManager
+import com.markoid.parky.core.presentation.notifications.AppNotificationManager
 import com.markoid.parky.home.domain.usecases.response.AutoParkingSpotStatus
 import com.markoid.parky.home.presentation.viewmodels.BluetoothViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +22,7 @@ class BluetoothReceiver : BroadcastReceiver() {
     lateinit var coroutineScope: CoroutineScope
 
     @Inject
-    lateinit var notificationManager: NotificationManager
+    lateinit var notificationManager: AppNotificationManager
 
     @Inject
     lateinit var viewModel: BluetoothViewModel

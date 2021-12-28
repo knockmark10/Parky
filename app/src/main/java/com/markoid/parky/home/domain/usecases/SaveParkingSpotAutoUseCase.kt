@@ -82,5 +82,5 @@ class SaveParkingSpotAutoUseCase
 
     private fun bluetoothDeviceDoesNotMatch(disconnectedDevice: String): Boolean =
         devicePreferences.bluetoothDevice != none &&
-            devicePreferences.bluetoothDevice != disconnectedDevice
+                devicePreferences.bluetoothDevice != disconnectedDevice
 }

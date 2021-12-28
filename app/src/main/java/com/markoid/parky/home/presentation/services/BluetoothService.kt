@@ -7,7 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import androidx.core.content.ContextCompat
-import com.markoid.parky.core.presentation.managers.NotificationManager
+import com.markoid.parky.core.presentation.notifications.AppNotificationManager
 import com.markoid.parky.home.presentation.receivers.BluetoothReceiver
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,7 +22,7 @@ private const val BLUETOOTH_SERVICE_ID = 92837
 class BluetoothService : Service() {
 
     @Inject
-    lateinit var notificationManager: NotificationManager
+    lateinit var notificationManager: AppNotificationManager
 
     private val bluetoothReceiver by lazy { BluetoothReceiver() }
 

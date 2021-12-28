@@ -12,10 +12,8 @@ import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.subscribe
-import com.markoid.parky.core.presentation.managers.GO_TO_ADD_PARKING
-import com.markoid.parky.core.presentation.managers.GO_TO_SETTINGS
-import com.markoid.parky.core.presentation.managers.GO_TO_USER_LOCATION
-import com.markoid.parky.core.presentation.managers.PARKING_SPOT_REQUEST
+import com.markoid.parky.core.presentation.notifications.NotificationConstants.PARKING_SPOT_REQUEST_ARG
+import com.markoid.parky.core.presentation.notifications.NotificationIntentActions
 import com.markoid.parky.databinding.FragmentParkingHistoryBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.entities.isActive
@@ -108,19 +106,19 @@ class ParkingHistoryFragment :
         // Save the reference for the caught intent
         val caughtIntent = requireActivity().intent
         // Recover the action that we will use to determine what to do
-        val action = caughtIntent.action
+        val action = caughtIntent.action?.let { NotificationIntentActions.getTypeByAction(it) }
         // Clear the action from the caught intent
         caughtIntent.action = null
         // Set the activity's intent with the clear action one
         requireActivity().intent = caughtIntent
         when (action) {
-            GO_TO_ADD_PARKING -> {
+            NotificationIntentActions.ACTION_ADD_PARKING -> {
                 val request = requireActivity().intent
-                    .getSerializableExtra(PARKING_SPOT_REQUEST) as? ParkingSpotRequest?
+                    .getSerializableExtra(PARKING_SPOT_REQUEST_ARG) as? ParkingSpotRequest?
                 goToAddParkingSpot(request)
             }
-            GO_TO_USER_LOCATION -> onGoToUserLocation()
-            GO_TO_SETTINGS -> goToSettings()
+            NotificationIntentActions.ACTION_USER_LOCATION -> onGoToUserLocation()
+            NotificationIntentActions.ACTION_SETTINGS -> goToSettings()
         }
     }
 
