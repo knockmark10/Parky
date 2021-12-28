@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.* // ktlint-disable no-wildcard-imports
 import com.markoid.parky.R
 import com.markoid.parky.core.presentation.extensions.asMoney
@@ -13,6 +14,8 @@ import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.dialgos.MapTypeDialog
 import com.markoid.parky.home.presentation.enums.ParkingType
 import com.markoid.parky.home.presentation.services.BluetoothService
+import com.markoid.parky.permissions.presentation.controllers.LocationPermissionController
+import com.markoid.parky.permissions.presentation.enums.LocationPermissions
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,6 +25,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Inject
     lateinit var devicePreferences: DevicePreferences
+
+    @Inject
+    lateinit var permissionController: LocationPermissionController
 
     private var navigationListener: HomeNavigationCallbacks? = null
 
@@ -65,11 +71,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setupAutoParkingPreference() {
-        findPreference<SwitchPreference>(getString(R.string.auto_detection_enabled_key))?.apply {
-            setOnPreferenceChangeListener { _, newValue ->
-                changeAutoDetectionParametersAvailability(newValue as Boolean)
-                if (newValue) BluetoothService.startBluetoothService(requireContext())
-                else BluetoothService.stopBluetoothService(requireContext())
+        findPreference<SwitchPreference>(getString(R.string.auto_detection_enabled_key))?.let {
+            it.setOnPreferenceChangeListener { _, newValue ->
+                viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                    val isPermissionGranted: Boolean =
+                        permissionController.onRequestPermission(LocationPermissions.RegularLocation)
+                    if (isPermissionGranted) {
+                        changeAutoDetectionParametersAvailability(newValue as Boolean)
+                        if (newValue) BluetoothService.startBluetoothService(requireContext())
+                        else BluetoothService.stopBluetoothService(requireContext())
+                    } else {
+                        it.isChecked = false
+                    }
+                }
                 true
             }
         }

@@ -40,4 +40,9 @@ class ParkingRepositoryImpl
         this.parkingDataSource.saveParkingSpotIntoDatabase(
             this.parkingSpotMapper.mapFromRequestToEntity(parkingSpot, ParkingSpotStatus.Active)
         )
+
+    override suspend fun updateParkingSpotInDatabase(parkingSpot: ParkingSpotRequest) =
+        this.parkingDataSource.updateParkingSpot(
+            parkingSpotMapper.mapFromRequestToEntity(parkingSpot, ParkingSpotStatus.Active)
+        )
 }

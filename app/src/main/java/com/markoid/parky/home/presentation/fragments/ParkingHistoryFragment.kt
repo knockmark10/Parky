@@ -12,12 +12,15 @@ import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.subscribe
+import com.markoid.parky.core.presentation.managers.GO_TO_ADD_PARKING
 import com.markoid.parky.core.presentation.managers.GO_TO_SETTINGS
 import com.markoid.parky.core.presentation.managers.GO_TO_USER_LOCATION
+import com.markoid.parky.core.presentation.managers.PARKING_SPOT_REQUEST
 import com.markoid.parky.databinding.FragmentParkingHistoryBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.entities.isActive
 import com.markoid.parky.home.data.entities.isArchived
+import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.presentation.adapters.ParkingHistoryAdapter
 import com.markoid.parky.home.presentation.callbacks.ParkingHistoryAdapterCallback
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
@@ -103,6 +106,11 @@ class ParkingHistoryFragment :
 
     private fun readPotentialNotificationIntent() {
         when (requireActivity().intent.action) {
+            GO_TO_ADD_PARKING -> {
+                val request = requireActivity().intent
+                    .getSerializableExtra(PARKING_SPOT_REQUEST) as? ParkingSpotRequest?
+                goToAddParkingSpot(request)
+            }
             GO_TO_USER_LOCATION -> onGoToUserLocation()
             GO_TO_SETTINGS -> goToSettings()
         }
@@ -111,9 +119,7 @@ class ParkingHistoryFragment :
     private fun setAddParkingSpotClickListener() {
         binding.actionAddParkingSpot.setOnClickListener {
             binding.parkingHistoryEmptyStateContainer.parkingHistoryEmptyAnimation.cancelAnimation()
-            navController.navigate(
-                ParkingHistoryFragmentDirections.actionToAddParking()
-            )
+            goToAddParkingSpot()
         }
     }
 
@@ -135,6 +141,12 @@ class ParkingHistoryFragment :
         )
     }
 
+    private fun goToAddParkingSpot(request: ParkingSpotRequest? = null) {
+        navController.navigate(
+            ParkingHistoryFragmentDirections.actionToAddParking().setParkingSpotRequest(request)
+        )
+    }
+
     override fun onRequestDeleteParkingSpot(spot: ParkingSpotEntity) {
         appAlert {
             message = getString(R.string.parking_spot_delete_title)
@@ -150,21 +162,16 @@ class ParkingHistoryFragment :
     }
 
     override fun onGoToUserLocation() {
-        findNavController()
-            .navigate(
-                ParkingHistoryFragmentDirections
-                    .actionToUserLocation()
-                    .setSpotId(parkingSpotId)
-            )
+        findNavController().navigate(
+            ParkingHistoryFragmentDirections
+                .actionToUserLocation()
+                .setSpotId(parkingSpotId)
+        )
     }
 
     override fun onDisplayEmptyState() {
         navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_add_parking, true)
         navigationListener?.onUpdateDrawerMenuItemVisibility(R.id.home_user_location, false)
         displayEmptyState()
-    }
-
-    companion object {
-        const val SPOT_ID = "spot.id"
     }
 }

@@ -7,7 +7,7 @@ import android.content.Intent
 import android.util.Log
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.managers.NotificationManager
-import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
+import com.markoid.parky.home.domain.usecases.response.AutoParkingSpotStatus
 import com.markoid.parky.home.presentation.viewmodels.BluetoothViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -52,11 +52,13 @@ class BluetoothReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun handleSpotSaving(result: ParkingValidationStatus) {
-        if (result is ParkingValidationStatus.Success) {
-            notificationManager.displayAutoParkingSavedNotification()
-        } else {
-            notificationManager.displayAutoParkingMissingDataNotification()
+    private fun handleSpotSaving(result: AutoParkingSpotStatus) {
+        when (result) {
+            AutoParkingSpotStatus.SkipDisconnectionEvent -> Unit
+            is AutoParkingSpotStatus.MissingData ->
+                notificationManager.displayAutoParkingMissingDataNotification(result.request)
+            is AutoParkingSpotStatus.ParkingSpotSavedAutomatically ->
+                notificationManager.displayAutoParkingSavedNotification()
         }
     }
 

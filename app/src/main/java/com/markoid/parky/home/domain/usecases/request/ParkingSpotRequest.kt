@@ -2,6 +2,7 @@ package com.markoid.parky.home.domain.usecases.request
 
 import android.net.Uri
 import org.joda.time.DateTime
+import java.io.Serializable
 
 data class ParkingSpotRequest(
     val address: String,
@@ -17,4 +18,4 @@ data class ParkingSpotRequest(
     val parkingTimeFormatted: String,
     val parkingType: String,
     val photo: Uri? = null
-)
+) : Serializable

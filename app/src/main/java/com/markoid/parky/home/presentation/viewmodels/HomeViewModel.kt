@@ -22,6 +22,7 @@ import javax.inject.Inject
 class HomeViewModel
 @Inject constructor(
     deleteParkingSpotUseCase: DeleteParkingSpotUseCase,
+    dispatcherProvider: CoroutineDispatcherProvider,
     finishParkingUseCase: FinishParkingUseCase,
     getActiveParkingSpotUseCase: GetActiveParkingSpotUseCase,
     getCurrentLocationUseCase: GetCurrentLocationUseCase,
@@ -30,7 +31,7 @@ class HomeViewModel
     private val getUserLocationUpdatesUseCase: GetUserLocationUpdatesUseCase,
     takeCarPictureUseCase: TakeCarPictureUseCase,
     saveParkingSpotUseCase: SaveParkingSpotUseCase,
-    dispatcherProvider: CoroutineDispatcherProvider
+    updateParkingSpotUseCase: UpdateParkingSpotUseCase
 ) : AbstractViewModel() {
 
     private val activeParkingSpotObserver =
@@ -56,6 +57,9 @@ class HomeViewModel
 
     private val takeCarPictureObserver =
         UseCaseObserver(takeCarPictureUseCase, dispatcherProvider, viewModelScope)
+
+    private val updateSpotObserver =
+        UseCaseObserver(updateParkingSpotUseCase, dispatcherProvider, viewModelScope)
 
     fun getUserLocationUpdates(parkingSpotLocation: LatLng) =
         getUserLocationUpdatesUseCase.subscribeToLocationUpdates(parkingSpotLocation)
@@ -86,6 +90,9 @@ class HomeViewModel
         saveParkingSpotObserver.execute(request)
 
     fun takeCarPicture() = takeCarPictureObserver.execute(Unit)
+
+    fun updateParkingSpot(request: ParkingSpotRequest): UseCaseObserver<ParkingValidationStatus, ParkingSpotRequest> =
+        updateSpotObserver.execute(request)
 
     override fun onCleared() {
         super.onCleared()

@@ -17,7 +17,20 @@
             app:enterAnim="@anim/left_in"
             app:exitAnim="@anim/left_out"
             app:popEnterAnim="@anim/right_in"
-            app:popExitAnim="@anim/right_out" />
+            app:popExitAnim="@anim/right_out">
+
+            <argument
+                android:name="edit.mode"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+            <argument
+                android:name="parking.spot.request"
+                android:defaultValue="@null"
+                app:argType="com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest"
+                app:nullable="true" />
+
+        </action>
 
         <action
             android:id="@+id/action_to_user_location"
@@ -50,13 +63,31 @@
         android:label="@string/menu_add_parking"
         tools:layout="@layout/fragment_add_parking">
 
+        <argument
+            android:name="edit.mode"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+        <argument
+            android:name="parking.spot.request"
+            android:defaultValue="@null"
+            app:argType="com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest"
+            app:nullable="true" />
+
     </fragment>
 
     <fragment
         android:id="@+id/home_user_location"
         android:name="com.markoid.parky.home.presentation.fragments.UserLocationFragment"
         android:label="@string/menu_user_location"
-        tools:layout="@layout/fragment_user_location" />
+        tools:layout="@layout/fragment_user_location">
+
+        <argument
+            android:name="spot.id"
+            android:defaultValue="0L"
+            app:argType="long" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/home_settings"

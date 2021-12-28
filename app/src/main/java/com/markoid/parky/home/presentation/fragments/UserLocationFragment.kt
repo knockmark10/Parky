@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
@@ -25,7 +26,6 @@ import com.markoid.parky.home.presentation.dialgos.AlarmDialog
 import com.markoid.parky.home.presentation.dialgos.CarPhotoDialog
 import com.markoid.parky.home.presentation.dialgos.MapTypeDialog
 import com.markoid.parky.home.presentation.dialgos.RateDialog
-import com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment.Companion.SPOT_ID
 import com.markoid.parky.position.presentation.extensions.centerWithLatLngList
 import com.markoid.parky.position.presentation.extensions.setDarkMode
 import com.markoid.parky.position.presentation.extensions.setMarker
@@ -43,8 +43,10 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     @Inject
     lateinit var devicePreferences: DevicePreferences
 
+    private val navigationArgs: UserLocationFragmentArgs by navArgs()
+
     private val parkingSpotId: Long
-        get() = arguments?.getLong(SPOT_ID) ?: 0L
+        get() = navigationArgs.spotId
 
     private var mGoogleMap: GoogleMap? = null
 

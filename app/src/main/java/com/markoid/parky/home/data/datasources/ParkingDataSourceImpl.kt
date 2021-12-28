@@ -31,7 +31,6 @@ class ParkingDataSourceImpl
     override suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotEntity): Long =
         this.parkingSpotDao.insert(parkingSpot)
 
-    override suspend fun updateParkingSpot(parkingSpot: ParkingSpotEntity) {
+    override suspend fun updateParkingSpot(parkingSpot: ParkingSpotEntity) =
         this.parkingSpotDao.update(parkingSpot)
-    }
 }

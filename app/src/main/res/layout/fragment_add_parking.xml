@@ -24,7 +24,6 @@
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <include
                 android:id="@+id/location_lot_info_container"
                 layout="@layout/content_add_parking_lot_info"
@@ -60,9 +59,9 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/save_parking_btn"
+            android:id="@+id/parking_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"

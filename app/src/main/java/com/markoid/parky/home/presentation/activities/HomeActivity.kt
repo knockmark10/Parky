@@ -52,8 +52,8 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_take_photo -> addParkingFragment?.takePhoto()
-            R.id.action_schedule_alarm -> addParkingFragment?.displayDatePicker()
+            R.id.action_take_photo -> addParkingFragment?.onTakePhoto()
+            R.id.action_schedule_alarm -> addParkingFragment?.displayAlarmDialog()
             R.id.action_change_map -> userLocationFragment?.displayMapTypeDialog()
             R.id.action_finish_parking -> userLocationFragment?.finishParking()
         }

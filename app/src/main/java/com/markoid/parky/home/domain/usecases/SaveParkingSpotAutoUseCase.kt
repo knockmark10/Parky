@@ -4,6 +4,7 @@ import android.content.res.Resources
 import com.markoid.parky.R
 import com.markoid.parky.core.domain.usecases.UseCase
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
+import com.markoid.parky.home.domain.usecases.response.AutoParkingSpotStatus
 import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
 import com.markoid.parky.position.data.repositories.TrackingRepository
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
@@ -20,7 +21,7 @@ class SaveParkingSpotAutoUseCase
     private val resources: Resources,
     private val trackingRepository: TrackingRepository,
     private val validateNewParkingUseCase: ValidateNewParkingUseCase
-) : UseCase<ParkingValidationStatus, String>() {
+) : UseCase<AutoParkingSpotStatus, String>() {
 
     private val none: String
         get() = resources.getString(R.string.none)
@@ -38,9 +39,9 @@ class SaveParkingSpotAutoUseCase
      *
      * @param request - The bluetooth device name that was just disconnected.
      */
-    override suspend fun onExecute(request: String): ParkingValidationStatus {
+    override suspend fun onExecute(request: String): AutoParkingSpotStatus {
         if (isThereAnyParkingSpotActive() || bluetoothDeviceDoesNotMatch(request))
-            return ParkingValidationStatus.Success(0L)
+            return AutoParkingSpotStatus.SkipDisconnectionEvent
 
         // TODO: Check exclusion zone (should be an entry on device preferences)
 
@@ -65,14 +66,15 @@ class SaveParkingSpotAutoUseCase
         )
         // Validate built data
         val status = validateNewParkingUseCase.onExecute(parkingRequest)
-        // If validations fail, return the validation status
-        if (status !is ParkingValidationStatus.Success) return status
+        // If validations fail, return the parking request that needs to be completed
+        if (status !is ParkingValidationStatus.Success)
+            return AutoParkingSpotStatus.MissingData(parkingRequest)
         // If everything went ok, save the spot into database
         val parkingSpotId: Long = saveParkingInDbUseCase.onExecute(parkingRequest)
         // Set flag on preferences
         devicePreferences.isParkingSpotActive = true
         // Return success state
-        return ParkingValidationStatus.Success(parkingSpotId)
+        return AutoParkingSpotStatus.ParkingSpotSavedAutomatically(parkingSpotId)
     }
 
     private fun isThereAnyParkingSpotActive(): Boolean =

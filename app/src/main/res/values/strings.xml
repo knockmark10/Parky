@@ -60,6 +60,7 @@
     <string name="invalid_lot_identifier_message">Enter a valid lot identifier</string>
     <string name="invalid_hour_rate_message">Enter a valid hour rate</string>
     <string name="save_parking_lot">Save parking lot</string>
+    <string name="update_parking_lot">Update parking lot</string>
     <string name="location_information">Location Information</string>
     <string name="address">Address</string>
     <string name="latitude">Latitude</string>
@@ -76,6 +77,7 @@
     <string name="map_view">Map View</string>
     <string name="car_picture">Car Picture</string>
     <string name="parking_spot_saved_successfully">Parking spot has been saved successfully!</string>
+    <string name="parking_spot_updated_successfully">Parking spot has been updated successfully!</string>
 
     <!--Colors-->
     <string name="yellow">Yellow</string>

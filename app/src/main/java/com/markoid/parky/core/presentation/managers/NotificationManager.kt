@@ -10,6 +10,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.markoid.parky.R
 import com.markoid.parky.core.presentation.extensions.notificationManager
 import com.markoid.parky.core.presentation.extensions.resolveColor
+import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.presentation.activities.HomeActivity
 import com.markoid.parky.home.presentation.enums.ChannelUsage
 import com.markoid.parky.home.presentation.factories.NotificationChannelFactory
@@ -23,6 +24,7 @@ private const val BLUETOOTH_REQUEST_CODE = 1003
 const val GO_TO_ADD_PARKING = "go.to.add.parking"
 const val GO_TO_USER_LOCATION = "go.to.user.location"
 const val GO_TO_SETTINGS = "go.to.settings"
+const val PARKING_SPOT_REQUEST = "parking.spot.request"
 
 class NotificationManager(private val context: Context) {
 
@@ -44,7 +46,10 @@ class NotificationManager(private val context: Context) {
     fun displayReminderAlarmNotification() {
         createNotificationChannel(ChannelUsage.ReminderAlarm)
         val redirectIntent = Intent(context, HomeActivity::class.java)
-            .apply { action = GO_TO_USER_LOCATION }
+            .apply {
+                action = GO_TO_USER_LOCATION
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
         val pendingIntent = PendingIntent.getActivity(
             context,
             REMINDER_NOTIFICATION_REQUEST_CODE,
@@ -75,6 +80,7 @@ class NotificationManager(private val context: Context) {
     fun displayAutoParkingSavedNotification() {
         createNotificationChannel(ChannelUsage.AutoParkingSpotSaving)
         val redirectIntent = Intent(context, HomeActivity::class.java)
+            .apply { flags = Intent.FLAG_ACTIVITY_CLEAR_TOP }
         val pendingIntent = PendingIntent.getActivity(
             context,
             AUTO_PARKING_REQUEST_CODE,
@@ -100,10 +106,14 @@ class NotificationManager(private val context: Context) {
      * This will be the notification displayed when there is missing data for the auto parking spot.
      * When tapped, it should take the user to [com.markoid.parky.home.presentation.fragments.AddParkingFragment].
      */
-    fun displayAutoParkingMissingDataNotification() {
+    fun displayAutoParkingMissingDataNotification(request: ParkingSpotRequest) {
         createNotificationChannel(ChannelUsage.AutoParkingSpotSaving)
         val redirectIntent = Intent(context, HomeActivity::class.java)
-            .apply { action = GO_TO_ADD_PARKING }
+            .apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                action = GO_TO_ADD_PARKING
+                putExtra(PARKING_SPOT_REQUEST, request)
+            }
         val pendingIntent = PendingIntent.getActivity(
             context,
             AUTO_PARKING_REQUEST_CODE,
@@ -134,7 +144,10 @@ class NotificationManager(private val context: Context) {
     fun getBluetoothServiceNotification(): Notification {
         createNotificationChannel(ChannelUsage.Bluetooth)
         val redirectIntent = Intent(context, HomeActivity::class.java)
-            .apply { action = GO_TO_SETTINGS }
+            .apply {
+                action = GO_TO_SETTINGS
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
         val pendingIntent = PendingIntent.getActivity(
             context,
             BLUETOOTH_REQUEST_CODE,
