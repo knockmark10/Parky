@@ -62,6 +62,7 @@ class NotificationManager(private val context: Context) {
             .setColor(context.resolveColor(R.color.colorPrimary))
             .setContentTitle(context.getString(R.string.alarm_notification_title))
             .setContentText(context.getString(R.string.alarm_notification_message))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.alarm_notification_message)))
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -92,6 +93,7 @@ class NotificationManager(private val context: Context) {
             .setColor(context.resolveColor(R.color.colorPrimary))
             .setContentTitle(context.getString(R.string.auto_parking_spot_notification_title))
             .setContentText(context.getString(R.string.auto_parking_spot_notification_message))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.auto_parking_spot_notification_message)))
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
@@ -125,6 +127,7 @@ class NotificationManager(private val context: Context) {
             .setColor(context.resolveColor(R.color.colorPrimary))
             .setContentTitle(context.getString(R.string.auto_parking_missing_data_notification_title))
             .setContentText(context.getString(R.string.auto_parking_missing_data_notification_message))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.auto_parking_missing_data_notification_message)))
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
@@ -159,6 +162,7 @@ class NotificationManager(private val context: Context) {
             .setColor(context.resolveColor(R.color.colorPrimary))
             .setContentTitle(context.getString(R.string.bluetooth_notification_title))
             .setContentText(context.getString(R.string.bluetooth_notification_message))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.bluetooth_notification_message)))
             .setContentIntent(pendingIntent)
             .setOngoing(true)
             .setAutoCancel(true)
