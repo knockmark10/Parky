@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -90,6 +91,7 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         checkMenuItemsVisibility()
+        setDrawerNavigationTransitions()
     }
 
     private fun checkMenuItemsVisibility() {
@@ -101,6 +103,25 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
             R.id.home_user_location,
             devicePreferences.isParkingSpotActive
         )
+    }
+
+    private fun setDrawerNavigationTransitions() {
+        val optionsBuilder = NavOptions.Builder()
+        binding.homeNavigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.home_add_parking,
+                R.id.home_user_location,
+                R.id.home_settings ->
+                    optionsBuilder
+                        .setEnterAnim(R.anim.left_in)
+                        .setExitAnim(R.anim.left_out)
+                        .setPopEnterAnim(R.anim.right_in)
+                        .setPopExitAnim(R.anim.right_out)
+            }
+            navController.navigate(it.itemId, null, optionsBuilder.build())
+            binding.drawerLayout.closeDrawers()
+            true
+        }
     }
 
     override fun onBackPressed() {
