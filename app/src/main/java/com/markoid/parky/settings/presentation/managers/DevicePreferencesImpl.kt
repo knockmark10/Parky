@@ -2,6 +2,7 @@ package com.markoid.parky.settings.presentation.managers
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.gms.maps.GoogleMap
 import com.markoid.parky.R
@@ -15,27 +16,31 @@ class DevicePreferencesImpl
     sharedPreferences: SharedPreferences
 ) : AbstractPreferences(context, sharedPreferences), DevicePreferences {
 
-    override var bluetoothDevice: String
-        get() = getPreference(R.string.bluetooth_device_key, getKey(R.string.any))
-        set(value) = setPreference(R.string.bluetooth_device_key, value)
+    private val res: Resources
+        get() = context.resources
+
+    private val packageName: String
+        get() = context.packageName
 
     private val defaultSelectedTheme: Int
         get() {
-            val defaultThemeName = context.getString(R.string.default_theme)
-            val themeResId =
-                context.resources.getIdentifier(defaultThemeName, "style", context.packageName)
+            val defaultThemeName = getKey(R.string.default_theme)
+            val themeResId = getTheme(defaultThemeName)
             return if (themeResId == 0) R.style.Theme_Parky else themeResId
         }
+
+    override var bluetoothDevice: String
+        get() = getPreference(R.string.bluetooth_device_key, getKey(R.string.any))
+        set(value) = setPreference(R.string.bluetooth_device_key, value)
 
     override val themeResId: Int
         get() {
             val defaultThemeResId = defaultSelectedTheme
             val themeName = getPreference(
                 R.string.current_theme_key,
-                context.resources.getResourceEntryName(defaultThemeResId)
+                res.getResourceEntryName(defaultThemeResId)
             )
-            val themeResId =
-                context.resources.getIdentifier(themeName, "style", context.packageName)
+            val themeResId = getTheme(themeName)
             return if (themeResId == 0) defaultThemeResId else themeResId
         }
 
@@ -72,6 +77,9 @@ class DevicePreferencesImpl
     override var mapType: Int
         get() = getPreference(R.string.map_type, GoogleMap.MAP_TYPE_HYBRID)
         set(value) = setPreference(R.string.map_type, value)
+
+    private fun getTheme(themeName: String): Int =
+        res.getIdentifier(themeName, "style", packageName)
 
     private fun Boolean.asTheme(): Int =
         if (this) AppCompatDelegate.MODE_NIGHT_YES
