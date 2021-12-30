@@ -28,6 +28,15 @@
         <item name="colorTextTitle">@color/md_white_1000</item>
     </style>
 
+    <!--Green-Red Theme-->
+    <style name="Theme.GreenRed" parent="Theme.Parky" />
+
+    <!--Orange-Amber Theme-->
+    <style name="Theme.OrangeAmber" parent="Theme.Parky" />
+
+    <!--Purple-Green Theme-->
+    <style name="Theme.PurpleGreen" parent="Theme.Parky" />
+
     <style name="Widget.App.Toolbar.PopUpMenu" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/md_blue_grey_800</item>
         <item name="android:textColor">@color/md_white_1000</item>
