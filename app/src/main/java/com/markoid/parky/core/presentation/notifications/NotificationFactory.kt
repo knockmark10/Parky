@@ -4,7 +4,7 @@ import android.app.PendingIntent
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.markoid.parky.R
-import com.markoid.parky.core.presentation.extensions.resolveColor
+import com.markoid.parky.core.presentation.extensions.getAttrColor
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotMissingData
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotSuccessful
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.Bluetooth
@@ -96,7 +96,7 @@ class NotificationFactory
         channelId: String,
         vibrationPattern: LongArray
     ): NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
-        .setColor(context.resolveColor(R.color.colorPrimary))
+        .setColor(context.getAttrColor(R.attr.colorPrimary))
         .setAutoCancel(true)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setVibrate(vibrationPattern)

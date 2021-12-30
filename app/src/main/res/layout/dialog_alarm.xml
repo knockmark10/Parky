@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/card_background"
+    android:background="?attr/colorCardBackground"
     android:padding="12dp">
 
     <TextView
@@ -11,9 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/alarm_dialog_title"
-        android:textColor="@color/card_title"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textAppearance="?attr/textAppearanceHeadline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:minute_hand_color="@color/md_black_1000"
-        app:scale_color="@color/card_title"
+        app:scale_color="?attr/colorTextTitle"
         app:second_hand_color="@color/md_red_900" />
 
     <TextView
@@ -44,7 +42,7 @@
         android:background="@drawable/bg_clock_field"
         android:gravity="center"
         android:text="@string/double_zero"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/hours_value"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +57,7 @@
         android:background="@drawable/bg_clock_field"
         android:gravity="center"
         android:text="@string/double_zero"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/minutes_value"
         app:layout_constraintStart_toEndOf="@+id/days_value"
@@ -74,7 +72,7 @@
         android:background="@drawable/bg_clock_field"
         android:gravity="center"
         android:text="@string/double_zero"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/seconds_value"
         app:layout_constraintStart_toEndOf="@+id/hours_value"
@@ -89,7 +87,7 @@
         android:background="@drawable/bg_clock_field"
         android:gravity="center"
         android:text="@string/double_zero"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/minutes_value"
@@ -102,7 +100,7 @@
         android:layout_marginTop="6dp"
         android:gravity="center"
         android:text="@string/days"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/days_value"
         app:layout_constraintStart_toStartOf="@+id/days_value"
@@ -115,7 +113,7 @@
         android:layout_marginTop="6dp"
         android:gravity="center"
         android:text="@string/hours"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/hours_value"
         app:layout_constraintStart_toStartOf="@+id/hours_value"
@@ -128,7 +126,7 @@
         android:layout_marginTop="6dp"
         android:gravity="center"
         android:text="@string/minutes"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/minutes_value"
         app:layout_constraintStart_toStartOf="@+id/minutes_value"
@@ -141,7 +139,7 @@
         android:layout_marginTop="6dp"
         android:gravity="center"
         android:text="@string/seconds"
-        android:textColor="@color/card_title"
+        android:textColor="?attr/colorTextTitle"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/seconds_value"
         app:layout_constraintStart_toStartOf="@+id/seconds_value"
@@ -154,9 +152,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/accept"
-        android:textColor="@color/primary_contrast"
+        android:textColor="?attr/colorPrimaryContrast"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seconds_label"
-        app:rippleColor="@color/ripple_contrast" />
+        app:rippleColor="?attr/colorMediumPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

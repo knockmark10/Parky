@@ -22,7 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/history_title"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/grey_text_title" />
+        android:background="?attr/colorGreyTextTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_list"

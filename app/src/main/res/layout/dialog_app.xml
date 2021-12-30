@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/card_background"
+    app:cardBackgroundColor="?attr/colorCardBackground"
     app:cardCornerRadius="20dp"
     app:cardElevation="6dp">
 
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:text="@string/success"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/grey_text_title"
+            android:textColor="?attr/colorGreyTextTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/alert_icon" />
@@ -53,6 +53,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="40dp"
+            android:textColor="?attr/colorGreyTextTitle"
             android:gravity="center"
             android:text="@string/app_name"
             android:textAppearance="?attr/textAppearanceBody1"
@@ -70,7 +71,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:text="@string/accept"
-            android:textColor="@color/primary_button_text"
+            android:textColor="?attr/colorPrimaryButtonText"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

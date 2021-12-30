@@ -1,8 +1,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@color/grey_background" />
+    <solid android:color="?attr/colorGreyBackground" />
     <stroke
         android:width="1dp"
-        android:color="@color/alarm_field_border" />
+        android:color="?attr/colorAlarmFieldBorder" />
     <corners android:radius="4dp" />
 </shape>

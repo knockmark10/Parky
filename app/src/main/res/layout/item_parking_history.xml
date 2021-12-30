@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/card_background"
+    android:background="?attr/colorCardBackground"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_dots_vertical"
-            app:tint="@color/primary_contrast" />
+            app:tint="?attr/colorPrimaryContrast" />
 
         <View
             android:id="@+id/divider"
@@ -74,7 +74,7 @@
             android:padding="4dp"
             android:textAppearance="?attr/textAppearanceBody2"
             app:drawableStartCompat="@drawable/ic_parking"
-            app:drawableTint="@color/primary_contrast"
+            app:drawableTint="?attr/colorPrimaryContrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider"
@@ -92,7 +92,7 @@
             android:textAppearance="?attr/textAppearanceBody2"
             android:visibility="gone"
             app:drawableStartCompat="@drawable/ic_alarm"
-            app:drawableTint="@color/primary_contrast"
+            app:drawableTint="?attr/colorPrimaryContrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/parking_type"
@@ -109,7 +109,7 @@
             android:padding="4dp"
             android:textAppearance="?attr/textAppearanceBody2"
             app:drawableStartCompat="@drawable/ic_location"
-            app:drawableTint="@color/primary_contrast"
+            app:drawableTint="?attr/colorPrimaryContrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/alarm_time"
@@ -126,7 +126,7 @@
             android:padding="4dp"
             android:textAppearance="?attr/textAppearanceBody2"
             app:drawableStartCompat="@drawable/ic_address"
-            app:drawableTint="@color/primary_contrast"
+            app:drawableTint="?attr/colorPrimaryContrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/coordinates"

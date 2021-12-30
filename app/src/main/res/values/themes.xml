@@ -2,35 +2,58 @@
     <!-- Base application theme. -->
     <style name="Theme.Parky" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimary">@color/md_blue_700</item>
+        <item name="colorPrimaryVariant">@color/md_blue_900</item>
+        <item name="colorOnPrimary">@color/md_blue_900</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
-        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSecondary">@color/md_orange_700</item>
+        <item name="colorSecondaryVariant">@color/md_orange_200</item>
+        <item name="colorOnSecondary">@color/md_black_1000</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+        <!--Custom theme-->
+        <item name="colorPrimaryContrast">?attr/colorPrimary</item>
+        <item name="colorPrimaryMediumContrast">@color/md_blue_400</item>
+        <item name="colorLightSecondary">@color/md_orange_50</item>
+        <item name="colorMediumPrimary">@color/md_blue_400</item>
+        <item name="colorHourRateBackground">@color/md_blue_50</item>
+        <item name="colorAlarmFieldBorder">?attr/colorPrimary</item>
+        <item name="colorGreyBackground">@color/md_grey_100</item>
+        <item name="colorGreyTextTitle">@color/md_grey_800</item>
+        <item name="colorGreyTextSubtitle">@color/md_grey_600</item>
+        <item name="colorCardBackground">@color/md_white_1000</item>
+        <item name="colorTimeBackground">@color/md_black_1000</item>
+        <item name="colorShadowBackground">@color/md_grey_300</item>
+        <item name="colorPrimaryButtonText">@color/md_white_1000</item>
+        <item name="colorTextTitle">@color/md_black_1000</item>
     </style>
 
-    <style name="Widget.App.Button.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">0dp</item>
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetBottom">0dp</item>
-        <item name="android:paddingLeft">12dp</item>
-        <item name="android:paddingRight">12dp</item>
-        <item name="android:minWidth">48dp</item>
-        <item name="android:minHeight">48dp</item>
+    <style name="Theme.GreenBlue" parent="Theme.Parky">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/md_green_700</item>
+        <item name="colorPrimaryVariant">@color/md_green_900</item>
+        <item name="colorOnPrimary">@color/md_green_900</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/md_blue_700</item>
+        <item name="colorSecondaryVariant">@color/md_blue_400</item>
+        <item name="colorOnSecondary">?attr/colorOnSecondary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <!--Custom theme-->
+        <item name="colorPrimaryMediumContrast">@color/md_green_400</item>
+        <item name="colorLightSecondary">@color/md_blue_50</item>
+        <item name="colorMediumPrimary">@color/md_green_400</item>
+        <item name="colorHourRateBackground">@color/md_green_50</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorOnPrimary</item>
-        <item name="colorAccent">@color/colorSecondary</item>
-        <item name="android:statusBarColor">@color/colorOnSecondary</item>
+        <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorPrimaryDark">?attr/colorOnPrimary</item>
+        <item name="colorAccent">?attr/colorSecondary</item>
+        <item name="android:statusBarColor">?attr/colorOnSecondary</item>
     </style>
 
     <style name="Theme.Parky.NoActionBar">
@@ -49,7 +72,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
         <item name="android:backgroundDimEnabled">false</item>
-        <item name="colorPrimaryDark">@color/md_blue_500</item>
+        <item name="colorPrimaryDark">?attr/colorPrimary</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowAnimationStyle">@style/DialogPoppingFromBottom</item>
     </style>
@@ -64,22 +87,31 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
-    <style name="TextInputLayout_OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/primary_contrast</item>
-        <item name="boxStrokeWidth">1dp</item>
-        <item name="hintTextColor">@color/primary_contrast</item>
+    <style name="Widget.App.Button.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
     </style>
 
-    <style name="TextInputLayout_ExposedDropdown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="boxStrokeColor">@color/primary_contrast</item>
+    <style name="Widget.App.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">?attr/colorPrimaryContrast</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="hintTextColor">?attr/colorPrimaryContrast</item>
+    </style>
+
+    <style name="Widget.App.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">?attr/colorPrimaryContrast</item>
         <item name="boxStrokeWidth">1dp</item>
     </style>
 
-    <style name="PrimaryToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
+    <style name="Widget.App.Toolbar.PopUpMenu" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/md_grey_200</item>
         <item name="android:textColor">@color/md_black_1000</item>
     </style>
-
-
 
 </resources>

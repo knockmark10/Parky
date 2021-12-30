@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_background">
+    android:background="?attr/colorGreyBackground">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:id="@+id/card_map"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/card_background"
+                app:cardBackgroundColor="?attr/colorCardBackground"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp"
                 app:cardUseCompatPadding="true"
@@ -40,7 +40,7 @@
                 android:id="@+id/card_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/card_background"
+                app:cardBackgroundColor="?attr/colorCardBackground"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp"
                 app:cardUseCompatPadding="true"
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/my_car"
                         android:textAppearance="?attr/textAppearanceHeadline5"
-                        android:textColor="@color/card_title"
+                        android:textColor="?attr/colorTextTitle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +68,7 @@
                         android:background="@drawable/bg_hour_rate"
                         android:padding="8dp"
                         android:textAppearance="?attr/textAppearanceSubtitle2"
-                        android:textColor="@color/colorSecondary"
+                        android:textColor="?attr/colorSecondary"
                         app:layout_constraintBottom_toBottomOf="@+id/address"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/my_car"
@@ -128,7 +128,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:textAppearance="?attr/textAppearanceCaption"
-                            android:textColor="@color/grey_text_subtitle"
+                            android:textColor="?attr/colorGreyTextSubtitle"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +179,7 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/parking_time"
                             android:textAppearance="?attr/textAppearanceCaption"
-                            android:textColor="@color/grey_text_subtitle"
+                            android:textColor="?attr/colorGreyTextSubtitle"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -244,7 +244,7 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/total"
                             android:textAppearance="?attr/textAppearanceCaption"
-                            android:textColor="@color/grey_text_subtitle"
+                            android:textColor="?attr/colorGreyTextSubtitle"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -264,7 +264,7 @@
         android:id="@+id/action_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/card_background"
+        android:background="?attr/colorCardBackground"
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -274,13 +274,13 @@
             android:layout_height="60dp"
             android:layout_marginStart="6dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="?attr/colorPrimary"
             android:text="@string/accept"
             android:textColor="@color/md_white_1000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:rippleColor="@color/colorOnPrimary" />
+            app:rippleColor="?attr/colorOnPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

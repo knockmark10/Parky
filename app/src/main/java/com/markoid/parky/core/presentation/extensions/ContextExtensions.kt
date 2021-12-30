@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.TypedValue
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -23,3 +24,10 @@ fun Context.resolveDrawable(@DrawableRes drawableId: Int): Drawable? =
 
 val Context.verticalLayoutManager
     get() = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+fun Context.getAttrColor(resId: Int): Int {
+    val typedValue = TypedValue()
+    val theme = theme
+    theme.resolveAttribute(resId, typedValue, true)
+    return typedValue.data
+}

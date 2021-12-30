@@ -42,13 +42,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:icon="@drawable/ic_edit"
-        app:iconTint="@color/primary_contrast"
+        app:iconTint="?attr/colorPrimaryContrast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete_btn"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@+id/exclusion_zone_color"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="@color/color_medium_primary_contrast" />
+        app:rippleColor="?attr/colorPrimaryMediumContrast" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/delete_btn"
@@ -56,12 +56,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:icon="@drawable/ic_delete"
-        app:iconTint="@color/primary_contrast"
+        app:iconTint="?attr/colorPrimaryContrast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@+id/edit_btn"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="@color/color_medium_primary_contrast" />
+        app:rippleColor="?attr/colorPrimaryMediumContrast" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="colorPrimaryContrast" format="color" />
+    <attr name="colorPrimaryMediumContrast" format="color" />
+    <attr name="colorLightSecondary" format="color" />
+    <attr name="colorMediumPrimary" format="color" />
+    <attr name="colorHourRateBackground" format="color" />
+    <attr name="colorAlarmFieldBorder" format="color" />
+    <attr name="colorGreyBackground" format="color" />
+    <attr name="colorGreyTextTitle" format="color" />
+    <attr name="colorGreyTextSubtitle" format="color" />
+    <attr name="colorCardBackground" format="color" />
+    <attr name="colorTimeBackground" format="color" />
+    <attr name="colorShadowBackground" format="color" />
+    <attr name="colorPrimaryButtonText" format="color" />
+    <attr name="colorTextTitle" format="color" />
+
+</resources>
