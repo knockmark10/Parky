@@ -47,6 +47,7 @@
     <string name="location_permission_denied">Location permission was not granted.</string>
 
     <!--Add Parking-->
+    <string name="parking_spots">Parking Spots</string>
     <string name="parking_type_street">Street-Parking</string>
     <string name="parking_type_lot">Parking Lot</string>
     <string name="parking_floor_type_lobby">Lobby</string>

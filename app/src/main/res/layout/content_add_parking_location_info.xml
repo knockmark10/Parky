@@ -18,9 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/location_information"
-            android:textColor="@color/card_title"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -172,9 +170,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
-            app:endIconTint="@color/primary_contrast"
             android:hint="@string/parking_type"
             android:textColorHint="@color/primary_contrast"
+            app:endIconTint="@color/primary_contrast"
             app:layout_constraintTop_toBottomOf="@+id/parking_alarm_container">
 
             <com.markoid.parky.core.presentation.views.InstantView

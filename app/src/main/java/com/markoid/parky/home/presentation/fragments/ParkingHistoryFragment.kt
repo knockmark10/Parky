@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.subscribe
+import com.markoid.parky.core.presentation.extensions.verticalLayoutManager
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.PARKING_SPOT_REQUEST_ARG
 import com.markoid.parky.core.presentation.notifications.NotificationIntentActions
 import com.markoid.parky.databinding.FragmentParkingHistoryBinding
@@ -57,9 +57,10 @@ class ParkingHistoryFragment :
 
     private fun setupHistoryAdapter() {
         historyAdapter.setAdapterListener(this)
-        binding.historyList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.historyList.adapter = historyAdapter
+        binding.parkingHistoryListContainer.historyList.apply {
+            layoutManager = requireContext().verticalLayoutManager
+            adapter = historyAdapter
+        }
     }
 
     private fun getHistoryList() {
@@ -130,12 +131,14 @@ class ParkingHistoryFragment :
     }
 
     private fun displayEmptyState() {
+        binding.parkingHistoryListContainer.root.isVisible = false
         binding.parkingHistoryEmptyStateContainer.root.isVisible = true
         binding.parkingHistoryEmptyStateContainer.parkingHistoryEmptyAnimation.playAnimation()
         binding.actionAddParkingSpot.isVisible = true
     }
 
     private fun hideEmptyState(isAddButtonVisible: Boolean = false) {
+        binding.parkingHistoryListContainer.root.isVisible = true
         binding.parkingHistoryEmptyStateContainer.root.isVisible = false
         binding.parkingHistoryEmptyStateContainer.parkingHistoryEmptyAnimation.cancelAnimation()
         binding.actionAddParkingSpot.isVisible = isAddButtonVisible

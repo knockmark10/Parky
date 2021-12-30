@@ -19,9 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@string/car_picture"
-            android:textColor="@color/card_title"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintEnd_toStartOf="@+id/edit_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_edit"
-            app:tint="@color/colorPrimary" />
+            app:tint="@color/primary_contrast" />
 
         <ImageView
             android:id="@+id/vehicle_picture"

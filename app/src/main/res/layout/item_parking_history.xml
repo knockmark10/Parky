@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
+            android:textAppearance="?attr/textAppearanceBody2"
             app:layout_constraintStart_toEndOf="@+id/status_icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Active" />
@@ -37,13 +38,13 @@
             android:id="@+id/action_more_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_dots_vertical"
-            app:tint="@color/colorPrimary" />
+            app:tint="@color/primary_contrast" />
 
         <View
             android:id="@+id/divider"
@@ -71,6 +72,7 @@
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:padding="4dp"
+            android:textAppearance="?attr/textAppearanceBody2"
             app:drawableStartCompat="@drawable/ic_parking"
             app:drawableTint="@color/primary_contrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
@@ -87,8 +89,9 @@
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:padding="4dp"
-            app:drawableStartCompat="@drawable/ic_alarm"
+            android:textAppearance="?attr/textAppearanceBody2"
             android:visibility="gone"
+            app:drawableStartCompat="@drawable/ic_alarm"
             app:drawableTint="@color/primary_contrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +107,7 @@
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:padding="4dp"
+            android:textAppearance="?attr/textAppearanceBody2"
             app:drawableStartCompat="@drawable/ic_location"
             app:drawableTint="@color/primary_contrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
@@ -120,6 +124,7 @@
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:padding="4dp"
+            android:textAppearance="?attr/textAppearanceBody2"
             app:drawableStartCompat="@drawable/ic_address"
             app:drawableTint="@color/primary_contrast"
             app:layout_constraintEnd_toStartOf="@+id/car_photo"
