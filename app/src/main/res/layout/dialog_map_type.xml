@@ -10,6 +10,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="?attr/colorTextTitle"
         android:text="@string/map_type_title"
         android:textAppearance="?attr/textAppearanceHeadline5"
         app:layout_constraintEnd_toEndOf="parent"

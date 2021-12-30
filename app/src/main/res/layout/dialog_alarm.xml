@@ -11,12 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/alarm_dialog_title"
+        android:textColor="?attr/colorTextTitle"
         android:textAppearance="?attr/textAppearanceHeadline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--https://github.com/samlss/ClockView-->
     <com.iigo.library.ClockView
         android:id="@+id/clock"
         android:layout_width="300dp"

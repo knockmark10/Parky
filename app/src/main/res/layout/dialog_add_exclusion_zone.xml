@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/exclusion_zone_title"
         android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="?attr/colorTextTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

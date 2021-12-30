@@ -12,12 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!--Custom theme-->
-        <item name="colorPrimaryContrast">?attr/colorPrimary</item>
+        <item name="colorPrimaryContrast">@color/md_blue_700</item>
         <item name="colorPrimaryMediumContrast">@color/md_blue_400</item>
         <item name="colorLightSecondary">@color/md_orange_50</item>
         <item name="colorMediumPrimary">@color/md_blue_400</item>
         <item name="colorHourRateBackground">@color/md_blue_50</item>
-        <item name="colorAlarmFieldBorder">?attr/colorPrimary</item>
+        <item name="colorAlarmFieldBorder">@color/md_blue_700</item>
         <item name="colorGreyBackground">@color/md_grey_100</item>
         <item name="colorGreyTextTitle">@color/md_grey_800</item>
         <item name="colorGreyTextSubtitle">@color/md_grey_600</item>
@@ -39,10 +39,12 @@
         <item name="colorSecondaryVariant">@color/md_red_900</item>
         <item name="colorOnSecondary">@color/md_red_900</item>
         <!--Custom theme-->
+        <item name="colorPrimaryContrast">@color/md_green_600</item>
         <item name="colorPrimaryMediumContrast">@color/md_green_400</item>
         <item name="colorMediumPrimary">@color/md_green_400</item>
         <item name="colorLightSecondary">@color/md_red_50</item>
         <item name="colorHourRateBackground">@color/md_green_50</item>
+        <item name="colorAlarmFieldBorder">@color/md_green_600</item>
     </style>
 
     <!--Orange-Amber Theme-->
@@ -56,10 +58,12 @@
         <item name="colorSecondaryVariant">@color/md_amber_200</item>
         <item name="colorOnSecondary">@color/md_amber_200</item>
         <!--Custom theme-->
+        <item name="colorPrimaryContrast">@color/md_orange_600</item>
         <item name="colorPrimaryMediumContrast">@color/md_orange_400</item>
         <item name="colorMediumPrimary">@color/md_orange_400</item>
         <item name="colorLightSecondary">@color/md_amber_50</item>
         <item name="colorHourRateBackground">@color/md_orange_50</item>
+        <item name="colorAlarmFieldBorder">@color/md_orange_600</item>
     </style>
 
     <!--Purple-Green Theme-->
@@ -73,10 +77,12 @@
         <item name="colorSecondaryVariant">@color/md_green_200</item>
         <item name="colorOnSecondary">@color/md_green_200</item>
         <!--Custom theme-->
+        <item name="colorPrimaryContrast">@color/md_purple_600</item>
         <item name="colorPrimaryMediumContrast">@color/md_purple_300</item>
         <item name="colorMediumPrimary">@color/md_purple_300</item>
         <item name="colorLightSecondary">@color/md_green_50</item>
         <item name="colorHourRateBackground">@color/md_purple_50</item>
+        <item name="colorAlarmFieldBorder">@color/md_purple_50</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
