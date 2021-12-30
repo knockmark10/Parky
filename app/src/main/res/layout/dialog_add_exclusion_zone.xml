@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/card_background"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exclusion_zone_title"
+        android:textColor="@color/card_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/exclusion_zone_name_container"
+        style="@style/TextInputLayout_OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/exclusion_zone_name_hint"
+        android:textColorHint="@color/primary_contrast"
+        app:endIconDrawable="@drawable/ic_map"
+        app:endIconMode="custom"
+        app:endIconTint="@color/primary_contrast"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/exclusion_zone_name_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/card_title"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/color_container"
+        style="@style/TextInputLayout_ExposedDropdown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/color"
+        android:textColorHint="@color/primary_contrast"
+        app:endIconTint="@color/primary_contrast"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exclusion_zone_name_container">
+
+        <com.markoid.parky.core.presentation.views.InstantView
+            android:id="@+id/color_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="none"
+            android:textColor="@color/edittext_disabled_state_color"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/radius_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Radius: 10m"
+        android:textColor="@color/primary_contrast"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/color_container" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/radius_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:enabled="false"
+        android:stepSize="10.0"
+        android:value="10.0"
+        android:valueFrom="10.0"
+        android:valueTo="1000.0"
+        app:layout_constraintTop_toBottomOf="@+id/radius_label"
+        app:trackColor="@color/primary_contrast" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/exclusion_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintDimensionRatio="h, 4:3"
+        app:layout_constraintTop_toBottomOf="@+id/radius_slider" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_cancel"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:text="@string/cancel"
+        android:textColor="@color/primary_contrast"
+        app:layout_constraintEnd_toStartOf="@+id/action_save"
+        app:layout_constraintTop_toTopOf="@+id/action_save"
+        app:rippleColor="@color/color_primary_medium" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_save"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/save"
+        android:textColor="@color/primary_contrast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exclusion_map"
+        app:rippleColor="@color/color_primary_medium" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

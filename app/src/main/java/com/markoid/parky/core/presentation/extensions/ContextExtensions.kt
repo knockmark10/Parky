@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 
 val Context.alarmManager: AlarmManager
     get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -19,3 +20,6 @@ fun Context.resolveColor(@ColorRes colorId: Int): Int =
 
 fun Context.resolveDrawable(@DrawableRes drawableId: Int): Drawable? =
     ContextCompat.getDrawable(this, drawableId)
+
+val Context.verticalLayoutManager
+    get() = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

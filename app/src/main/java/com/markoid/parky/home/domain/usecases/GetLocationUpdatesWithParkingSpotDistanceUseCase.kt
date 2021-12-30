@@ -1,8 +1,8 @@
-package com.markoid.parky.home.domain.usecases.response
+package com.markoid.parky.home.domain.usecases
 
 import com.google.android.gms.maps.model.LatLng
 import com.markoid.parky.core.presentation.extensions.latLng
-import com.markoid.parky.position.data.repositories.TrackingRepository
+import com.markoid.parky.home.domain.usecases.response.LocationUpdatesResponse
 import com.markoid.parky.position.presentation.managers.PositionManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -10,14 +10,14 @@ import org.joda.time.Duration
 import javax.inject.Inject
 import kotlin.math.roundToLong
 
-class GetUserLocationUpdatesUseCase
+class GetLocationUpdatesWithParkingSpotDistanceUseCase
 @Inject constructor(
-    private val trackingRepository: TrackingRepository
+    private val getRealTimeLocationUseCase: GetRealTimeLocationUseCase
 ) {
 
     fun subscribeToLocationUpdates(parkingSpotLocation: LatLng): Flow<LocationUpdatesResponse> =
-        trackingRepository
-            .getRealTimeLocation()
+        getRealTimeLocationUseCase
+            .getLocationUpdates()
             .map { Pair(it, getDistance(it.latLng, parkingSpotLocation)) }
             .map {
                 LocationUpdatesResponse(

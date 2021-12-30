@@ -3,6 +3,7 @@ package com.markoid.parky.core.data.converters
 import android.net.Uri
 import androidx.room.TypeConverter
 import com.markoid.parky.home.data.entities.ParkingSpotStatus
+import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
 import org.joda.time.DateTime
@@ -40,4 +41,11 @@ class DatabaseConverters {
 
     @TypeConverter
     fun uriFromString(uriString: String?): Uri? = uriString?.let { Uri.parse(it) }
+
+    @TypeConverter
+    fun colorTypeToString(color: ParkingColor): String = color.name
+
+    @TypeConverter
+    fun colorTypeFromString(colorName: String): ParkingColor =
+        ParkingColor.valueOf(colorName)
 }

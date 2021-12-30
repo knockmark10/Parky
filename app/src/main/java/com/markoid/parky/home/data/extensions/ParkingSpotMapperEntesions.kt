@@ -1,4 +1,4 @@
-package com.markoid.parky.home.data.mappers
+package com.markoid.parky.home.data.extensions
 
 import android.content.res.Resources
 import com.markoid.parky.home.data.entities.ParkingSpotEntity

@@ -21,7 +21,7 @@ import com.markoid.parky.core.presentation.extensions.findMapById
 import com.markoid.parky.core.presentation.extensions.longToast
 import com.markoid.parky.core.presentation.extensions.toDouble
 import com.markoid.parky.core.presentation.extensions.value
-import com.markoid.parky.core.presentation.views.InstantViewAdapter
+import com.markoid.parky.core.presentation.views.buildArrayAdapter
 import com.markoid.parky.databinding.FragmentAddParkingBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.extensions.latLng
@@ -167,9 +167,9 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
             ?.setAdapter(
                 ParkingColor
                     .values()
-                    .map { getString(it.colorId) }
+                    .map { getString(it.colorNameId) }
                     .sorted()
-                    .buildArrayAdapter()
+                    .buildArrayAdapter(requireContext())
             )
     }
 
@@ -180,13 +180,13 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
                     .values()
                     .map { getString(it.typeId) }
                     .sorted()
-                    .buildArrayAdapter()
+                    .buildArrayAdapter(requireContext())
             )
     }
 
     private fun populateParkingTypes() {
         val parkingTypes: List<String> = values().map { getString(it.typeId) }.sorted()
-        val adapter = parkingTypes.buildArrayAdapter()
+        val adapter = parkingTypes.buildArrayAdapter(requireContext())
         (binding.locationInfoContainer.parkingTypeContainer.editText as? AutoCompleteTextView?)?.apply {
             setAdapter(adapter)
             setOnItemClickListener { _, _, position, _ ->
@@ -313,10 +313,4 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
             lotIdentifierContainer.isErrorEnabled = false
         }
     }
-
-    private fun List<String>.buildArrayAdapter(): InstantViewAdapter = InstantViewAdapter(
-        requireContext(),
-        android.R.layout.simple_expandable_list_item_1,
-        this
-    )
 }

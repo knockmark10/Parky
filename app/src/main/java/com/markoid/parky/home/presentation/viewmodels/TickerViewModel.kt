@@ -6,7 +6,12 @@ import com.markoid.parky.core.presentation.extensions.toTimer
 import com.markoid.parky.home.presentation.viewmodels.entities.RemainingTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
 import org.joda.time.DateTime
 import org.joda.time.Duration
 import javax.inject.Inject

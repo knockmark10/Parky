@@ -27,13 +27,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/floor_type_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/TextInputLayout_ExposedDropdown"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
             android:layout_marginEnd="4dp"
             android:hint="@string/floor_type"
             android:textColorHint="@color/primary_contrast"
+            app:endIconTint="@color/primary_contrast"
             app:layout_constraintEnd_toStartOf="@+id/floor_number_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/parking_lot_title">
@@ -87,13 +88,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/color_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/TextInputLayout_ExposedDropdown"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
             android:layout_marginEnd="4dp"
             android:hint="@string/color"
             android:textColorHint="@color/primary_contrast"
+            app:endIconTint="@color/primary_contrast"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toStartOf="@+id/lot_identifier_container"
@@ -104,9 +106,9 @@
                 android:id="@+id/color_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/edittext_disabled_state_color"
                 android:enabled="false"
                 android:inputType="none"
+                android:textColor="@color/edittext_disabled_state_color"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

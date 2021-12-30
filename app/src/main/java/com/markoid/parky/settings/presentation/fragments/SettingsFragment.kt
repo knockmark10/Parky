@@ -6,7 +6,12 @@ import android.os.Bundle
 import android.text.InputType
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.* // ktlint-disable no-wildcard-imports
+import androidx.navigation.fragment.findNavController
+import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.markoid.parky.R
 import com.markoid.parky.core.presentation.extensions.asMoney
 import com.markoid.parky.core.presentation.extensions.show
@@ -48,6 +53,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupFavoriteParkingTypePreference()
 
         setupHourRatePreference()
+
+        setupExclusionZonePreference()
     }
 
     private fun setupToolbar() {
@@ -105,7 +112,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             ?.apply { this.isEnabled = isEnabled }
         findPreference<EditTextPreference>(getString(R.string.internal_hour_rate_key))
             ?.apply { this.isEnabled = isEnabled }
-        findPreference<Preference>(getString(R.string.exclusion_zone_key))
+        findPreference<Preference>(getString(R.string.internal_exclusion_zone_key))
             ?.apply { this.isEnabled = isEnabled }
     }
 
@@ -145,6 +152,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val hourRate = (newValue as String).toDouble()
                 devicePreferences.hourRate = hourRate
                 summary = hourRate.asMoney()
+                true
+            }
+        }
+    }
+
+    private fun setupExclusionZonePreference() {
+        findPreference<Preference>(getString(R.string.internal_exclusion_zone_key))?.apply {
+            setOnPreferenceClickListener {
+                findNavController().navigate(SettingsFragmentDirections.actionToExclusionZones())
                 true
             }
         }

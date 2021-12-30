@@ -33,3 +33,9 @@ constructor(
         }
     }
 }
+
+fun List<String>.buildArrayAdapter(context: Context): InstantViewAdapter = InstantViewAdapter(
+    context,
+    android.R.layout.simple_expandable_list_item_1,
+    this
+)

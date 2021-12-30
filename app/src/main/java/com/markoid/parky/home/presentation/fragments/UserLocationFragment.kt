@@ -205,7 +205,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     }
 
     private fun CoroutineScope.observeUserLocationUpdates(parkingSpotLocation: LatLng) {
-        homeViewModel.getUserLocationUpdates(parkingSpotLocation)
+        homeViewModel.getLocationUpdatesWithSpotDistance(parkingSpotLocation)
             .onEach { setRealTimeData(it) }
             .launchIn(this)
     }

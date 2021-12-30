@@ -1,7 +1,9 @@
 package com.markoid.parky.core.presentation.extensions
 
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.PopupMenu
@@ -29,3 +31,6 @@ fun View.popUpMenuOnClickListener(@MenuRes menuId: Int, block: (MenuItem) -> Uni
         }
     }
 }
+
+val ViewGroup.layoutInflater: LayoutInflater
+    get() = LayoutInflater.from(context)

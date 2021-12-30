@@ -47,6 +47,12 @@
     <style name="TextInputLayout_OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/primary_contrast</item>
         <item name="boxStrokeWidth">1dp</item>
+        <item name="hintTextColor">@color/primary_contrast</item>
+    </style>
+
+    <style name="TextInputLayout_ExposedDropdown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/primary_contrast</item>
+        <item name="boxStrokeWidth">1dp</item>
     </style>
 
     <style name="PrimaryToolbarStyle" parent="ThemeOverlay.AppCompat.Light">

@@ -168,10 +168,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/parking_type_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/TextInputLayout_ExposedDropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
+            app:endIconTint="@color/primary_contrast"
             android:hint="@string/parking_type"
             android:textColorHint="@color/primary_contrast"
             app:layout_constraintTop_toBottomOf="@+id/parking_alarm_container">

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="General">
 
@@ -50,9 +51,10 @@
 
         <Preference
             android:enabled="false"
-            android:key="@string/exclusion_zone_key"
+            android:key="@string/internal_exclusion_zone_key"
             android:summary="@string/exclusion_zone_summary"
-            android:title="@string/exclusion_zone_title" />
+            android:title="@string/exclusion_zones_title"
+            app:fragment="com.markoid.parky.settings.presentation.fragments.ExclusionZoneFragment" />
 
     </PreferenceCategory>
 

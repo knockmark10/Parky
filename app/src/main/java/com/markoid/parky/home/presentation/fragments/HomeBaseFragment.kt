@@ -9,6 +9,10 @@ import com.markoid.parky.core.presentation.AbstractFragment
 import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
 
+/**
+ * Since we're using ViewModel with injected constructor, all classes that extend this class
+ * should have @AndroidEntryPoint annotation.
+ */
 abstract class HomeBaseFragment<T : ViewBinding> : AbstractFragment<T>() {
 
     var navigationListener: HomeNavigationCallbacks? = null

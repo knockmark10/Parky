@@ -20,6 +20,7 @@
     <string name="any">Any</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="save">Save</string>
 
     <!--Menu-->
     <string name="menu_home">Home</string>
@@ -146,5 +147,15 @@
     <string name="auto_parking_spot_notification_message">Your parking spot has been saved automatically.</string>
     <string name="auto_parking_missing_data_notification_title">Parking spot missing data</string>
     <string name="auto_parking_missing_data_notification_message">Your parking spot is missing some parameters. Tap here to complete it.</string>
+
+    <!--Exclusion Zones-->
+    <string name="exclusion_zones_title">Exclusion Zones</string>
+    <string name="exclusion_zone_name_hint">Exclusion Zone Name</string>
+    <string name="exclusion_zones_subtitle">You can add exclusion zones to prevent saving parking spots automatically when there is a bluetooth disconnection on your most frequent places.</string>
+    <string name="exclusion_zones_header">Exclusion Zones Added</string>
+    <string name="exclusion_zone_invalid_name">Enter a valid name of at least 4 characters.</string>
+    <string name="exclusion_zone_saved_successfully">Exclusion zone saved successfully!</string>
+    <string name="no_exclusion_zones_added">No exclusion zones added</string>
+    <string name="exclusion_zone_deleted_successfully">Exclusion zone deleted successfully.</string>
 
 </resources>

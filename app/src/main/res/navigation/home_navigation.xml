@@ -94,6 +94,22 @@
     <fragment
         android:id="@+id/home_settings"
         android:name="com.markoid.parky.settings.presentation.fragments.SettingsFragment"
-        android:label="@string/menu_settings" />
+        android:label="@string/menu_settings">
+
+        <action
+            android:id="@+id/action_to_exclusion_zones"
+            app:destination="@id/home_exclusion_zones"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/home_exclusion_zones"
+        android:name="com.markoid.parky.settings.presentation.fragments.ExclusionZoneFragment"
+        android:label="@string/exclusion_zones_title"
+        tools:layout="@layout/fragment_exclusion_zone" />
 
 </navigation>

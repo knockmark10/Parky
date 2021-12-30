@@ -1,12 +1,15 @@
 package com.markoid.parky.home.domain.usecases
 
 import android.content.res.Resources
+import com.google.android.gms.maps.model.LatLng
 import com.markoid.parky.R
 import com.markoid.parky.core.domain.usecases.UseCase
+import com.markoid.parky.home.domain.repositories.ExclusionZoneRepository
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.AutoParkingSpotStatus
 import com.markoid.parky.home.domain.usecases.response.ParkingValidationStatus
 import com.markoid.parky.position.data.repositories.TrackingRepository
+import com.markoid.parky.position.presentation.managers.PositionManager
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import org.joda.time.DateTime
 import javax.inject.Inject
@@ -17,6 +20,7 @@ import javax.inject.Inject
 class SaveParkingSpotAutoUseCase
 @Inject constructor(
     private val devicePreferences: DevicePreferences,
+    private val exclusionZoneRepository: ExclusionZoneRepository,
     private val saveParkingInDbUseCase: SaveParkingInDbUseCase,
     private val resources: Resources,
     private val trackingRepository: TrackingRepository,
@@ -34,7 +38,7 @@ class SaveParkingSpotAutoUseCase
      * 2) Bluetooth device name matches the one saved in preferences.
      * 3) Current location is not within one of the exclusion zones
      *
-     * If bluetooth device name is 'none', then any device disconnected would suffice to save
+     * If bluetooth device name is 'any', then any device disconnected would suffice to save
      * the parking spot automatically.
      *
      * @param request - The bluetooth device name that was just disconnected.
@@ -42,11 +46,10 @@ class SaveParkingSpotAutoUseCase
     override suspend fun onExecute(request: String): AutoParkingSpotStatus {
         if (isThereAnyParkingSpotActive() || bluetoothDeviceDoesNotMatch(request))
             return AutoParkingSpotStatus.SkipDisconnectionEvent
-
-        // TODO: Check exclusion zone (should be an entry on device preferences)
-
         // Get user's current location
         val location = trackingRepository.getCurrentLocation()
+        // Check exclusion zones. If we're inside any, we need to skip this
+        if (isInsideExclusionZone(location)) return AutoParkingSpotStatus.SkipDisconnectionEvent
         // Translate such location
         val positionEntity = trackingRepository.translateCoordinates(location)
         // Build request with location fetched
@@ -83,4 +86,14 @@ class SaveParkingSpotAutoUseCase
     private fun bluetoothDeviceDoesNotMatch(disconnectedDevice: String): Boolean =
         devicePreferences.bluetoothDevice != any &&
             devicePreferences.bluetoothDevice != disconnectedDevice
+
+    private suspend fun isInsideExclusionZone(currentLocation: LatLng): Boolean {
+        val zones = exclusionZoneRepository.getExclusionZones()
+        return zones.any {
+            // Get the distance between current location and the circle one
+            val distance = PositionManager.getDistanceFromLocations(currentLocation, it.location)
+            // If distance is lower or equals than the radius, it means that we're inside an exclusion zone
+            distance <= it.radius
+        }
+    }
 }
