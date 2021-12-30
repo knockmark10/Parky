@@ -81,7 +81,7 @@ object NotificationChannelFactory {
         )
         channel.description = BLUETOOTH_CHANNEL_DESCRIPTION
         channel.enableVibration(true)
-        channel.vibrationPattern = urgentVibrationPattern
+        channel.vibrationPattern = regularVibrationPattern
         return channel
     }
 }
