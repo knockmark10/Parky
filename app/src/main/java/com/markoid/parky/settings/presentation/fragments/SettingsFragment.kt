@@ -44,6 +44,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         setupMapTypePreference()
 
+        setupThemePreference()
+
         setupDarkModePreference()
 
         setupAutoParkingPreference()
@@ -68,6 +70,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference<Preference>(getString(R.string.map_type))?.apply {
             setOnPreferenceClickListener {
                 MapTypeDialog().show(childFragmentManager)
+                true
+            }
+        }
+    }
+
+    private fun setupThemePreference() {
+        findPreference<ListPreference>(getString(R.string.current_theme_key))?.apply {
+            val typedArrayThemes = resources.obtainTypedArray(R.array.theme_values)
+            val themesLength = typedArrayThemes.length()
+            val themeNames = arrayOfNulls<String>(themesLength)
+            for (i in 0 until themesLength) {
+                val themeResId = typedArrayThemes.getResourceId(i, 0)
+                themeNames[i] = resources.getResourceEntryName(themeResId)
+            }
+            typedArrayThemes.recycle()
+            entryValues = themeNames
+            setOnPreferenceChangeListener { _, _ ->
+                requireActivity().recreate()
                 true
             }
         }

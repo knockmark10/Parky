@@ -99,16 +99,33 @@
     <string name="purple">Purple</string>
 
     <!--Settings-->
-    <string name="dark_mode_summary">Enables dark mode</string>
-    <string name="dark_mode_title">Dark Mode</string>
     <string name="auto_detection_title">Auto-Parking Detection</string>
     <string name="auto_detection_summary">Detects when you park your car by using bluetooth</string>
     <string name="background_location_title">Background Location</string>
     <string name="background_location_summary">Use background location to find your car</string>
+    <string name="bluetooth_device_title">Bluetooth Device</string>
+    <string name="current_theme_title">Theme</string>
+    <string name="current_theme_summary">Choose a theme for the app</string>
+    <string name="dark_mode_summary">Enables dark mode</string>
+    <string name="dark_mode_title">Dark Mode</string>
     <string name="exclusion_zone_title">Exclusion Zone</string>
     <string name="exclusion_zone_summary">Add exclusion zones to avoid adding parking spots in your most frequent spaces</string>
-    <string name="bluetooth_device_title">Bluetooth Device</string>
     <string name="favorite_parking_title">Favorite Parking Type</string>
+    <string name="default_theme">Theme_Parky</string>
+
+    <string-array name="theme_names">
+        <item>Blue-Orange</item>
+        <item>Green-Red</item>
+        <item>Orange-Amber</item>
+        <item>Purple-Green</item>
+    </string-array>
+
+    <array name="theme_values">
+        <item>@style/Theme.Parky</item>
+        <item>@style/Theme.GreenRed</item>
+        <item>@style/Theme.OrangeAmber</item>
+        <item>@style/Theme.PurpleGreen</item>
+    </array>
 
     <!--Animations-->
     <string name="loading">Loading…</string>

@@ -11,13 +11,33 @@ import javax.inject.Inject
 
 class DevicePreferencesImpl
 @Inject constructor(
-    @ApplicationContext context: Context,
+    @ApplicationContext private val context: Context,
     sharedPreferences: SharedPreferences
 ) : AbstractPreferences(context, sharedPreferences), DevicePreferences {
 
     override var bluetoothDevice: String
         get() = getPreference(R.string.bluetooth_device_key, getKey(R.string.any))
         set(value) = setPreference(R.string.bluetooth_device_key, value)
+
+    private val defaultSelectedTheme: Int
+        get() {
+            val defaultThemeName = context.getString(R.string.default_theme)
+            val themeResId =
+                context.resources.getIdentifier(defaultThemeName, "style", context.packageName)
+            return if (themeResId == 0) R.style.Theme_Parky else themeResId
+        }
+
+    override val themeResId: Int
+        get() {
+            val defaultThemeResId = defaultSelectedTheme
+            val themeName = getPreference(
+                R.string.current_theme_key,
+                context.resources.getResourceEntryName(defaultThemeResId)
+            )
+            val themeResId =
+                context.resources.getIdentifier(themeName, "style", context.packageName)
+            return if (themeResId == 0) defaultThemeResId else themeResId
+        }
 
     override val darkModeTheme: Int
         get() = (getPreference(R.string.dark_mode_key, false)).asTheme()

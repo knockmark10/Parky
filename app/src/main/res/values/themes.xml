@@ -11,7 +11,6 @@
         <item name="colorOnSecondary">@color/md_black_1000</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
         <!--Custom theme-->
         <item name="colorPrimaryContrast">?attr/colorPrimary</item>
         <item name="colorPrimaryMediumContrast">@color/md_blue_400</item>
@@ -29,23 +28,55 @@
         <item name="colorTextTitle">@color/md_black_1000</item>
     </style>
 
-    <style name="Theme.GreenBlue" parent="Theme.Parky">
+    <!--Green-Red Theme-->
+    <style name="Theme.GreenRed" parent="Theme.Parky">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/md_green_700</item>
-        <item name="colorPrimaryVariant">@color/md_green_900</item>
-        <item name="colorOnPrimary">@color/md_green_900</item>
+        <item name="colorPrimary">@color/md_green_600</item>
+        <item name="colorPrimaryVariant">@color/md_green_800</item>
+        <item name="colorOnPrimary">@color/md_green_800</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/md_blue_700</item>
-        <item name="colorSecondaryVariant">@color/md_blue_400</item>
-        <item name="colorOnSecondary">?attr/colorOnSecondary</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
+        <item name="colorSecondary">@color/md_red_600</item>
+        <item name="colorSecondaryVariant">@color/md_red_900</item>
+        <item name="colorOnSecondary">@color/md_red_900</item>
         <!--Custom theme-->
         <item name="colorPrimaryMediumContrast">@color/md_green_400</item>
-        <item name="colorLightSecondary">@color/md_blue_50</item>
         <item name="colorMediumPrimary">@color/md_green_400</item>
+        <item name="colorLightSecondary">@color/md_red_50</item>
         <item name="colorHourRateBackground">@color/md_green_50</item>
+    </style>
+
+    <!--Orange-Amber Theme-->
+    <style name="Theme.OrangeAmber" parent="Theme.Parky">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/md_orange_600</item>
+        <item name="colorPrimaryVariant">@color/md_orange_800</item>
+        <item name="colorOnPrimary">@color/md_orange_800</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/md_amber_600</item>
+        <item name="colorSecondaryVariant">@color/md_amber_200</item>
+        <item name="colorOnSecondary">@color/md_amber_200</item>
+        <!--Custom theme-->
+        <item name="colorPrimaryMediumContrast">@color/md_orange_400</item>
+        <item name="colorMediumPrimary">@color/md_orange_400</item>
+        <item name="colorLightSecondary">@color/md_amber_50</item>
+        <item name="colorHourRateBackground">@color/md_orange_50</item>
+    </style>
+
+    <!--Purple-Green Theme-->
+    <style name="Theme.PurpleGreen" parent="Theme.Parky">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/md_purple_600</item>
+        <item name="colorPrimaryVariant">@color/md_purple_800</item>
+        <item name="colorOnPrimary">@color/md_purple_800</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/md_green_600</item>
+        <item name="colorSecondaryVariant">@color/md_green_200</item>
+        <item name="colorOnSecondary">@color/md_green_200</item>
+        <!--Custom theme-->
+        <item name="colorPrimaryMediumContrast">@color/md_purple_300</item>
+        <item name="colorMediumPrimary">@color/md_purple_300</item>
+        <item name="colorLightSecondary">@color/md_green_50</item>
+        <item name="colorHourRateBackground">@color/md_purple_50</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -99,13 +130,13 @@
     </style>
 
     <style name="Widget.App.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">?attr/colorPrimaryContrast</item>
+        <item name="boxStrokeColor">@color/layout_text_input_contrast</item>
         <item name="boxStrokeWidth">1dp</item>
         <item name="hintTextColor">?attr/colorPrimaryContrast</item>
     </style>
 
     <style name="Widget.App.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="boxStrokeColor">?attr/colorPrimaryContrast</item>
+        <item name="boxStrokeColor">@color/layout_text_input_contrast</item>
         <item name="boxStrokeWidth">1dp</item>
     </style>
 

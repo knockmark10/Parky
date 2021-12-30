@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:textColor="@color/edittext_disabled_state_color"
+                android:textColor="@color/layout_edit_text_black_contrast"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:inputType="text"
-                android:textColor="@color/edittext_disabled_state_color"
+                android:textColor="@color/layout_edit_text_black_contrast"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:inputType="text"
-                android:textColor="@color/edittext_disabled_state_color"
+                android:textColor="@color/layout_edit_text_black_contrast"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -133,7 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:textColor="@color/edittext_disabled_state_color"
+                android:textColor="@color/layout_edit_text_black_contrast"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -159,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:textColor="@color/edittext_disabled_state_color"
+                android:textColor="@color/layout_edit_text_black_contrast"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -182,7 +182,7 @@
                 android:completionThreshold="0"
                 android:enabled="false"
                 android:inputType="none"
-                android:textColor="@color/edittext_disabled_state_color"
+                android:textColor="@color/layout_edit_text_black_contrast"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

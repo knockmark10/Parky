@@ -5,6 +5,7 @@
     <string name="auto_detection_enabled_key">auto_detection_enabled</string>
     <string name="background_location_enabled_key">background_location_enabled</string>
     <string name="bluetooth_device_key">bluetooth_device_key</string>
+    <string name="current_theme_key">current_theme</string>
     <string name="dark_mode_key">dark_mode</string>
     <string name="favorite_parking_key">favorite_parking</string>
     <string name="hour_rate_key">hour_rate</string>
