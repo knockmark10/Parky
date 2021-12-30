@@ -38,39 +38,30 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_btn"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.App.Button.IconOnly"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
         app:icon="@drawable/ic_edit"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
+        app:iconTint="@color/primary_contrast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete_btn"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@+id/exclusion_zone_color"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="@color/color_primary_medium" />
+        app:rippleColor="@color/color_medium_primary_contrast" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/delete_btn"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.App.Button.IconOnly"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
         app:icon="@drawable/ic_delete"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
+        app:iconTint="@color/primary_contrast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@+id/edit_btn"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/color_medium_primary_contrast" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/car_picture_title"
@@ -20,21 +20,21 @@
             android:layout_marginEnd="8dp"
             android:text="@string/car_picture"
             android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_btn"
             app:layout_constraintEnd_toStartOf="@+id/edit_btn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/edit_btn" />
 
-        <ImageView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/edit_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
+            style="@style/Widget.App.Button.IconOnly"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:icon="@drawable/ic_edit"
+            app:rippleColor="@color/color_medium_primary_contrast"
+            app:iconTint="@color/primary_contrast"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_edit"
-            app:tint="@color/primary_contrast" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/vehicle_picture"
@@ -42,7 +42,7 @@
             android:layout_height="0dp"
             android:scaleType="fitCenter"
             app:layout_constraintDimensionRatio="h, 16:9"
-            app:layout_constraintTop_toBottomOf="@+id/car_picture_title" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

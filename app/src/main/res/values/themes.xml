@@ -14,6 +14,17 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Widget.App.Button.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -31,7 +42,7 @@
 
     <style name="Theme.Parky.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="FullScreenDialog" >
+    <style name="FullScreenDialog">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -68,5 +79,7 @@
         <item name="android:colorBackground">@color/md_grey_200</item>
         <item name="android:textColor">@color/md_black_1000</item>
     </style>
+
+
 
 </resources>

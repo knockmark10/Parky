@@ -21,6 +21,7 @@
     <color name="hour_rate_background">@color/md_blue_50</color>
     <color name="color_primary_medium">@color/md_blue_400</color>
     <color name="color_secondary_light">@color/md_orange_50</color>
+    <color name="color_medium_primary_contrast">@color/md_blue_400</color>
 
     <!--This overrides outline box color-->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/md_blue_700

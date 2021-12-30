@@ -20,14 +20,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Add"
-        android:textColor="?attr/colorPrimary"
+        android:text="@string/add"
+        android:textColor="@color/primary_contrast"
         app:icon="@drawable/ic_add"
         app:iconGravity="end"
-        app:iconTint="?attr/colorPrimary"
+        app:iconTint="@color/primary_contrast"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subtitle"
-        app:rippleColor="@color/color_primary_medium" />
+        app:rippleColor="@color/color_medium_primary_contrast" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/exclusion_zones_list_card"
