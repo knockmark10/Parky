@@ -26,7 +26,6 @@ import com.markoid.parky.settings.presentation.callbacks.ExclusionZoneDialogCall
 import com.markoid.parky.settings.presentation.callbacks.ExclusionZonesAdapterCallback
 import com.markoid.parky.settings.presentation.dialogs.AddExclusionZoneDialog
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
-import com.markoid.parky.settings.presentation.managers.isDarkMode
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -62,7 +61,7 @@ class ExclusionZoneFragment :
     private fun handleMap(map: GoogleMap) {
         this.mGoogleMap = map
         map.mapType = GoogleMap.MAP_TYPE_NORMAL
-        if (devicePreferences.currentTheme.isDarkMode) map.setDarkMode(requireContext())
+        if (devicePreferences.isDarkModeEnabled) map.setDarkMode(requireContext())
         setupView()
     }
 

@@ -16,7 +16,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
-import com.markoid.parky.core.presentation.extensions.* // ktlint-disable no-wildcard-imports
+import com.markoid.parky.core.presentation.extensions.appAlert
+import com.markoid.parky.core.presentation.extensions.findMapById
+import com.markoid.parky.core.presentation.extensions.launchWhenStartedCatching
+import com.markoid.parky.core.presentation.extensions.react
+import com.markoid.parky.core.presentation.extensions.show
+import com.markoid.parky.core.presentation.extensions.subscribe
 import com.markoid.parky.databinding.FragmentUserLocationBinding
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
 import com.markoid.parky.home.data.extensions.getAlarmTimeFormatted
@@ -30,7 +35,6 @@ import com.markoid.parky.position.presentation.extensions.centerWithLatLngList
 import com.markoid.parky.position.presentation.extensions.setDarkMode
 import com.markoid.parky.position.presentation.extensions.setMarker
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
-import com.markoid.parky.settings.presentation.managers.isDarkMode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
@@ -105,7 +109,7 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
 
     private fun changeMapType(type: Int) {
         mGoogleMap?.mapType = type
-        if (devicePreferences.currentTheme.isDarkMode) mGoogleMap?.setDarkMode(requireContext())
+        if (devicePreferences.isDarkModeEnabled) mGoogleMap?.setDarkMode(requireContext())
     }
 
     private fun displayAlertToDeleteParkingSpot() {

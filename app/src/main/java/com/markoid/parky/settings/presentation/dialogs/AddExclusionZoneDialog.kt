@@ -12,7 +12,6 @@ import com.markoid.parky.home.presentation.viewmodels.HomeViewModel
 import com.markoid.parky.settings.domain.requests.ExclusionZoneRequest
 import com.markoid.parky.settings.presentation.callbacks.ExclusionZoneDialogCallback
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
-import com.markoid.parky.settings.presentation.managers.isDarkMode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -28,7 +27,7 @@ class AddExclusionZoneDialog : CrudExclusionZoneDialog() {
     private var mListener: ExclusionZoneDialogCallback? = null
 
     override val isDarkMode: Boolean
-        get() = devicePreferences.currentTheme.isDarkMode
+        get() = devicePreferences.isDarkModeEnabled
 
     override fun getStyle(): Int = R.style.FullWidthDialog
 

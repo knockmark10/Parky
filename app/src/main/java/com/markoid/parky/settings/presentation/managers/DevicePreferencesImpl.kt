@@ -19,9 +19,12 @@ class DevicePreferencesImpl
         get() = getPreference(R.string.bluetooth_device_key, getKey(R.string.any))
         set(value) = setPreference(R.string.bluetooth_device_key, value)
 
-    override var currentTheme: Int
-        get() = getPreference(R.string.dark_mode_key, false).asTheme()
-        set(value) = setPreference(R.string.dark_mode_key, value.isDarkMode)
+    override val darkModeTheme: Int
+        get() = (getPreference(R.string.dark_mode_key, false)).asTheme()
+
+    override var isDarkModeEnabled: Boolean
+        get() = getPreference(R.string.dark_mode_key, false)
+        set(value) = setPreference(R.string.dark_mode_key, value)
 
     override var favoriteParkingType: String
         get() = getPreference(
@@ -54,6 +57,3 @@ class DevicePreferencesImpl
         if (this) AppCompatDelegate.MODE_NIGHT_YES
         else AppCompatDelegate.MODE_NIGHT_NO
 }
-
-val Int.isDarkMode: Boolean
-    get() = this == AppCompatDelegate.MODE_NIGHT_YES

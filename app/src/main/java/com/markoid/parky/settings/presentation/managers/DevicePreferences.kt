@@ -2,7 +2,8 @@ package com.markoid.parky.settings.presentation.managers
 
 interface DevicePreferences {
     var bluetoothDevice: String
-    var currentTheme: Int
+    val darkModeTheme: Int
+    var isDarkModeEnabled: Boolean
     var favoriteParkingType: String
     var hourRate: Double
     var isAutoParkingDetectionEnabled: Boolean

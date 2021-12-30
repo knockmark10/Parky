@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        AppCompatDelegate.setDefaultNightMode(devicePreferences.currentTheme)
+        AppCompatDelegate.setDefaultNightMode(devicePreferences.darkModeTheme)
 
         applicationContext.packageManager.setComponentEnabledSetting(
             ComponentName(applicationContext, BootCompleteReceiver::class.java),
