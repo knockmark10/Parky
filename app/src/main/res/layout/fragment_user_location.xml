@@ -41,7 +41,7 @@
                 android:layout_marginStart="8dp"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:text="My Car"
+                android:text="@string/my_car"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:textColor="@color/md_white_1000"
                 android:textStyle="bold"

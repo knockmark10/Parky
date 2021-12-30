@@ -22,6 +22,7 @@
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
+    <string name="double_zero">00</string>
 
     <!--Menu-->
     <string name="menu_home">Home</string>
@@ -159,5 +160,6 @@
     <string name="exclusion_zone_saved_successfully">Exclusion zone saved successfully!</string>
     <string name="no_exclusion_zones_added">No exclusion zones added</string>
     <string name="exclusion_zone_deleted_successfully">Exclusion zone deleted successfully.</string>
+    <string name="exclusion_zone_default_radius_label">Radius: 10m</string>
 
 </resources>
