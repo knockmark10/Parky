@@ -29,7 +29,7 @@
             android:id="@+id/none"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:buttonTint="?attr/colorPrimary"
+            android:buttonTint="?attr/colorOnPrimary"
             android:text="@string/map_none"
             android:textColor="?attr/colorTextTitle"
             android:textSize="16sp" />
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
-            android:buttonTint="?attr/colorPrimary"
+            android:buttonTint="?attr/colorOnPrimary"
             android:text="@string/map_normal"
             android:textColor="?attr/colorTextTitle"
             android:textSize="16sp" />
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
-            android:buttonTint="?attr/colorPrimary"
+            android:buttonTint="?attr/colorOnPrimary"
             android:text="@string/map_satellite"
             android:textColor="?attr/colorTextTitle"
             android:textSize="16sp" />
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
-            android:buttonTint="?attr/colorPrimary"
+            android:buttonTint="?attr/colorOnPrimary"
             android:text="@string/map_terrain"
             android:textColor="?attr/colorTextTitle"
             android:textSize="16sp" />
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
-            android:buttonTint="?attr/colorPrimary"
+            android:buttonTint="?attr/colorOnPrimary"
             android:text="@string/map_hybrid"
             android:textColor="?attr/colorTextTitle"
             android:textSize="16sp" />
