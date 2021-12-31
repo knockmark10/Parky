@@ -11,4 +11,5 @@ interface DevicePreferences {
     var isBackgroundLocationEnabled: Boolean
     var isParkingSpotActive: Boolean
     var mapType: Int
+    var onBoardingCompleted: Boolean
 }

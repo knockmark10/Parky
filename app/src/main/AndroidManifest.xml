@@ -45,6 +45,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".onboarding.activities.OnBoardingActivity"
+            android:label="My custom"/>
+
         <activity
             android:name=".home.presentation.activities.HomeActivity"
             android:label="@string/title_activity_home"
@@ -80,8 +83,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver
-            android:name=".home.presentation.receivers.BluetoothReceiver">
+        <receiver android:name=".home.presentation.receivers.BluetoothReceiver">
             <intent-filter>
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />

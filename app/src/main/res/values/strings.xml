@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Parky</string>
     <string name="server_preference_url">http://192.168.1.74:9090</string>
+    <string name="title_activity_onboarding">OnBoardingActivity</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -178,5 +179,16 @@
     <string name="no_exclusion_zones_added">No exclusion zones added</string>
     <string name="exclusion_zone_deleted_successfully">Exclusion zone deleted successfully.</string>
     <string name="exclusion_zone_default_radius_label">Radius: 10m</string>
+    <string name="onboarding_welcome_title">Welcome to Parky!</string>
+    <string name="onboarding_welcome_description">Your best friend to remember your parking spot</string>
+    <string name="onboarding_auto_detection_title">Auto-Detection</string>
+    <string name="onboarding_auto_detection_description">Forget about saving your parking spot manually. Parky will do it for you by using bluetooth.</string>
+    <string name="onboarding_reminder_title">Set reminders</string>
+    <string name="onboarding_reminder_description">You can schedule a reminder to pick up your car at any time.</string>
+    <string name="onboarding_customization_title">App customization</string>
+    <string name="onboarding_customization_description">Customize the app according to your needs.</string>
+
+    <!--OnBoarding-->
+
 
 </resources>

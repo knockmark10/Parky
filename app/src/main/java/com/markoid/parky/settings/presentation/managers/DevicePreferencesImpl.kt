@@ -78,6 +78,10 @@ class DevicePreferencesImpl
         get() = getPreference(R.string.map_type, GoogleMap.MAP_TYPE_HYBRID)
         set(value) = setPreference(R.string.map_type, value)
 
+    override var onBoardingCompleted: Boolean
+        get() = getPreference(R.string.onboarding_completed_key, false)
+        set(value) = setPreference(R.string.onboarding_completed_key, value)
+
     private fun getTheme(themeName: String): Int =
         res.getIdentifier(themeName, "style", packageName)
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.markoid.parky.home.presentation.activities.HomeActivity
 import com.markoid.parky.home.presentation.receivers.BootCompleteReceiver
+import com.markoid.parky.onboarding.activities.OnBoardingActivity
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -30,8 +31,15 @@ class SplashActivity : AppCompatActivity() {
             PackageManager.DONT_KILL_APP
         )
 
-        startActivity(Intent(this, HomeActivity::class.java))
+        routeIntent()
+    }
 
+    private fun routeIntent() {
+        val intent = when {
+            devicePreferences.onBoardingCompleted -> Intent(this, HomeActivity::class.java)
+            else -> Intent(this, OnBoardingActivity::class.java)
+        }
+        startActivity(intent)
         finish()
     }
 }
