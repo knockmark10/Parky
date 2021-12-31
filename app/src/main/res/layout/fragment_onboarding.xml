@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_onboarding"
     android:padding="12dp">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="6dp"
         android:textAppearance="?attr/textAppearanceHeadline5"
-        android:textColor="?attr/colorTextTitle"
+        android:textColor="@color/md_white_1000"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,10 +36,11 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
         android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:padding="12dp"
         android:textAppearance="?attr/textAppearanceBody1"
-        android:textColor="?attr/colorTextTitle"
+        android:textColor="@color/md_white_1000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image"
         tools:text="@string/onboarding_customization_description" />

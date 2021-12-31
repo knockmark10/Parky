@@ -64,6 +64,6 @@ class OnBoardingFragment :
     }
 
     override fun setBackgroundColor(backgroundColor: Int) {
-        binding.root.setBackgroundColor(backgroundColor)
+        /*binding.root.setBackgroundColor(backgroundColor)*/
     }
 }
