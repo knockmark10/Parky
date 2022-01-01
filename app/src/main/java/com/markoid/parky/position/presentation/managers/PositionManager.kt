@@ -19,7 +19,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
-import java.util.*
+import java.util.Locale
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -56,7 +56,6 @@ class PositionManager(
                 // Ignore any null response
                 val location: Location = locationResult?.lastLocation ?: return
                 stopLocationUpdates()
-                Log.d("leissue", "Accuracy: ${location.accuracy}")
                 task.resume(location)
             }
         }
@@ -78,7 +77,6 @@ class PositionManager(
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null) {
                     Log.d("PositionManager", "got location ${locationResult.lastLocation}")
-                    Log.d("leissue", "Accuracy: ${locationResult.lastLocation.accuracy}")
                     trySend(locationResult.lastLocation)
                 }
             }
