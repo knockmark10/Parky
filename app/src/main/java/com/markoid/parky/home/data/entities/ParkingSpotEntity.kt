@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import com.markoid.parky.home.presentation.enums.ParkingType
 import org.joda.time.DateTime
@@ -19,7 +20,7 @@ data class ParkingSpotEntity(
     val alarmTime: DateTime?,
 
     @ColumnInfo(name = "color")
-    val color: String,
+    val color: ParkingColor?,
 
     @ColumnInfo(name = "hour_rate")
     val hourRate: Double,

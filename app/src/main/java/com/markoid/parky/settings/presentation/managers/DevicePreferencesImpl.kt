@@ -54,7 +54,7 @@ class DevicePreferencesImpl
     override var favoriteParkingType: String
         get() = getPreference(
             R.string.favorite_parking_key,
-            getKey(ParkingType.StreetParking.typeId)
+            ParkingType.StreetParking.name
         )
         set(value) = setPreference(R.string.favorite_parking_key, value)
 

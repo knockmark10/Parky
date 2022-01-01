@@ -52,9 +52,15 @@ abstract class CrudExclusionZoneDialog : AbstractDialog<DialogAddExclusionZoneBi
     private val isEditMode: Boolean
         get() = zoneToEdit != null
 
+    private val colorTypeFieldValue: String
+        get() = binding.colorValue.value
+
+    private val colorType: ParkingColor?
+        get() = ParkingColor.fromLocalizedValue(resources, colorTypeFieldValue)
+
     private val currentExclusionZone: ExclusionZoneRequest
         get() = ExclusionZoneRequest(
-            color = binding.colorValue.value,
+            color = colorType?.name.orEmpty(),
             latitude = zoneToEdit?.latitude ?: userLocation.latitude,
             longitude = zoneToEdit?.longitude ?: userLocation.longitude,
             id = zoneToEdit?.id,
@@ -145,7 +151,7 @@ abstract class CrudExclusionZoneDialog : AbstractDialog<DialogAddExclusionZoneBi
 
     private fun getSelectedColor(): Int {
         val colorValue = binding.colorValue.text.toString()
-        val parkingColor = ParkingColor.forValue(colorValue, resources)
+        val parkingColor = ParkingColor.fromLocalizedValue(resources, colorValue)
         return parkingColor?.let { getResolvedColor(it.transparentColorId) }
             ?: getResolvedColor(R.color.md_blue_500_50)
     }

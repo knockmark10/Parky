@@ -37,7 +37,7 @@ class GetHourRateDataUseCase
             "3" -> floorBuilder.append(floorNumber).append("rd")
             else -> floorBuilder.append(floorNumber).append("th")
         }
-        return floorBuilder.append(" ").append(floorType.getValue(resources)).toString()
+        return floorBuilder.append(" ").append(floorType.getLocalizedValue(resources)).toString()
     }
 
     private fun getHourRate(rate: Double): String = StringBuilder()

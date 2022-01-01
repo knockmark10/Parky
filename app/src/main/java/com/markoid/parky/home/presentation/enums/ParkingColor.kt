@@ -22,13 +22,20 @@ enum class ParkingColor(
     White(R.string.white, R.color.md_white_1000, R.color.md_white_1000_50),
     Purple(R.string.purple, R.color.md_purple_700, R.color.md_purple_500_50);
 
-    fun getValue(res: Resources): String = res.getString(colorNameId)
+    fun getLocalizedValue(res: Resources): String = res.getString(colorNameId)
 
     companion object {
-        fun exists(res: Resources, colorValue: String): Boolean =
-            values().any { it.getValue(res) == colorValue }
+        /**
+         * Checks whether or not the provided name exists. The name provided is checked against
+         * the enum type, and NOT the localized value.
+         */
+        fun exists(typeName: String): Boolean =
+            values().any { it.name == typeName }
 
-        fun forValue(value: String, res: Resources): ParkingColor? =
-            values().firstOrNull { it.getValue(res) == value }
+        fun forValue(typeName: String): ParkingColor? =
+            values().firstOrNull { it.name == typeName }
+
+        fun fromLocalizedValue(res: Resources, value: String): ParkingColor? =
+            values().firstOrNull { it.getLocalizedValue(res) == value }
     }
 }

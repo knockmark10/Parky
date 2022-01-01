@@ -10,16 +10,16 @@
             android:title="@string/map_type_title" />
 
         <ListPreference
-            android:key="@string/language_key"
-            android:summary="@string/app_language_summary"
             android:entries="@array/language_names"
             android:entryValues="@array/language_values"
+            android:key="@string/language_key"
+            android:summary="@string/app_language_summary"
             android:title="@string/app_language_title" />
 
         <ListPreference
+            android:entries="@array/theme_names"
             android:key="@string/current_theme_key"
             android:summary="@string/current_theme_summary"
-            android:entries="@array/theme_names"
             android:title="@string/current_theme_title" />
 
         <SwitchPreference
@@ -29,8 +29,8 @@
             android:title="@string/dark_mode_title" />
 
         <SwitchPreference
-            android:enabled="false"
             android:defaultValue="false"
+            android:enabled="false"
             android:key="@string/background_location_enabled_key"
             android:summary="@string/background_location_summary"
             android:title="@string/background_location_title" />
@@ -46,6 +46,7 @@
             android:title="@string/auto_detection_title" />
 
         <ListPreference
+            android:defaultValue="@string/any"
             android:enabled="false"
             android:key="@string/bluetooth_device_key"
             android:summary="@string/any"

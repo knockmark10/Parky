@@ -6,7 +6,7 @@ import com.markoid.parky.home.presentation.enums.ParkingColor
 import com.markoid.parky.settings.domain.requests.ExclusionZoneRequest
 
 fun ExclusionZoneRequest.toEntity(res: Resources): ExclusionZoneEntity = ExclusionZoneEntity(
-    color = ParkingColor.forValue(color, res)!!,
+    color = ParkingColor.fromLocalizedValue(res, color)!!,
     latitude = latitude,
     longitude = longitude,
     id = id ?: 0L,

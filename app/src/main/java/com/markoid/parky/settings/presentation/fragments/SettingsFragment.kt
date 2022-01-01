@@ -13,12 +13,14 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.markoid.parky.R
+import com.markoid.parky.core.presentation.extensions.BluetoothExtensions
 import com.markoid.parky.core.presentation.extensions.LocaleExtensions
 import com.markoid.parky.core.presentation.extensions.asMoney
 import com.markoid.parky.core.presentation.extensions.show
 import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
 import com.markoid.parky.home.presentation.dialgos.MapTypeDialog
 import com.markoid.parky.home.presentation.enums.ParkingType
+import com.markoid.parky.home.presentation.enums.ParkingType.Companion.getIndexForName
 import com.markoid.parky.home.presentation.services.BluetoothService
 import com.markoid.parky.permissions.presentation.controllers.LocationPermissionController
 import com.markoid.parky.permissions.presentation.enums.LocationPermissions
@@ -129,7 +131,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             it.setOnPreferenceChangeListener { _, newValue ->
                 viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                     val isPermissionGranted: Boolean =
-                        permissionController.onRequestPermission(LocationPermissions.RegularLocation)
+                        permissionController.onRequestPermission(LocationPermissions.BackgroundLocation)
                     if (isPermissionGranted) {
                         changeAutoDetectionParametersAvailability(newValue as Boolean)
                         if (newValue) BluetoothService.startBluetoothService(requireContext())
@@ -157,9 +159,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setupBluetoothDevicePreference() {
         findPreference<ListPreference>(getString(R.string.bluetooth_device_key))?.apply {
-            val bluetoothDevices = getBondedBluetoothDevices()
-            entries = bluetoothDevices
-            entryValues = bluetoothDevices
+            // Display devices with an option for 'any'
+            entries = BluetoothExtensions.getBondedDevicesWithAny(getString(R.string.any))
+            // Values to be stored, with any as '-'
+            entryValues = BluetoothExtensions.getBondedDevicesWithAny("-")
             summary = devicePreferences.bluetoothDevice
             setOnPreferenceChangeListener { _, newValue ->
                 summary = newValue as String
@@ -170,10 +173,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setupFavoriteParkingTypePreference() {
         findPreference<ListPreference>(getString(R.string.favorite_parking_key))?.apply {
-            val parkingTypeList = ParkingType.getLocalizedValues(resources).toTypedArray()
-            entries = parkingTypeList
-            entryValues = parkingTypeList
-            summary = devicePreferences.favoriteParkingType
+            // Translated values
+            entries = ParkingType.getLocalizedValues(resources).toTypedArray()
+            // Values to be stored, with the name of the enum to prevent issues while changing language
+            entryValues = ParkingType.values().map { it.name }.toTypedArray()
+            // Displaying value even when there is none stored
+            setValueIndex(getIndexForName(devicePreferences.favoriteParkingType))
             setOnPreferenceChangeListener { _, newValue ->
                 summary = newValue as String
                 true
@@ -203,11 +208,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
         }
-    }
-
-    private fun getBondedBluetoothDevices(): Array<String> {
-        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-        return bluetoothAdapter?.bondedDevices?.map { it.name }?.toTypedArray() ?: arrayOf()
     }
 
     override fun onAttach(context: Context) {

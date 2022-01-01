@@ -75,7 +75,7 @@ class ParkingHistoryAdapter : RecyclerView.Adapter<ParkingHistoryAdapter.ViewHol
             statusIcon.background = if (spot.status.isActive) getDrawable(R.drawable.bg_active_spot)
             else getDrawable(R.drawable.bg_archived_spot)
             status.text = spot.status.name
-            parkingType.text = spot.parkingType.getValue(res)
+            parkingType.text = spot.parkingType.getLocalizedValue(res)
             coordinates.text = spot.latLng.format(5)
             address.text = spot.address
             actionMoreOptions.popUpMenuOnClickListener(R.menu.parking_more_options_menu) {

@@ -43,9 +43,9 @@ class DatabaseConverters {
     fun uriFromString(uriString: String?): Uri? = uriString?.let { Uri.parse(it) }
 
     @TypeConverter
-    fun colorTypeToString(color: ParkingColor): String = color.name
+    fun colorTypeToString(color: ParkingColor?): String? = color?.name
 
     @TypeConverter
-    fun colorTypeFromString(colorName: String): ParkingColor =
-        ParkingColor.valueOf(colorName)
+    fun colorTypeFromString(colorName: String?): ParkingColor? =
+        colorName?.let { ParkingColor.valueOf(it) }
 }

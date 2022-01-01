@@ -46,19 +46,37 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
         get() = ParkingSpotRequest(
             address = binding.locationInfoContainer.locationAddressValue.value,
             alarmTime = alarmTime,
-            color = binding.locationLotInfoContainer.colorValue.value,
+            color = parkingColor?.name.orEmpty(),
             hourRate = binding.locationLotInfoContainer.hourRateValue.value.toDouble(-0.1),
             floorNumber = binding.locationLotInfoContainer.floorNumberValue.value,
-            floorType = binding.locationLotInfoContainer.floorTypeValue.value,
+            floorType = parkingFloorType?.name.orEmpty(),
             id = parkingSpotToEdit?.id,
             latitude = binding.locationInfoContainer.locationLatitudeValue.value.toDouble(0.0),
             longitude = binding.locationInfoContainer.locationLongitudeValue.value.toDouble(0.0),
             lotIdentifier = binding.locationLotInfoContainer.lotIndentifierValue.value,
             parkingTime = parkingTime,
             parkingTimeFormatted = binding.locationInfoContainer.parkingTimeValue.value,
-            parkingType = binding.locationInfoContainer.parkingTypeValue.value,
+            parkingType = parkingType?.name.orEmpty(),
             photo = carPhotoUri
         )
+
+    private val parkingType: ParkingType?
+        get() = ParkingType.fromLocalizedValue(resources, parkingTypeFieldValue)
+
+    private val parkingFloorType: ParkingFloorType?
+        get() = ParkingFloorType.fromLocalizedValue(resources, parkingFloorTypeFieldValue)
+
+    private val parkingColor: ParkingColor?
+        get() = ParkingColor.fromLocalizedValue(resources, parkingColorFieldValue)
+
+    private val parkingTypeFieldValue: String
+        get() = binding.locationInfoContainer.parkingTypeValue.value
+
+    private val parkingFloorTypeFieldValue: String
+        get() = binding.locationLotInfoContainer.floorTypeValue.value
+
+    private val parkingColorFieldValue: String
+        get() = binding.locationLotInfoContainer.colorValue.value
 
     private lateinit var mGoogleMap: GoogleMap
 
@@ -209,7 +227,7 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
             request.alarmTime?.let { setupAlarm(it) }
         }
         locationLotInfoContainer.apply {
-            root.isVisible = ParkingType.forValue(resources, request.parkingType) == ParkingLot
+            root.isVisible = ParkingType.forValue(request.parkingType) == ParkingLot
             hourRateValue.setText(request.hourRate.toString())
         }
         displayMarkerOnMap(LatLng(request.latitude, request.longitude))
@@ -229,7 +247,8 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
             root.isVisible = spot.parkingType == ParkingLot
             spot.floorType?.let { floorTypeValue.setText(getString(it.typeId)) }
             floorNumberValue.setText(spot.floorNumber)
-            colorValue.setText(spot.color)
+            val colorName: String = spot.color?.colorNameId?.let { getString(it) } ?: ""
+            colorValue.setText(colorName)
             lotIndentifierValue.setText(spot.lotIdentifier)
             if (spot.hourRate >= 0.0) hourRateValue.setText(spot.hourRate.toString())
         }

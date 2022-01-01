@@ -22,7 +22,7 @@ class AddParkingFragment : ParkingFormBaseFragment() {
     lateinit var devicePreferences: DevicePreferences
 
     private val parkingType: ParkingType
-        get() = ParkingType.forValue(resources, devicePreferences.favoriteParkingType)
+        get() = ParkingType.forValue(devicePreferences.favoriteParkingType)
             ?: ParkingType.StreetParking
 
     private val loadingDialog by lazy { LoadingDialog() }

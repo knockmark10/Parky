@@ -11,7 +11,7 @@ import com.markoid.parky.home.data.entities.ParkingSpotEntity
 
 @Database(
     entities = [ParkingSpotEntity::class, ExclusionZoneEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(DatabaseConverters::class)

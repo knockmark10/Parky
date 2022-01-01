@@ -75,7 +75,7 @@
     <string name="longitude">Longitud</string>
     <string name="parking_time">Hora de Aparcado</string>
     <string name="parking_alarm_time">Hora de Alarma</string>
-    <string name="parking_type">Tipo de Estaacionamiento</string>
+    <string name="parking_type">Tipo de Estacionamiento</string>
     <string name="parking_lot_information">Información de Cajón de Estacionamiento</string>
     <string name="floor_type">Tipo de Piso</string>
     <string name="floor_number">Número de Piso</string>
@@ -119,10 +119,10 @@
     <string name="app_language_summary">Escoge el lenguage de la aplicación para ser mostrada</string>
 
     <string-array name="theme_names">
-        <item>Azul Naranja</item>
-        <item>Verde Rojo</item>
-        <item>Naranja Ámbar</item>
-        <item>Morado Verde</item>
+        <item>Default</item>
+        <item>Bosque de Cerezos</item>
+        <item>Puesta de Sol</item>
+        <item>Uvas</item>
     </string-array>
 
     <array name="theme_values">

@@ -38,7 +38,7 @@ class ExclusionZonesAdapter : RecyclerView.Adapter<ExclusionZonesAdapter.ItemVie
 
         fun setData(zoneEntity: ExclusionZoneEntity) = with(binding) {
             exclusionZoneName.text = zoneEntity.name
-            exclusionZoneColor.text = zoneEntity.color.getValue(root.resources)
+            exclusionZoneColor.text = zoneEntity.color.getLocalizedValue(root.resources)
             deleteBtn.setOnClickListener { mListener?.onDeleteExclusionZone(zoneEntity.id) }
             editBtn.setOnClickListener { mListener?.onEditExclusionZone(zoneEntity) }
         }

@@ -120,10 +120,10 @@
     <string name="app_language_summary">Choose the app language to be displayed</string>
 
     <string-array name="theme_names">
-        <item>Blue-Orange</item>
-        <item>Green-Red</item>
-        <item>Orange-Amber</item>
-        <item>Purple-Green</item>
+        <item>Default</item>
+        <item>Cherry Forest</item>
+        <item>Sunset</item>
+        <item>Grapes</item>
     </string-array>
 
     <array name="theme_values">

@@ -10,13 +10,20 @@ enum class ParkingFloorType(@StringRes val typeId: Int) {
     Roof(R.string.parking_floor_type_roof),
     Basement(R.string.parking_floor_type_basement);
 
-    fun getValue(res: Resources): String = res.getString(typeId)
+    fun getLocalizedValue(res: Resources): String = res.getString(typeId)
 
     companion object {
-        fun exists(res: Resources, type: String): Boolean =
-            values().any { it.getValue(res) == type }
+        /**
+         * Checks whether or not the provided name exists. The name provided is checked against
+         * the enum type, and NOT the localized value.
+         */
+        fun exists(typeName: String): Boolean =
+            values().any { it.name == typeName }
 
-        fun forValue(res: Resources, value: String): ParkingFloorType? =
-            values().firstOrNull { it.getValue(res) == value }
+        fun forValue(typeName: String): ParkingFloorType? =
+            values().firstOrNull { it.name == typeName }
+
+        fun fromLocalizedValue(res: Resources, value: String): ParkingFloorType? =
+            values().firstOrNull { it.getLocalizedValue(res) == value }
     }
 }
