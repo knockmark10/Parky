@@ -30,7 +30,7 @@ class OnBoardingActivity : AppIntro() {
                 titleResId = R.string.onboarding_welcome_title,
                 descriptionId = R.string.onboarding_welcome_description,
                 animationFile = "parking_onboarding.json",
-                backgroundColorId = R.color.md_indigo_400
+                backgroundGradient = R.drawable.bg_onboarding
             )
         )
         addSlide(
@@ -38,7 +38,7 @@ class OnBoardingActivity : AppIntro() {
                 titleResId = R.string.onboarding_auto_detection_title,
                 descriptionId = R.string.onboarding_auto_detection_description,
                 animationFile = "bluetooth_onboarding.json",
-                backgroundColorId = R.color.md_indigo_400
+                backgroundGradient = R.drawable.bg_onboarding
             )
         )
         addSlide(
@@ -46,7 +46,7 @@ class OnBoardingActivity : AppIntro() {
                 titleResId = R.string.onboarding_reminder_title,
                 descriptionId = R.string.onboarding_reminder_description,
                 animationFile = "reminder_onboarding.json",
-                backgroundColorId = R.color.md_indigo_400
+                backgroundGradient = R.drawable.bg_onboarding
             )
         )
         addSlide(
@@ -54,7 +54,7 @@ class OnBoardingActivity : AppIntro() {
                 titleResId = R.string.onboarding_customization_title,
                 descriptionId = R.string.onboarding_customization_description,
                 animationFile = "customization_onboarding.json",
-                backgroundColorId = R.color.md_indigo_400
+                backgroundGradient = R.drawable.bg_onboarding
             )
         )
     }
