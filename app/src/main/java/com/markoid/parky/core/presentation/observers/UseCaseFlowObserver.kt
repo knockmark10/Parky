@@ -4,11 +4,15 @@ import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.domain.usecases.UseCase
 import com.markoid.parky.core.presentation.dispatchers.CoroutineDispatcherProvider
 import com.markoid.parky.core.presentation.states.LoadingState
-import kotlinx.coroutines.* // ktlint-disable no-wildcard-imports
+import kotlinx.coroutines.CompletableJob
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class UseCaseFlowObserver<Result, Request>(

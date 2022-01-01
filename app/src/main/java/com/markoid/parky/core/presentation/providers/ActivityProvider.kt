@@ -4,7 +4,12 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import kotlinx.coroutines.flow.* // ktlint-disable no-wildcard-imports
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 import javax.inject.Singleton

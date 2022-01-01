@@ -2,7 +2,18 @@ package com.markoid.permissions.helpers
 
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.activity.result.contract.ActivityResultContracts.* // ktlint-disable no-wildcard-imports
+import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.activity.result.contract.ActivityResultContracts.GetContent
+import androidx.activity.result.contract.ActivityResultContracts.GetMultipleContents
+import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
+import androidx.activity.result.contract.ActivityResultContracts.OpenDocumentTree
+import androidx.activity.result.contract.ActivityResultContracts.OpenMultipleDocuments
+import androidx.activity.result.contract.ActivityResultContracts.PickContact
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.activity.result.contract.ActivityResultContracts.TakePicture
+import androidx.activity.result.contract.ActivityResultContracts.TakePicturePreview
+import androidx.activity.result.contract.ActivityResultContracts.TakeVideo
 import androidx.annotation.RequiresApi
 import com.markoid.permissions.enums.AppPermissions
 import com.markoid.permissions.managers.abstractions.ActivityResultManager
