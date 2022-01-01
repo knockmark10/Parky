@@ -150,6 +150,7 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
     }
 
     fun displayMarkerOnMap(position: LatLng) {
+        mGoogleMap.clear()
         mGoogleMap.setCameraPosition(position, 18f)
         mGoogleMap.setMarker(requireContext(), position, R.drawable.ic_parking_marker)
     }

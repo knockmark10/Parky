@@ -14,4 +14,11 @@
         android:orderInCategory="101"
         android:title="@string/schedule_alarm"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_refresh_location"
+        android:icon="@drawable/ic_refresh"
+        android:orderInCategory="102"
+        android:title="@string/refresh_location"
+        app:showAsAction="always" />
 </menu>

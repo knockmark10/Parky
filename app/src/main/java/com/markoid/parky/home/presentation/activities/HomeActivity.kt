@@ -55,6 +55,7 @@ class HomeActivity : AbstractActivity<ActivityHomeBinding>(), HomeNavigationCall
         when (item.itemId) {
             R.id.action_take_photo -> addParkingFragment?.onTakePhoto()
             R.id.action_schedule_alarm -> addParkingFragment?.displayAlarmDialog()
+            R.id.action_refresh_location -> addParkingFragment?.onGetCurrentLocation()
             R.id.action_change_map -> userLocationFragment?.displayMapTypeDialog()
             R.id.action_finish_parking -> userLocationFragment?.finishParking()
             android.R.id.home -> if (currentDestination != getString(R.string.menu_home)) {

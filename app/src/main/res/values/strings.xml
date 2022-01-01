@@ -34,6 +34,7 @@
     <string name="schedule_alarm">Schedule alarm</string>
     <string name="change_map_type">Change map type</string>
     <string name="finish_parking">Finish parking</string>
+    <string name="refresh_location">Refresh location</string>
 
     <!--Permissions-->
     <string name="camera_permission_rationale">Camera permission is required so that a picture of your car parking gets taken.</string>
