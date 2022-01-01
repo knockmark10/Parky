@@ -116,6 +116,8 @@
     <string name="exclusion_zone_summary">Add exclusion zones to avoid adding parking spots in your most frequent spaces</string>
     <string name="favorite_parking_title">Favorite Parking Type</string>
     <string name="default_theme">Theme_Parky</string>
+    <string name="app_language_title">Language</string>
+    <string name="app_language_summary">Choose the app language to be displayed</string>
 
     <string-array name="theme_names">
         <item>Blue-Orange</item>
@@ -130,6 +132,16 @@
         <item>@style/Theme.OrangeAmber</item>
         <item>@style/Theme.PurpleGreen</item>
     </array>
+
+    <string-array name="language_names">
+        <item>English</item>
+        <item>Spanish</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>@string/english_language</item>
+        <item>@string/spanish_language</item>
+    </string-array>
 
     <!--Animations-->
     <string name="loading">Loading…</string>

@@ -115,6 +115,8 @@
     <string name="exclusion_zone_summary">Añadir zonas de exlcusión evita que se guarden lugares de estacionamiento automáticos en tus lugares más frecuentados</string>
     <string name="favorite_parking_title">Tipo de Estacionamiento Favorito</string>
     <string name="default_theme">Default Parky</string>
+    <string name="app_language_title">Idioma</string>
+    <string name="app_language_summary">Escoge el lenguage de la aplicación para ser mostrada</string>
 
     <string-array name="theme_names">
         <item>Azul Naranja</item>
@@ -129,6 +131,16 @@
         <item>@style/Theme.OrangeAmber</item>
         <item>@style/Theme.PurpleGreen</item>
     </array>
+
+    <string-array name="language_names">
+        <item>Inglés</item>
+        <item>Español</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>@string/english_language</item>
+        <item>@string/spanish_language</item>
+    </string-array>
 
     <!--Animations-->
     <string name="loading">Cargando…</string>

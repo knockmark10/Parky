@@ -93,6 +93,7 @@ dependencies {
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
     implementation 'com.github.samlss:ClockView:1.0'
     implementation 'com.github.AppIntro:AppIntro:6.1.0'
+    implementation "com.github.YarikSOffice:lingver:1.3.0"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

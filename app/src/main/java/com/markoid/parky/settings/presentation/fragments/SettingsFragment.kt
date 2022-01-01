@@ -13,6 +13,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.markoid.parky.R
+import com.markoid.parky.core.presentation.extensions.LocaleExtensions
 import com.markoid.parky.core.presentation.extensions.asMoney
 import com.markoid.parky.core.presentation.extensions.show
 import com.markoid.parky.home.presentation.callbacks.HomeNavigationCallbacks
@@ -22,7 +23,9 @@ import com.markoid.parky.home.presentation.services.BluetoothService
 import com.markoid.parky.permissions.presentation.controllers.LocationPermissionController
 import com.markoid.parky.permissions.presentation.enums.LocationPermissions
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
+import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -43,6 +46,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupToolbar()
 
         setupMapTypePreference()
+
+        setupLanguagePreference()
 
         setupThemePreference()
 
@@ -70,6 +75,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference<Preference>(getString(R.string.map_type))?.apply {
             setOnPreferenceClickListener {
                 MapTypeDialog().show(childFragmentManager)
+                true
+            }
+        }
+    }
+
+    private fun setupLanguagePreference() {
+        findPreference<ListPreference>(getString(R.string.language_key))?.apply {
+            val currentLanguage = Locale.getDefault().language
+            val languageIndex = LocaleExtensions.getLocaleIndex(currentLanguage)
+            setValueIndex(languageIndex)
+            setOnPreferenceChangeListener { _, newValue ->
+                val locale = LocaleExtensions.getLocaleForLanguage(newValue as String)
+                Lingver.getInstance().setLocale(requireActivity(), locale)
+                requireActivity().recreate()
                 true
             }
         }

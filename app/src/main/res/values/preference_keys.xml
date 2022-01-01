@@ -13,6 +13,11 @@
     <string name="parking_spot_active" translatable="false">parking_spot_active</string>
     <string name="onboarding_completed_key" translatable="false">onboarding_completed</string>
     <string name="location_accuracy_key" translatable="false">location_accuracy</string>
+    <string name="language_key" translatable="false">language</string>
+
+    <!--Preferences values-->
+    <string name="english_language" translatable="false">en</string>
+    <string name="spanish_language" translatable="false">es</string>
 
     <!--Internal keys are used with PreferenceScreen widgets, but they store a different type of
     objects than the ones we desire. For that reason, we are using similar ones inside
