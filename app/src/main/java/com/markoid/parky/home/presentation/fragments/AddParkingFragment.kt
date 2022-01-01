@@ -8,11 +8,21 @@ import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.show
 import com.markoid.parky.core.presentation.extensions.subscribe
 import com.markoid.parky.core.presentation.states.LoadingState
+import com.markoid.parky.home.presentation.enums.ParkingType
 import com.markoid.parky.position.data.entities.PositionEntity
+import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddParkingFragment : ParkingFormBaseFragment() {
+
+    @Inject
+    lateinit var devicePreferences: DevicePreferences
+
+    private val parkingType: ParkingType
+        get() = ParkingType.forValue(resources, devicePreferences.favoriteParkingType)
+            ?: ParkingType.StreetParking
 
     private val loadingDialog by lazy { LoadingDialog() }
 
@@ -85,6 +95,7 @@ class AddParkingFragment : ParkingFormBaseFragment() {
             locationLatitudeValue.setText(position.latitude.toString())
             locationLongitudeValue.setText(position.longitude.toString())
             parkingTimeValue.setText(position.dateFormatted)
+            parkingTypeValue.setText(getString(parkingType.typeId))
         }
     }
 
