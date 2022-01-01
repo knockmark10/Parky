@@ -4,6 +4,7 @@ import android.content.res.Resources
 import com.google.android.gms.maps.model.LatLng
 import com.markoid.parky.R
 import com.markoid.parky.core.domain.usecases.UseCase
+import com.markoid.parky.core.presentation.extensions.latLng
 import com.markoid.parky.home.domain.repositories.ExclusionZoneRepository
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.AutoParkingSpotStatus
@@ -44,14 +45,20 @@ class SaveParkingSpotAutoUseCase
      * @param request - The bluetooth device name that was just disconnected.
      */
     override suspend fun onExecute(request: String): AutoParkingSpotStatus {
+        // Check initial constraints
         if (isThereAnyParkingSpotActive() || bluetoothDeviceDoesNotMatch(request))
             return AutoParkingSpotStatus.SkipDisconnectionEvent
         // Get user's current location
         val location = trackingRepository.getCurrentLocation()
+        // Check accuracy
+        if (location.accuracy > devicePreferences.locationAccuracy)
+            return AutoParkingSpotStatus.LocationAccuracyNotMet
+        // Extract coordinates from location
+        val coordinates = location.latLng
         // Check exclusion zones. If we're inside any, we need to skip this
-        if (isInsideExclusionZone(location)) return AutoParkingSpotStatus.SkipDisconnectionEvent
+        if (isInsideExclusionZone(coordinates)) return AutoParkingSpotStatus.SkipDisconnectionEvent
         // Translate such location
-        val positionEntity = trackingRepository.translateCoordinates(location)
+        val positionEntity = trackingRepository.translateCoordinates(coordinates)
         // Build request with location fetched
         val parkingRequest = ParkingSpotRequest(
             address = positionEntity.streetAddress,

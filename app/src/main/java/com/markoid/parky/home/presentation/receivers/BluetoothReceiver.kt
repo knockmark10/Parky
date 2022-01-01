@@ -59,6 +59,8 @@ class BluetoothReceiver : BroadcastReceiver() {
                 notificationManager.displayAutoParkingMissingDataNotification(result.request)
             is AutoParkingSpotStatus.ParkingSpotSavedAutomatically ->
                 notificationManager.displayAutoParkingSavedNotification()
+            AutoParkingSpotStatus.LocationAccuracyNotMet ->
+                notificationManager.displayAutoParkingUserInteractionRequiredNotification()
         }
     }
 

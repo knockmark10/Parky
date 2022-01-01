@@ -25,6 +25,7 @@ class NotificationIntentFactory
         request: ParkingSpotRequest? = null
     ): PendingIntent = when (type) {
         AppNotificationType.AutoParkingSpotMissingData -> getAutoParkingMissingDataIntent(request!!)
+        AppNotificationType.AutoParkingSpotRequiresUserInteraction -> getAutoParkingRequiresUserInteractionIntent()
         AppNotificationType.AutoParkingSpotSuccessful -> getAutoParkingSavedIntent()
         AppNotificationType.Bluetooth -> getBluetoothIntent()
         AppNotificationType.ReminderAlarm -> getReminderAlarmIntent()
@@ -39,6 +40,19 @@ class NotificationIntentFactory
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 putExtra(PARKING_SPOT_REQUEST_ARG, incompleteRequest)
             }
+        return PendingIntent.getActivity(
+            context,
+            AUTO_PARKING_REQUEST_CODE,
+            redirectIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+    }
+
+    private fun getAutoParkingRequiresUserInteractionIntent(): PendingIntent {
+        val redirectIntent = homeActivityIntent.apply {
+            action = NotificationIntentActions.ACTION_ADD_PARKING.action
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
         return PendingIntent.getActivity(
             context,
             AUTO_PARKING_REQUEST_CODE,

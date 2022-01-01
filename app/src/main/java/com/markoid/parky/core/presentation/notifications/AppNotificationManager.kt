@@ -4,6 +4,11 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.os.Build
 import androidx.core.app.NotificationManagerCompat
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotMissingData
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotRequiresUserInteraction
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotSuccessful
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.Bluetooth
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.ReminderAlarm
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.AUTO_PARKING_CHANNEL_ID
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.BLUETOOTH_CHANNEL_ID
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.REMINDER_ALARM_CHANNEL_ID
@@ -21,9 +26,9 @@ class AppNotificationManager @Inject constructor(
      * When tapped, it should take the user to [com.markoid.parky.home.presentation.fragments.UserLocationFragment].
      */
     fun displayReminderAlarmNotification() {
-        val channelId = createNotificationChannel(AppNotificationType.ReminderAlarm)
+        val channelId = createNotificationChannel(ReminderAlarm)
         val notificationBuilder = notificationFactory.getNotificationBuilderByType(
-            type = AppNotificationType.ReminderAlarm,
+            type = ReminderAlarm,
             channelId = channelId
         )
 
@@ -36,9 +41,25 @@ class AppNotificationManager @Inject constructor(
      * When tapped, it should take the user to [com.markoid.parky.home.presentation.fragments.ParkingHistoryFragment].
      */
     fun displayAutoParkingSavedNotification() {
-        val channelId = createNotificationChannel(AppNotificationType.AutoParkingSpotSuccessful)
+        val channelId = createNotificationChannel(AutoParkingSpotSuccessful)
         val notificationBuilder = notificationFactory.getNotificationBuilderByType(
-            type = AppNotificationType.AutoParkingSpotSuccessful,
+            type = AutoParkingSpotSuccessful,
+            channelId = channelId
+        )
+
+        // Show a notification
+        notificationManagerCompat.notify(generateNewId(), notificationBuilder.build())
+    }
+
+    /**
+     * This will be the notification displayed when there was an attempt to save the parking spot
+     * automatically, and an inaccurate location was received.
+     */
+    fun displayAutoParkingUserInteractionRequiredNotification() {
+        val channelId =
+            createNotificationChannel(AutoParkingSpotRequiresUserInteraction)
+        val notificationBuilder = notificationFactory.getNotificationBuilderByType(
+            type = AutoParkingSpotRequiresUserInteraction,
             channelId = channelId
         )
 
@@ -51,9 +72,9 @@ class AppNotificationManager @Inject constructor(
      * When tapped, it should take the user to [com.markoid.parky.home.presentation.fragments.AddParkingFragment].
      */
     fun displayAutoParkingMissingDataNotification(request: ParkingSpotRequest) {
-        val channelId = createNotificationChannel(AppNotificationType.AutoParkingSpotMissingData)
+        val channelId = createNotificationChannel(AutoParkingSpotMissingData)
         val notificationBuilder = notificationFactory.getNotificationBuilderByType(
-            type = AppNotificationType.AutoParkingSpotMissingData,
+            type = AutoParkingSpotMissingData,
             channelId = channelId,
             incompleteRequest = request
         )
@@ -69,9 +90,9 @@ class AppNotificationManager @Inject constructor(
      * When tapped, it should take the user to [com.markoid.parky.home.presentation.fragments.SettingsFragment].
      */
     fun getBluetoothServiceNotification(): Notification {
-        val channelId = createNotificationChannel(AppNotificationType.Bluetooth)
+        val channelId = createNotificationChannel(Bluetooth)
         return notificationFactory.getNotificationBuilderByType(
-            type = AppNotificationType.Bluetooth,
+            type = Bluetooth,
             channelId = channelId
         ).build()
     }
@@ -85,10 +106,11 @@ class AppNotificationManager @Inject constructor(
     }
 
     private fun getChannelIdByType(type: AppNotificationType): String = when (type) {
-        AppNotificationType.Bluetooth -> BLUETOOTH_CHANNEL_ID
-        AppNotificationType.ReminderAlarm -> REMINDER_ALARM_CHANNEL_ID
-        AppNotificationType.AutoParkingSpotMissingData,
-        AppNotificationType.AutoParkingSpotSuccessful -> AUTO_PARKING_CHANNEL_ID
+        Bluetooth -> BLUETOOTH_CHANNEL_ID
+        ReminderAlarm -> REMINDER_ALARM_CHANNEL_ID
+        AutoParkingSpotMissingData,
+        AutoParkingSpotRequiresUserInteraction,
+        AutoParkingSpotSuccessful -> AUTO_PARKING_CHANNEL_ID
     }
 
     /**

@@ -12,6 +12,7 @@
     <string name="map_type">map_type</string>
     <string name="parking_spot_active">parking_spot_active</string>
     <string name="onboarding_completed_key">onboarding_completed</string>
+    <string name="location_accuracy_key">location_accuracy</string>
 
     <!--Internal keys are used with PreferenceScreen widgets, but they store a different type of
     objects than the ones we desire. For that reason, we are using similar ones inside

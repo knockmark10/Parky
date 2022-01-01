@@ -114,7 +114,10 @@ class LocationPermissionController @Inject constructor(
                             activity.lifecycleScope.launch {
                                 val result =
                                     permissionManager.requestPermission(AppPermissions.BackgroundLocation)
-                                continuation.resume(handlePermissionResult(result, params))
+                                val wasGranted = handlePermissionResult(result, params)
+                                if (continuation.isActive) {
+                                    continuation.resume(wasGranted)
+                                }
                             }
                         }
                         .setNegativeButton(R.string.cancel, null)

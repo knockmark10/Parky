@@ -8,7 +8,7 @@ import com.markoid.parky.position.data.entities.positionstack.PositionStackRespo
 import kotlinx.coroutines.flow.Flow
 
 interface TrackingDataSource {
-    suspend fun getCurrentLocation(): Location?
+    suspend fun getCurrentLocation(): Location
     fun getRealTimeLocation(): Flow<Location>
     suspend fun translateCoordinatesWithAndroidApi(location: LatLng): List<Address>
     suspend fun translateCoordinatesWithBigDataCloud(location: LatLng): BigDataCloudResponse

@@ -21,7 +21,7 @@ class TrackingDataSourceImpl
     private val responseHandler: ResponseHandler
 ) : TrackingDataSource {
 
-    override suspend fun getCurrentLocation(): Location? =
+    override suspend fun getCurrentLocation(): Location =
         this.positionManager.requestSingleLocation()
 
     override fun getRealTimeLocation(): Flow<Location> =

@@ -21,3 +21,27 @@ fun Duration.toTimer(): RemainingTime {
     remainingTime.seconds = timer.standardSeconds
     return remainingTime
 }
+
+val Int.days
+    get() = Duration.standardDays(this.toLong())
+
+val Long.days
+    get() = Duration.standardDays(this)
+
+val Int.hours
+    get() = Duration.standardHours(this.toLong())
+
+val Long.hours
+    get() = Duration.standardHours(this)
+
+val Int.minutes
+    get() = Duration.standardMinutes(this.toLong())
+
+val Long.minutes
+    get() = Duration.standardMinutes(this)
+
+val Int.seconds
+    get() = Duration.standardSeconds(this.toLong())
+
+val Long.seconds
+    get() = Duration.standardSeconds(this)

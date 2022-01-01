@@ -4,6 +4,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotMissingData
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotRequiresUserInteraction
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotSuccessful
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.Bluetooth
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.ReminderAlarm
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.AUTO_PARKING_CHANNEL_ID
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.BLUETOOTH_CHANNEL_ID
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.REMINDER_ALARM_CHANNEL_ID
@@ -27,10 +32,11 @@ object NotificationChannelFactory {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getChannelByType(type: AppNotificationType): NotificationChannel = when (type) {
-        AppNotificationType.AutoParkingSpotMissingData -> getAutoParkingSpotMissingChannel()
-        AppNotificationType.AutoParkingSpotSuccessful -> getAutoParkingSpotSavedChannel()
-        AppNotificationType.Bluetooth -> getBluetoothChannel()
-        AppNotificationType.ReminderAlarm -> getReminderAlarmChannel()
+        AutoParkingSpotMissingData -> getAutoParkingSpotMissingChannel()
+        AutoParkingSpotRequiresUserInteraction -> getAutoParkingSpotMissingChannel()
+        AutoParkingSpotSuccessful -> getAutoParkingSpotSavedChannel()
+        Bluetooth -> getBluetoothChannel()
+        ReminderAlarm -> getReminderAlarmChannel()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

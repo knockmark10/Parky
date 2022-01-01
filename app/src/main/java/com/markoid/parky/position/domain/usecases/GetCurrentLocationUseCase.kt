@@ -2,6 +2,7 @@ package com.markoid.parky.position.domain.usecases
 
 import com.google.android.gms.maps.model.LatLng
 import com.markoid.parky.core.domain.usecases.UseCase
+import com.markoid.parky.core.presentation.extensions.latLng
 import com.markoid.parky.permissions.presentation.controllers.LocationPermissionController
 import com.markoid.parky.permissions.presentation.enums.LocationPermissions
 import com.markoid.parky.position.data.entities.PositionEntity
@@ -33,7 +34,7 @@ class GetCurrentLocationUseCase
 
     private suspend fun getCurrentLocation(): PositionEntity {
         // Get current location
-        val currentLocation: LatLng = trackingRepository.getCurrentLocation()
+        val currentLocation: LatLng = trackingRepository.getCurrentLocation().latLng
         // Validate that we are getting valid coordinates
         if (currentLocation.isValid.not()) throw InvalidPositionException()
         // Translate the coordinates that we got

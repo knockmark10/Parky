@@ -15,10 +15,8 @@ class TrackingRepositoryImpl @Inject constructor(
     override suspend fun translateCoordinates(location: LatLng): PositionEntity =
         translatePositionWithAndroidApi(location)
 
-    override suspend fun getCurrentLocation(): LatLng {
-        val location = this.trackingDataSource.getCurrentLocation()
-        return LatLng(location?.latitude ?: 0.0, location?.longitude ?: 0.0)
-    }
+    override suspend fun getCurrentLocation(): Location =
+        trackingDataSource.getCurrentLocation()
 
     override fun getRealTimeLocation(): Flow<Location> =
         trackingDataSource.getRealTimeLocation()

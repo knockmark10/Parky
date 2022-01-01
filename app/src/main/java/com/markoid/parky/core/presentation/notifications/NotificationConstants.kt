@@ -20,5 +20,5 @@ object NotificationConstants {
     val urgentVibrationPattern =
         longArrayOf(0, 1000, 100, 1000, 100, 1000, 100, 1000, 100, 1000, 100, 1000, 100, 1000, 100)
 
-    val regularVibrationPattern = longArrayOf(0, 1000, 1000, 1000, 1000, 1000, 100)
+    val regularVibrationPattern = longArrayOf(0, 400, 400, 400, 400, 400, 100)
 }

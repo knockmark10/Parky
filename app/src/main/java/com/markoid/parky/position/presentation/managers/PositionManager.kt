@@ -7,14 +7,19 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Looper
 import android.util.Log
-import com.google.android.gms.location.* // ktlint-disable no-wildcard-imports
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.model.LatLng
+import com.markoid.parky.core.presentation.extensions.seconds
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
-import org.joda.time.Duration
-import java.util.* // ktlint-disable no-wildcard-imports
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -32,8 +37,8 @@ class PositionManager(
     private val locationRequest = LocationRequest
         .create()
         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-        .setInterval(Duration.standardSeconds(1L).millis)
-        .setFastestInterval(Duration.standardSeconds(1L).millis)
+        .setInterval(1.seconds.millis)
+        .setFastestInterval(1.seconds.millis)
 
     private var locationCallback: LocationCallback? = null
 
@@ -44,13 +49,14 @@ class PositionManager(
     /**
      * Request and receive location once.
      */
-    suspend fun requestSingleLocation(): Location? = suspendCancellableCoroutine { task ->
+    suspend fun requestSingleLocation(): Location = suspendCancellableCoroutine { task ->
         val client = LocationServices.getFusedLocationProviderClient(mContext)
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 // Ignore any null response
                 val location: Location = locationResult?.lastLocation ?: return
                 stopLocationUpdates()
+                Log.d("leissue", "Accuracy: ${location.accuracy}")
                 task.resume(location)
             }
         }
@@ -72,6 +78,7 @@ class PositionManager(
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null) {
                     Log.d("PositionManager", "got location ${locationResult.lastLocation}")
+                    Log.d("leissue", "Accuracy: ${locationResult.lastLocation.accuracy}")
                     trySend(locationResult.lastLocation)
                 }
             }

@@ -62,6 +62,10 @@ class DevicePreferencesImpl
         get() = getPreference(R.string.hour_rate_key, 10.0)
         set(value) = setPreference(R.string.hour_rate_key, value)
 
+    override var locationAccuracy: Float
+        get() = getPreference(R.string.location_accuracy_key, 20f)
+        set(value) = setPreference(R.string.location_accuracy_key, value)
+
     override var isAutoParkingDetectionEnabled: Boolean
         get() = getPreference(R.string.auto_detection_enabled_key, false)
         set(value) = setPreference(R.string.auto_detection_enabled_key, value)

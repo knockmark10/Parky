@@ -4,10 +4,12 @@ import android.app.PendingIntent
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.markoid.parky.R
-import com.markoid.parky.core.presentation.extensions.getAttrColor
+import com.markoid.parky.core.presentation.extensions.resolveColor
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotMissingData
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotRequiresUserInteraction
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotSuccessful
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.Bluetooth
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.ReminderAlarm
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.regularVibrationPattern
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.urgentVibrationPattern
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
@@ -29,7 +31,9 @@ class NotificationFactory
             getAutoParkingMissingDataBuilder(channelId, incompleteRequest!!)
         AutoParkingSpotSuccessful -> getAutoParkingSuccessfulBuilder(channelId)
         Bluetooth -> getBluetoothBuilder(channelId)
-        AppNotificationType.ReminderAlarm -> getReminderAlarmBuilder(channelId)
+        ReminderAlarm -> getReminderAlarmBuilder(channelId)
+        AutoParkingSpotRequiresUserInteraction ->
+            getAutoParkingRequiresUserInteractionBuilder(channelId)
     }
 
     private fun getAutoParkingMissingDataBuilder(
@@ -45,6 +49,22 @@ class NotificationFactory
             .setStyle(
                 NotificationCompat.BigTextStyle()
                     .bigText(context.getString(R.string.auto_parking_missing_data_notification_message))
+            )
+            .setContentIntent(pendingIntent)
+    }
+
+    private fun getAutoParkingRequiresUserInteractionBuilder(
+        channelId: String
+    ): NotificationCompat.Builder {
+        val pendingIntent: PendingIntent = notificationIntentFactory
+            .getPendingIntentByNotificationType(AutoParkingSpotRequiresUserInteraction)
+        return getCommonNotification(channelId, urgentVibrationPattern)
+            .setSmallIcon(R.drawable.ic_error)
+            .setContentTitle(context.getString(R.string.auto_parking_requires_user_interaction_title))
+            .setContentText(context.getString(R.string.auto_parking_requires_user_interaction_message))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(context.getString(R.string.auto_parking_requires_user_interaction_message))
             )
             .setContentIntent(pendingIntent)
     }
@@ -96,7 +116,7 @@ class NotificationFactory
         channelId: String,
         vibrationPattern: LongArray
     ): NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
-        .setColor(context.getAttrColor(R.attr.colorPrimary))
+        .setColor(context.resolveColor(R.color.md_blue_700))
         .setAutoCancel(true)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setVibrate(vibrationPattern)
