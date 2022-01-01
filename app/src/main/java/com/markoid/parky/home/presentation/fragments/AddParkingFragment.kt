@@ -5,6 +5,7 @@ import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.dialogs.LoadingDialog
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
+import com.markoid.parky.core.presentation.extensions.ensureAdded
 import com.markoid.parky.core.presentation.extensions.show
 import com.markoid.parky.core.presentation.extensions.subscribe
 import com.markoid.parky.core.presentation.states.LoadingState
@@ -26,7 +27,7 @@ class AddParkingFragment : ParkingFormBaseFragment() {
 
     private val loadingDialog by lazy { LoadingDialog() }
 
-    override fun onGetCurrentLocation() {
+    override fun onGetCurrentLocation() = ensureAdded {
         val response = homeViewModel.getCurrentLocation()
         response.getResult().subscribe(viewLifecycleOwner) {
             when (it) {
@@ -36,8 +37,8 @@ class AddParkingFragment : ParkingFormBaseFragment() {
         }
         response.getLoading().subscribe(viewLifecycleOwner) {
             when (it) {
-                LoadingState.Show -> this.loadingDialog.show(childFragmentManager)
-                LoadingState.Dismiss -> this.loadingDialog.dismiss()
+                LoadingState.Show -> loadingDialog.show(childFragmentManager)
+                LoadingState.Dismiss -> loadingDialog.dismiss()
             }
         }
     }
@@ -74,7 +75,7 @@ class AddParkingFragment : ParkingFormBaseFragment() {
         }
     }
 
-    override fun onTakePhoto() {
+    override fun onTakePhoto() = ensureAdded {
         homeViewModel.takeCarPicture().getResult().subscribe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Data -> displayCarImage(it.data)

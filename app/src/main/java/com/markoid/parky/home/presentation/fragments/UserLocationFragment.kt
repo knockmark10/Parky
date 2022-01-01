@@ -17,6 +17,7 @@ import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
+import com.markoid.parky.core.presentation.extensions.ensureAdded
 import com.markoid.parky.core.presentation.extensions.findMapById
 import com.markoid.parky.core.presentation.extensions.launchWhenStartedCatching
 import com.markoid.parky.core.presentation.extensions.react
@@ -239,13 +240,13 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         }
     }
 
-    fun displayMapTypeDialog() {
+    fun displayMapTypeDialog() = ensureAdded {
         MapTypeDialog()
             .setOnMapTypeSelectedListener { changeMapType(it) }
             .show(childFragmentManager)
     }
 
-    fun finishParking() {
+    fun finishParking() = ensureAdded {
         appAlert {
             type = AlertType.Info
             message = getString(R.string.parking_spot_finish)

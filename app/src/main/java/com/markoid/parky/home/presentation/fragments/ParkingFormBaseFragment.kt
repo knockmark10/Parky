@@ -17,6 +17,7 @@ import com.markoid.parky.core.date.extensions.formatWith
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.dateAndTimePickers
+import com.markoid.parky.core.presentation.extensions.ensureAdded
 import com.markoid.parky.core.presentation.extensions.findMapById
 import com.markoid.parky.core.presentation.extensions.longToast
 import com.markoid.parky.core.presentation.extensions.toDouble
@@ -110,11 +111,11 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
         binding.carPictureContainer.vehiclePicture.setImageURI(uri)
     }
 
-    fun displayAlarmDialog() {
+    fun displayAlarmDialog() = ensureAdded {
         dateAndTimePickers(
             true,
             { setupAlarm(this) },
-            { longToast("Alarm was not set") }
+            { longToast(getString(R.string.alarm_not_set)) }
         )
     }
 

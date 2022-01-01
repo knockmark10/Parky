@@ -86,6 +86,7 @@
     <string name="car_picture">Car Picture</string>
     <string name="parking_spot_saved_successfully">Parking spot has been saved successfully!</string>
     <string name="parking_spot_updated_successfully">Parking spot has been updated successfully!</string>
+    <string name="alarm_not_set">Alarm was not set</string>
 
     <!--Colors-->
     <string name="yellow">Yellow</string>
@@ -182,6 +183,8 @@
     <string name="no_exclusion_zones_added">No exclusion zones added</string>
     <string name="exclusion_zone_deleted_successfully">Exclusion zone deleted successfully.</string>
     <string name="exclusion_zone_default_radius_label">Radius: 10m</string>
+
+    <!--On Boarding-->
     <string name="onboarding_welcome_title">Welcome to Parky!</string>
     <string name="onboarding_welcome_description">Your best friend to remember your parking spot</string>
     <string name="onboarding_auto_detection_title">Auto-Detection</string>
@@ -190,8 +193,5 @@
     <string name="onboarding_reminder_description">You can schedule a reminder to pick up your car at any time.</string>
     <string name="onboarding_customization_title">App customization</string>
     <string name="onboarding_customization_description">Customize the app according to your needs.</string>
-
-    <!--OnBoarding-->
-
 
 </resources>

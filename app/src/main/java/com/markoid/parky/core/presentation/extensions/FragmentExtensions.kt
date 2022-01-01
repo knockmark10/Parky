@@ -101,3 +101,7 @@ fun Fragment.appAlert(block: AppDialogInterface.() -> Unit) {
     appDialog.show(childFragmentManager, this::class.java.name)
     block(appDialog)
 }
+
+fun Fragment.ensureAdded(contract: Fragment.() -> Unit) {
+    if (isAdded) contract(this)
+}
