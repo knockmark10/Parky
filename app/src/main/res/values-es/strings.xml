@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Activity labels-->
+    <string name="title_activity_onboarding">Tutorial</string>
+    <string name="title_activity_home">Inicio</string>
+
+    <!--Navigation Drawer-->
+    <string name="navigation_drawer_open">Abrir navegación de cajón</string>
+    <string name="navigation_drawer_close">Cerrar navegación de cajón</string>
+    <string name="nav_header_subtitle">Guarda tu lugar de estacionamiento</string>
+
+    <!--Generics-->
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="grant">Permitir</string>
+    <string name="success">Éxito</string>
+    <string name="error">Error</string>
+    <string name="warning">Advertencia</string>
+    <string name="info">Información</string>
+    <string name="any">Cualquiera</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
+    <string name="save">Guardar</string>
+    <string name="add">Agregar</string>
+    <string name="double_zero">00</string>
+
+    <!--Menu-->
+    <string name="menu_home">Inicio</string>
+    <string name="menu_add_parking">Agregar Estacionamiento</string>
+    <string name="menu_user_location">Ubicación de Usuario</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="take_photo">Tomar Foto</string>
+    <string name="schedule_alarm">Agendar Alarma</string>
+    <string name="change_map_type">Cambiar Tipo de Mapa</string>
+    <string name="finish_parking">Finalizar Estacionamiento</string>
+    <string name="refresh_location">Refrescar Ubicación</string>
+
+    <!--Permissions-->
+    <string name="camera_permission_rationale">EL permiso de cámara es requerido para que se pueda tomar una fotografía de tu auto estacionado.</string>
+    <string name="camera_permission_title">Permiso de cámara requerido</string>
+    <string name="camera_permission_denied">El permiso de cámara requerido no fue otorgado.</string>
+    <string name="contact_permission_rationale">TBD</string>
+    <string name="microphone_permission_rationale">TBD</string>
+    <string name="phone_permission_rationale">TBD</string>
+    <string name="storage_permission_rationale">TBD</string>
+    <string name="location_permission_title">Permiso de ubicación requerido</string>
+    <string name="location_permission_rationale">Para detectar tu ubicación de estacionamiento, la aplicación necesita que la ubicación esté habilitada.</string>
+    <string name="location_background_permission_title">Ubicación en segudno plano requerida</string>
+    <string name="location_background_permission_rationale">Para detectar tu lugar de estacionamiento, la aplicación necesita que la ubicación esté ajustada como <b>Permitir todo el tiempo.</b></string>
+    <string name="location_permission_denied">Permiso de ubicación no fue otorgado.</string>
+
+    <!--Add Parking-->
+    <string name="parking_spots">Lugares de Estacionamiento</string>
+    <string name="parking_type_street">Apacardado en la calle</string>
+    <string name="parking_type_lot">Estacionamiento de paga</string>
+    <string name="parking_floor_type_lobby">Lobby</string>
+    <string name="parking_floor_type_floor">Nivel de Piso</string>
+    <string name="parking_floor_type_roof">Azotea</string>
+    <string name="parking_floor_type_basement">Sótano</string>
+    <string name="invalid_address_message">Ingresa uan dirección válida</string>
+    <string name="invalid_location_message">La ubicación obtenida no es válida. Por favor refresque la ubicación manualmente.</string>
+    <string name="invalid_parking_time_message">Ingresa una hora válida</string>
+    <string name="invalid_parking_type_message">Ingresa un tipo de estacionamineto válido</string>
+    <string name="invalid_floor_type_message">Ingresa un tipo de tipo válido</string>
+    <string name="invalid_floor_number_message">Ingresa un número de piso válido</string>
+    <string name="invalid_color_message">Ingresa un color válido</string>
+    <string name="invalid_lot_identifier_message">Ingresa el identificador de cajón válido</string>
+    <string name="invalid_hour_rate_message">Ingresa una tarifa por hora válida.</string>
+    <string name="save_parking_lot">Guardar lugar de estacaionamiento</string>
+    <string name="update_parking_lot">Actualizar lugar de estacionamiento</string>
+    <string name="location_information">Información de Ubicación</string>
+    <string name="address">Dirección</string>
+    <string name="latitude">Latitud</string>
+    <string name="longitude">Longitud</string>
+    <string name="parking_time">Hora de Aparcado</string>
+    <string name="parking_alarm_time">Hora de Alarma</string>
+    <string name="parking_type">Tipo de Estaacionamiento</string>
+    <string name="parking_lot_information">Información de Cajón de Estacionamiento</string>
+    <string name="floor_type">Tipo de Piso</string>
+    <string name="floor_number">Número de Piso</string>
+    <string name="color">Color</string>
+    <string name="lot_identifier">ID de Cajón</string>
+    <string name="hour_rate">Tarifa por Hora</string>
+    <string name="map_view">Vista del Mapa</string>
+    <string name="car_picture">Foto del Auto</string>
+    <string name="parking_spot_saved_successfully">¡Tu lugar de estacionamineto ha sido guardado exitosamente!</string>
+    <string name="parking_spot_updated_successfully">¡Tu lugar de estacionamiento ha sido actualizado exitosamente!</string>
+    <string name="alarm_not_set">La alarma no se ha establecido</string>
+
+    <!--Colors-->
+    <string name="yellow">Amarillo</string>
+    <string name="blue">Azul</string>
+    <string name="red">Rojo</string>
+    <string name="green">Verde</string>
+    <string name="orange">Naranja</string>
+    <string name="brown">Café</string>
+    <string name="grey">Gris</string>
+    <string name="pink">Rosa</string>
+    <string name="black">Negro</string>
+    <string name="white">Blanco</string>
+    <string name="purple">Morado</string>
+
+    <!--Settings-->
+    <string name="auto_detection_title">Detección de Estacionamiento Automático</string>
+    <string name="auto_detection_summary">Detecta cuando has estacionado tu auto usando Bluetooth</string>
+    <string name="background_location_title">Ubicación en Segundo Plano</string>
+    <string name="background_location_summary">Usar ubicación en segundo plano para ubicar tu auto</string>
+    <string name="bluetooth_device_title">Dispositivo Bluetooth</string>
+    <string name="current_theme_title">Tema</string>
+    <string name="current_theme_summary">Escoge un tema para la aplicación</string>
+    <string name="dark_mode_title">Modo Oscuro</string>
+    <string name="dark_mode_summary">Habilitar modo oscuro</string>
+    <string name="exclusion_zone_title">Zona de Exclusión</string>
+    <string name="exclusion_zone_summary">Añadir zonas de exlcusión evita que se guarden lugares de estacionamiento automáticos en tus lugares más frecuentados</string>
+    <string name="favorite_parking_title">Tipo de Estacionamiento Favorito</string>
+    <string name="default_theme">Default Parky</string>
+
+    <string-array name="theme_names">
+        <item>Azul Naranja</item>
+        <item>Verde Rojo</item>
+        <item>Naranja Ámbar</item>
+        <item>Morado Verde</item>
+    </string-array>
+
+    <array name="theme_values">
+        <item>@style/Theme.Parky</item>
+        <item>@style/Theme.GreenRed</item>
+        <item>@style/Theme.OrangeAmber</item>
+        <item>@style/Theme.PurpleGreen</item>
+    </array>
+
+    <!--Animations-->
+    <string name="loading">Cargando…</string>
+    <string name="parking_empty_state_message">No tienes lugares guardados…</string>
+
+    <!--User Location-->
+    <string name="parking_spot_delete_title">¿Estás seguro que quieres eliminar este lugar de estacionamiento?</string>
+    <string name="parking_spot_deleted_successful_message">¡Lugar de estacionamineto borrado exitosamente!</string>
+    <string name="parking_spot_archived_successfully">Tu lugar de estacionamiento ha sido archivado existosamente..</string>
+    <string name="parking_spot_finish">¿Estás seguro que quieres finalizar este lugar de estacionamiento y archivarlo?</string>
+
+    <!--Alarm-->
+    <string name="alarm_dialog_title">Alarma</string>
+    <string name="days">Días</string>
+    <string name="hours">Horas</string>
+    <string name="minutes">Minutos</string>
+    <string name="seconds">Segundos</string>
+
+    <!--Map Type-->
+    <string name="map_type_title">Tipo de Mapa</string>
+    <string name="map_none">Ninguno</string>
+    <string name="map_normal">Normal</string>
+    <string name="map_satellite">Satélite</string>
+    <string name="map_terrain">Terreno</string>
+    <string name="map_hybrid">Híbrido</string>
+    <string name="map_type_summary">Elegir el tipo de mapa que quieres que se muestre</string>
+
+    <!--Rate Dialog-->
+    <string name="my_car">Mi Auto</string>
+    <string name="hour_rate_disclaimer">* Please note that the hour rate calculated is just an estimation and should not be considered as exact under any circumstances.</string>
+    <string name="total">Total</string>
+
+    <!--Notifications-->
+    <string name="alarm_notification_title">Alarma recordatorio</string>
+    <string name="alarm_notification_message">Recuerda recoger tu vehículo.</string>
+    <string name="bluetooth_notification_title">Servicio de Bluetooth en ejecución</string>
+    <string name="bluetooth_notification_message">Nos aseguraremos de que tu lugar de estacionamiento sea guardado la próxima vez que tu dispositivo se desconecte de tu vehículo.</string>
+    <string name="auto_parking_spot_notification_title">Lugar de estacionamiento guardado</string>
+    <string name="auto_parking_spot_notification_message">Tu lugar de estacionamiento ha sido guardado automáticamente.</string>
+    <string name="auto_parking_missing_data_notification_title">Hace falta información para tu estacionamineto</string>
+    <string name="auto_parking_missing_data_notification_message">Hacen falta algunos datos para tu lugar de estacionamiento. Presiona aquí para completarlo.</string>
+    <string name="auto_parking_requires_user_interaction_title">Interacción del usuario requerida</string>
+    <string name="auto_parking_requires_user_interaction_message">Ubicación imprecisa recibida. Por favor haga un guardado manual presionando esta notificación.</string>
+
+    <!--Exclusion Zones-->
+    <string name="exclusion_zones_title">Zonas de Exclusión</string>
+    <string name="exclusion_zone_name_hint">Nombre de la Zona de Exclusión</string>
+    <string name="exclusion_zones_subtitle">Puedes agregar zonas de exclusión para evitar que se guarden lugares de estacionamineto automáticos cuando se presenta una desconexión del Bluetooth de tu vehículo en tus zonas más frecuentes.</string>
+    <string name="exclusion_zones_header">Zonas de Exlcusión Agregadas</string>
+    <string name="exclusion_zone_invalid_name">Ingresa un nombre válido de al menos 4 caracteres.</string>
+    <string name="exclusion_zone_saved_successfully">¡Zona de exlcusión guardada exitosamente!</string>
+    <string name="no_exclusion_zones_added">No hay zonas de exclusión</string>
+    <string name="exclusion_zone_deleted_successfully">Zona de exclusión eliminada exitosamente.</string>
+    <string name="exclusion_zone_default_radius_label">Radio: 10m</string>
+
+    <!--On Boarding-->
+    <string name="onboarding_welcome_title">Bienvenido a Parky!</string>
+    <string name="onboarding_welcome_description">Tu mejor amigo para recordar tu lugar de estacionamiento</string>
+    <string name="onboarding_auto_detection_title">Detección Automática</string>
+    <string name="onboarding_auto_detection_description">Olvídate de guardar tus lugares de estacionamineto manualmente. Parky lo hará por ti utilizando Bluetooth.</string>
+    <string name="onboarding_reminder_title">Programa recordatorios</string>
+    <string name="onboarding_reminder_description">Puedes agendar un recordatorio para recoger tu vehículo en cualquier momento.</string>
+    <string name="onboarding_customization_title">Personalización de la App</string>
+    <string name="onboarding_customization_description">Personaliza la aplicación de acuerdo a tus necesidades.</string>
+
+</resources>

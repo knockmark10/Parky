@@ -1,14 +1,15 @@
 <resources>
-    <string name="app_name">Parky</string>
-    <string name="server_preference_url">http://192.168.1.74:9090</string>
-    <string name="title_activity_onboarding">OnBoardingActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="app_name" translatable="false">Parky</string>
+    <string name="server_preference_url" translatable="false">http://192.168.1.74:9090</string>
+
+    <!--Activity labels-->
+    <string name="title_activity_onboarding">OnBoarding</string>
+    <string name="title_activity_home">Home</string>
+
+    <!--Navigation Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">Save your parking spot</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <!--Generics-->
     <string name="accept">Accept</string>
@@ -33,13 +34,13 @@
     <string name="take_photo">Take photo</string>
     <string name="schedule_alarm">Schedule alarm</string>
     <string name="change_map_type">Change map type</string>
-    <string name="finish_parking">Finish parking</string>
-    <string name="refresh_location">Refresh location</string>
+    <string name="finish_parking">Finish Parking</string>
+    <string name="refresh_location">Refresh Location</string>
 
     <!--Permissions-->
     <string name="camera_permission_rationale">Camera permission is required so that a picture of your car parking gets taken.</string>
     <string name="camera_permission_title">Camera permission required</string>
-    <string name="camera_permission_denied">Camera permission was not granted.</string>
+    <string name="camera_permission_denied">Required camera permission was not granted.</string>
     <string name="contact_permission_rationale">TBD</string>
     <string name="microphone_permission_rationale">TBD</string>
     <string name="phone_permission_rationale">TBD</string>
@@ -59,7 +60,7 @@
     <string name="parking_floor_type_roof">Roof</string>
     <string name="parking_floor_type_basement">Basement</string>
     <string name="invalid_address_message">Enter a valid address</string>
-    <string name="invalid_location_message">Enter a valid location</string>
+    <string name="invalid_location_message">The location received is not a valid one. Please refresh the location manually.</string>
     <string name="invalid_parking_time_message">Enter a valid time</string>
     <string name="invalid_parking_type_message">Enter a valid parking type</string>
     <string name="invalid_floor_type_message">Enter a valid floor type</string>
@@ -103,7 +104,7 @@
 
     <!--Settings-->
     <string name="auto_detection_title">Auto-Parking Detection</string>
-    <string name="auto_detection_summary">Detects when you park your car by using bluetooth</string>
+    <string name="auto_detection_summary">Detects when you park your car by using Bluetooth</string>
     <string name="background_location_title">Background Location</string>
     <string name="background_location_summary">Use background location to find your car</string>
     <string name="bluetooth_device_title">Bluetooth Device</string>

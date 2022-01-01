@@ -2,22 +2,22 @@
 <resources>
 
     <!--These keys are totally compatible between DevicePreferences and PreferenceScreen.-->
-    <string name="auto_detection_enabled_key">auto_detection_enabled</string>
-    <string name="background_location_enabled_key">background_location_enabled</string>
-    <string name="bluetooth_device_key">bluetooth_device_key</string>
-    <string name="current_theme_key">current_theme</string>
-    <string name="dark_mode_key">dark_mode</string>
-    <string name="favorite_parking_key">favorite_parking</string>
-    <string name="hour_rate_key">hour_rate</string>
-    <string name="map_type">map_type</string>
-    <string name="parking_spot_active">parking_spot_active</string>
-    <string name="onboarding_completed_key">onboarding_completed</string>
-    <string name="location_accuracy_key">location_accuracy</string>
+    <string name="auto_detection_enabled_key" translatable="false">auto_detection_enabled</string>
+    <string name="background_location_enabled_key" translatable="false">background_location_enabled</string>
+    <string name="bluetooth_device_key" translatable="false">bluetooth_device_key</string>
+    <string name="current_theme_key" translatable="false">current_theme</string>
+    <string name="dark_mode_key" translatable="false">dark_mode</string>
+    <string name="favorite_parking_key" translatable="false">favorite_parking</string>
+    <string name="hour_rate_key" translatable="false">hour_rate</string>
+    <string name="map_type" translatable="false">map_type</string>
+    <string name="parking_spot_active" translatable="false">parking_spot_active</string>
+    <string name="onboarding_completed_key" translatable="false">onboarding_completed</string>
+    <string name="location_accuracy_key" translatable="false">location_accuracy</string>
 
     <!--Internal keys are used with PreferenceScreen widgets, but they store a different type of
     objects than the ones we desire. For that reason, we are using similar ones inside
     DevicePreferences to avoid incompatibility issues.-->
-    <string name="internal_exclusion_zone_key">androidx_exclusion_zone</string>
-    <string name="internal_hour_rate_key">androidx_hour_rate</string>
+    <string name="internal_exclusion_zone_key" translatable="false">androidx_exclusion_zone</string>
+    <string name="internal_hour_rate_key" translatable="false">androidx_hour_rate</string>
 
 </resources>
