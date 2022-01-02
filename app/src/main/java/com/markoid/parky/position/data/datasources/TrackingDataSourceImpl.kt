@@ -24,6 +24,9 @@ class TrackingDataSourceImpl
     override suspend fun getCurrentLocation(): Location =
         this.positionManager.requestSingleLocation()
 
+    override suspend fun getLocationWithSamples(samples: Int): Location =
+        positionManager.requestLocationWithSamples(samples)
+
     override fun getRealTimeLocation(): Flow<Location> =
         positionManager.observeLocationUpdates()
 

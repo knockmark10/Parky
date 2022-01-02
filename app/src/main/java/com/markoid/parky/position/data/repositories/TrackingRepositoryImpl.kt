@@ -18,6 +18,9 @@ class TrackingRepositoryImpl @Inject constructor(
     override suspend fun getCurrentLocation(): Location =
         trackingDataSource.getCurrentLocation()
 
+    override suspend fun getLocationWithSamples(samples: Int): Location =
+        trackingDataSource.getLocationWithSamples(samples)
+
     override fun getRealTimeLocation(): Flow<Location> =
         trackingDataSource.getRealTimeLocation()
 

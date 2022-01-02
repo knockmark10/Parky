@@ -8,5 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface TrackingRepository {
     suspend fun translateCoordinates(location: LatLng): PositionEntity
     suspend fun getCurrentLocation(): Location
+    suspend fun getLocationWithSamples(samples: Int): Location
     fun getRealTimeLocation(): Flow<Location>
 }

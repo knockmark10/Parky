@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TrackingDataSource {
     suspend fun getCurrentLocation(): Location
+    suspend fun getLocationWithSamples(samples: Int): Location
     fun getRealTimeLocation(): Flow<Location>
     suspend fun translateCoordinatesWithAndroidApi(location: LatLng): List<Address>
     suspend fun translateCoordinatesWithBigDataCloud(location: LatLng): BigDataCloudResponse

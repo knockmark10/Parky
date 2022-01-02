@@ -49,7 +49,7 @@ class SaveParkingSpotAutoUseCase
         if (isThereAnyParkingSpotActive() || bluetoothDeviceDoesNotMatch(request))
             return AutoParkingSpotStatus.SkipDisconnectionEvent
         // Get user's current location
-        val location = trackingRepository.getCurrentLocation()
+        val location = trackingRepository.getLocationWithSamples(5)
         // Check accuracy
         if (location.accuracy > devicePreferences.locationAccuracy)
             return AutoParkingSpotStatus.LocationAccuracyNotMet
