@@ -72,16 +72,17 @@ class PositionManager(
      * highest accuracy. As the current interval is set to a request every 1 second, this method
      * will take [samples] long to complete.
      */
-    suspend fun requestLocationWithSamples(samples: Int): Location = suspendCancellableCoroutine { task ->
+    suspend fun requestLocationWithSamples(
+        samples: Int
+    ): Location = suspendCancellableCoroutine { task ->
         val locationList = mutableListOf<Location>()
         val client = LocationServices.getFusedLocationProviderClient(mContext)
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 // Ignore any null response
                 val location: Location = locationResult?.lastLocation ?: return
-                if (locationList.size < samples) {
-                    locationList.add(location)
-                } else {
+                locationList.add(location)
+                if (locationList.size >= samples) {
                     stopLocationUpdates()
                     val mostAccurateLocation = locationList.minByOrNull { it.accuracy }!!
                     task.resume(mostAccurateLocation)
