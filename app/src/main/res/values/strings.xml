@@ -88,6 +88,7 @@
     <string name="parking_spot_saved_successfully">Parking spot has been saved successfully!</string>
     <string name="parking_spot_updated_successfully">Parking spot has been updated successfully!</string>
     <string name="alarm_not_set">Alarm was not set</string>
+    <string name="add_parking_car_found_message">You have found your car. Would you like to finish this parking spot?</string>
 
     <!--Colors-->
     <string name="yellow">Yellow</string>

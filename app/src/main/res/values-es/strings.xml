@@ -87,6 +87,7 @@
     <string name="parking_spot_saved_successfully">¡Tu lugar de estacionamineto ha sido guardado exitosamente!</string>
     <string name="parking_spot_updated_successfully">¡Tu lugar de estacionamiento ha sido actualizado exitosamente!</string>
     <string name="alarm_not_set">La alarma no se ha establecido</string>
+    <string name="add_parking_car_found_message">Encontraste tu vehículo. ¿Te gustaría terminar tu lugar de aparcado?</string>
 
     <!--Colors-->
     <string name="yellow">Amarillo</string>

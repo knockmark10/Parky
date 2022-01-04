@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import com.markoid.parky.core.presentation.dialogs.AbstractBottomSheetDialog
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.databinding.DialogAppBinding
 
 class AppDialog : AbstractBottomSheetDialog<DialogAppBinding>(), AppDialogInterface {
 
+    private var isShowing: Boolean = false
+
     override var isDialogCancelable: Boolean = false
+
+    override val isDialogShowing: Boolean
+        get() = isShowing
 
     override var message: String = ""
 
@@ -40,7 +46,13 @@ class AppDialog : AbstractBottomSheetDialog<DialogAppBinding>(), AppDialogInterf
             .setOnClickListener { negativeListener?.invoke(this) ?: dismiss() }
     }
 
+    override fun show(manager: FragmentManager, tag: String?) {
+        isShowing = true
+        super.show(manager, tag)
+    }
+
     override fun close() {
         super.dismiss()
+        isShowing = false
     }
 }

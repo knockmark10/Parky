@@ -21,6 +21,7 @@ class GetLocationUpdatesWithParkingSpotDistanceUseCase
             .map { Pair(it, getDistance(it.latLng, parkingSpotLocation)) }
             .map {
                 LocationUpdatesResponse(
+                    it.second,
                     getDistanceFormatted(it.second),
                     it.first.latLng,
                     getTimeFormatted(it.second, it.first.speed),

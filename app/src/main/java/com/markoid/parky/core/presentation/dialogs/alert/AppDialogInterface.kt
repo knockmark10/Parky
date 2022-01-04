@@ -7,6 +7,7 @@ typealias OnNegativeListener = AppDialogInterface.() -> Unit
 
 interface AppDialogInterface {
     var isDialogCancelable: Boolean
+    val isDialogShowing: Boolean
     var message: String
     var type: AlertType
     var positiveListener: OnPositiveListener?

@@ -14,6 +14,8 @@ import com.markoid.parky.core.presentation.dialogs.alert.AppDialogInterface
 import com.markoid.parky.core.presentation.entities.XDate
 import com.markoid.parky.core.presentation.entities.XTime
 import org.joda.time.DateTime
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 @Suppress("UNCHECKED_CAST")
 fun <F : Fragment> AppCompatActivity.findFragmentByClassName(fragmentClass: Class<F>): F? {
@@ -104,4 +106,19 @@ fun Fragment.appAlert(block: AppDialogInterface.() -> Unit) {
 
 fun Fragment.ensureAdded(contract: Fragment.() -> Unit) {
     if (isAdded) contract(this)
+}
+
+fun appAlertDelegate(block: AppDialogInterface.() -> Unit): ReadWriteProperty<Any, AppDialog> {
+    return object : ReadWriteProperty<Any, AppDialog> {
+        var dialog = AppDialog()
+
+        override fun setValue(thisRef: Any, property: KProperty<*>, value: AppDialog) {
+            // No operation needed
+        }
+
+        override fun getValue(thisRef: Any, property: KProperty<*>): AppDialog {
+            block(dialog)
+            return dialog
+        }
+    }
 }

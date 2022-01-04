@@ -17,6 +17,7 @@ import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
+import com.markoid.parky.core.presentation.extensions.appAlertDelegate
 import com.markoid.parky.core.presentation.extensions.ensureAdded
 import com.markoid.parky.core.presentation.extensions.findMapById
 import com.markoid.parky.core.presentation.extensions.launchWhenStartedCatching
@@ -56,6 +57,15 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
     private var mGoogleMap: GoogleMap? = null
 
     private var parkingSpot: ParkingSpotEntity? = null
+
+    private var hasCarFoundDialogBeenDisplayed: Boolean = false
+
+    private val carFoundDialog by appAlertDelegate {
+        type = AlertType.Info
+        message = getString(R.string.add_parking_car_found_message)
+        positiveListener = { archiveParking() }
+        negativeListener = { close() }
+    }
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -217,11 +227,12 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
 
     private fun setRealTimeData(data: LocationUpdatesResponse) {
         binding.time.text = data.time
-        binding.distance.text = data.distance
+        binding.distance.text = data.distanceWithDisplayFormat
         binding.speed.text = data.speedKph
         val locationList: List<LatLng> = parkingSpot?.let { listOf(it.latLng, data.userLocation) }
             ?: listOf(data.userLocation)
         mGoogleMap?.centerWithLatLngList(resources, locationList)
+        checkDistanceToFinishParking(data.distance)
     }
 
     private fun archiveParking() {
@@ -237,6 +248,16 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
                 }
                 is DataState.Error -> showError(it.error)
             }
+        }
+    }
+
+    private fun checkDistanceToFinishParking(distance: Double) = ensureAdded {
+        if (distance < 5.0 &&
+            carFoundDialog.isDialogShowing.not() &&
+            hasCarFoundDialogBeenDisplayed.not()
+        ) {
+            carFoundDialog.show(childFragmentManager)
+            hasCarFoundDialogBeenDisplayed = true
         }
     }
 
