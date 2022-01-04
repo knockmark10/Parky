@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.markoid.parky.R
@@ -27,7 +28,7 @@ import com.markoid.parky.permissions.presentation.enums.LocationPermissions
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -54,6 +55,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupThemePreference()
 
         setupDarkModePreference()
+
+        setupAutoDetectionCategory()
 
         setupAutoParkingPreference()
 
@@ -127,7 +130,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setupAutoParkingPreference() {
         findPreference<SwitchPreference>(getString(R.string.auto_detection_enabled_key))?.let {
-            it.isEnabled = BluetoothAdapter.getDefaultAdapter() != null
             it.setOnPreferenceChangeListener { _, newValue ->
                 viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                     val isPermissionGranted: Boolean =
@@ -143,7 +145,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
         }
-        changeAutoDetectionParametersAvailability(devicePreferences.isAutoParkingDetectionEnabled)
+    }
+
+    private fun setupAutoDetectionCategory() {
+        findPreference<PreferenceCategory>(getString(R.string.preference_auto_detection_key))
+            ?.isVisible = BluetoothAdapter.getDefaultAdapter() != null
     }
 
     private fun changeAutoDetectionParametersAvailability(isEnabled: Boolean) {

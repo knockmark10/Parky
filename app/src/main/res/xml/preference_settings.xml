@@ -37,7 +37,9 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Automatic Detection">
+    <PreferenceCategory
+        android:key="@string/preference_auto_detection_key"
+        android:title="Automatic Detection">
 
         <SwitchPreference
             android:defaultValue="false"
