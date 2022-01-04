@@ -100,22 +100,18 @@ class UserLocationFragment : HomeBaseFragment<FragmentUserLocationBinding>() {
         }
     }
 
-    private fun displayParkingSpotDeletedSuccessfully() {
-        appAlert {
-            type = AlertType.Success
-            message = getString(R.string.parking_spot_deleted_successful_message)
-            positiveListener = {
-                close()
-                requireActivity().onBackPressed()
-            }
+    private fun displayParkingSpotDeletedSuccessfully(): Unit = appAlert {
+        type = AlertType.Success
+        message = getString(R.string.parking_spot_deleted_successful_message)
+        positiveListener = {
+            close()
+            requireActivity().onBackPressed()
         }
     }
 
-    private fun showError(error: String) {
-        appAlert {
-            message = error
-            type = AlertType.Error
-        }
+    private fun showError(error: String): Unit = appAlert {
+        message = error
+        type = AlertType.Error
     }
 
     private fun changeMapType(type: Int) {
