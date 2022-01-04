@@ -2,6 +2,8 @@ package com.markoid.parky.home.domain.usecases
 
 import android.content.res.Resources
 import com.markoid.parky.core.domain.usecases.UseCase
+import com.markoid.parky.core.presentation.extensions.minutes
+import com.markoid.parky.core.presentation.extensions.seconds
 import com.markoid.parky.home.data.extensions.latLng
 import com.markoid.parky.home.domain.repositories.ParkingRepository
 import com.markoid.parky.home.domain.usecases.response.HourRateResponse
@@ -74,15 +76,22 @@ class GetHourRateDataUseCase
     }
 
     private fun getTotal(parkingTime: DateTime, hourRate: Double): String {
+        // Calculate the parking duration time
         val parkingDuration = Duration(parkingTime, DateTime.now())
+        // Initialize our total
         var total = 0.0
+        // Check for fifteen minute tolerance
+        val isFifteenMinuteToleranceActive = parkingDuration.isShorterThan(15.minutes)
+        // Calculate the hour rate for the hours parked
         if (parkingDuration.standardHours >= 1) {
             total = hourRate * parkingDuration.standardHours
             parkingDuration.minus(parkingDuration.standardHours)
         }
-        if (parkingDuration.standardMinutes >= 1 || parkingDuration.standardSeconds >= 1) {
+        // When tolerance is not active, add the hour rate to the total is there is a second on the clock
+        if (isFifteenMinuteToleranceActive.not() && parkingDuration.isLongerThan(1.seconds)) {
             total += hourRate
         }
+        // Return formatted hour rate
         return StringBuilder().append("$").append(String.format("%.2f", total)).toString()
     }
 }
