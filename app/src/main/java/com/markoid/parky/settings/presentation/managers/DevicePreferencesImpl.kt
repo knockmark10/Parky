@@ -47,6 +47,14 @@ class DevicePreferencesImpl
     override val darkModeTheme: Int
         get() = (getPreference(R.string.dark_mode_key, false)).asTheme()
 
+    override var cleanUpAfterDays: Int
+        get() {
+            // This value gets saved as string. So we need to treat it as string
+            val stringPreference = getPreference(R.string.clean_up_parking_spot_key, "30")
+            return stringPreference.toInt()
+        }
+        set(value) = setPreference(R.string.clean_up_parking_spot_key, value.toString())
+
     override var isDarkModeEnabled: Boolean
         get() = getPreference(R.string.dark_mode_key, false)
         set(value) = setPreference(R.string.dark_mode_key, value)

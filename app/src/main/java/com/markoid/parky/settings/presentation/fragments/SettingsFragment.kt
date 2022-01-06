@@ -28,7 +28,7 @@ import com.markoid.parky.permissions.presentation.enums.LocationPermissions
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,6 +55,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupThemePreference()
 
         setupDarkModePreference()
+
+        setupParkingSpotCleaningPreference()
 
         setupAutoDetectionCategory()
 
@@ -123,6 +125,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val theme = if (newValue as Boolean) AppCompatDelegate.MODE_NIGHT_YES
                 else AppCompatDelegate.MODE_NIGHT_NO
                 AppCompatDelegate.setDefaultNightMode(theme)
+                true
+            }
+        }
+    }
+
+    private fun setupParkingSpotCleaningPreference() {
+        findPreference<ListPreference>(getString(R.string.clean_up_parking_spot_key))?.apply {
+            summary = String.format(
+                getString(R.string.clean_up_spot_summary),
+                devicePreferences.cleanUpAfterDays
+            )
+            val entriesList = resources.getStringArray(R.array.clean_up_values).toList()
+            val index = entriesList.indexOf(devicePreferences.cleanUpAfterDays.toString())
+            setValueIndex(index)
+            setOnPreferenceChangeListener { _, newValue ->
+                summary = String.format(
+                    getString(R.string.clean_up_spot_summary),
+                    (newValue as String).toInt()
+                )
                 true
             }
         }

@@ -119,6 +119,8 @@
     <string name="default_theme">Theme_Parky</string>
     <string name="app_language_title">Language</string>
     <string name="app_language_summary">Choose the app language to be displayed</string>
+    <string name="clean_up_spot_title">Delete Archived Spots</string>
+    <string name="clean_up_spot_summary">Remove archived parking spots after %d days</string>
 
     <string-array name="theme_names">
         <item>Default</item>
@@ -142,6 +144,22 @@
     <string-array name="language_values">
         <item>@string/english_language</item>
         <item>@string/spanish_language</item>
+    </string-array>
+
+    <string-array name="clean_up_names">
+        <item>15 days</item>
+        <item>30 days</item>
+        <item>45 days</item>
+        <item>60 days</item>
+        <item>90 days</item>
+    </string-array>
+
+    <string-array name="clean_up_values">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>90</item>
     </string-array>
 
     <!--Animations-->

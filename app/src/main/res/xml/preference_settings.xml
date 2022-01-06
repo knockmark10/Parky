@@ -4,11 +4,6 @@
 
     <PreferenceCategory android:title="General">
 
-        <Preference
-            android:key="@string/map_type"
-            android:summary="@string/map_type_summary"
-            android:title="@string/map_type_title" />
-
         <ListPreference
             android:entries="@array/language_names"
             android:entryValues="@array/language_values"
@@ -27,6 +22,18 @@
             android:key="@string/dark_mode_key"
             android:summary="@string/dark_mode_summary"
             android:title="@string/dark_mode_title" />
+
+        <Preference
+            android:key="@string/map_type"
+            android:summary="@string/map_type_summary"
+            android:title="@string/map_type_title" />
+
+        <ListPreference
+            android:entries="@array/clean_up_names"
+            android:entryValues="@array/clean_up_values"
+            android:key="@string/clean_up_parking_spot_key"
+            android:summary="@string/clean_up_spot_summary"
+            android:title="@string/clean_up_spot_title" />
 
         <SwitchPreference
             android:defaultValue="false"

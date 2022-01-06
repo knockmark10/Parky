@@ -63,6 +63,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
 
+    // Workers
+    implementation "androidx.work:work-runtime-ktx:2.6.0"
+
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
@@ -86,6 +89,10 @@ dependencies {
     // Dependency Injection
     implementation "com.google.dagger:hilt-android:$dagger_hilt"
     kapt "com.google.dagger:hilt-android-compiler:$dagger_hilt"
+
+    // Hilt with Jetpack
+    implementation 'androidx.hilt:hilt-work:1.0.0'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
     // Others
     implementation 'com.airbnb.android:lottie:4.2.2'

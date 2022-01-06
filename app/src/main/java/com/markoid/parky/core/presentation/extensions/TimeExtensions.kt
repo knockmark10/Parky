@@ -1,6 +1,7 @@
 package com.markoid.parky.core.presentation.extensions
 
 import com.markoid.parky.home.presentation.viewmodels.entities.RemainingTime
+import org.joda.time.DateTime
 import org.joda.time.Duration
 
 fun Duration.toTimer(): RemainingTime {
@@ -21,6 +22,8 @@ fun Duration.toTimer(): RemainingTime {
     remainingTime.seconds = timer.standardSeconds
     return remainingTime
 }
+
+fun DateTime.untilToday(): Duration = Duration(this, DateTime.now())
 
 val Int.days
     get() = Duration.standardDays(this.toLong())

@@ -3,6 +3,7 @@ package com.markoid.parky.settings.presentation.managers
 interface DevicePreferences {
     var bluetoothDevice: String
     val darkModeTheme: Int
+    var cleanUpAfterDays: Int
     var isAutoParkingDetectionEnabled: Boolean
     var isBackgroundLocationEnabled: Boolean
     var isDarkModeEnabled: Boolean

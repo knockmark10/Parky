@@ -118,6 +118,8 @@
     <string name="default_theme">Default Parky</string>
     <string name="app_language_title">Idioma</string>
     <string name="app_language_summary">Escoge el lenguage de la aplicación para ser mostrada</string>
+    <string name="clean_up_spot_title">Eliminar Lugares Archivados</string>
+    <string name="clean_up_spot_summary">Remover lugares de estacionamineto archivados después de %d días</string>
 
     <string-array name="theme_names">
         <item>Default</item>
@@ -141,6 +143,22 @@
     <string-array name="language_values">
         <item>@string/english_language</item>
         <item>@string/spanish_language</item>
+    </string-array>
+
+    <string-array name="clean_up_names">
+        <item>15 días</item>
+        <item>30 días</item>
+        <item>45 días</item>
+        <item>60 días</item>
+        <item>90 días</item>
+    </string-array>
+
+    <string-array name="clean_up_values">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>90</item>
     </string-array>
 
     <!--Animations-->

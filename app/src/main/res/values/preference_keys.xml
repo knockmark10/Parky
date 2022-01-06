@@ -14,6 +14,7 @@
     <string name="onboarding_completed_key" translatable="false">onboarding_completed</string>
     <string name="location_accuracy_key" translatable="false">location_accuracy</string>
     <string name="language_key" translatable="false">language</string>
+    <string name="clean_up_parking_spot_key" translatable="false">clean_up_parking_spot</string>
 
     <string name="preference_auto_detection_key" translatable="false">pref_auto_detection</string>
 
