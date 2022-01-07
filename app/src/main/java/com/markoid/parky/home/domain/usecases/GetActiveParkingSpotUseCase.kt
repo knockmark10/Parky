@@ -12,4 +12,5 @@ class GetActiveParkingSpotUseCase
 
     override suspend fun onExecute(request: Unit): ParkingSpotEntity =
         parkingRepository.getActiveParkingSpot()
+            ?: throw IllegalStateException("No active parking spots at the moment.")
 }

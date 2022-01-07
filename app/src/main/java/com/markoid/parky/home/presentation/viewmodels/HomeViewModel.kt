@@ -8,7 +8,6 @@ import com.markoid.parky.core.presentation.observers.UseCaseObserver
 import com.markoid.parky.core.presentation.viewmodels.AbstractViewModel
 import com.markoid.parky.home.data.entities.ExclusionZoneEntity
 import com.markoid.parky.home.data.entities.ParkingSpotEntity
-import com.markoid.parky.home.domain.UpdateExclusionZoneUseCase
 import com.markoid.parky.home.domain.usecases.DeleteExclusionZoneUseCase
 import com.markoid.parky.home.domain.usecases.DeleteParkingSpotUseCase
 import com.markoid.parky.home.domain.usecases.FinishParkingUseCase
@@ -20,6 +19,7 @@ import com.markoid.parky.home.domain.usecases.GetParkingHistoryUseCase
 import com.markoid.parky.home.domain.usecases.GetRealTimeLocationUseCase
 import com.markoid.parky.home.domain.usecases.SaveParkingSpotUseCase
 import com.markoid.parky.home.domain.usecases.TakeCarPictureUseCase
+import com.markoid.parky.home.domain.usecases.UpdateExclusionZoneUseCase
 import com.markoid.parky.home.domain.usecases.UpdateParkingSpotUseCase
 import com.markoid.parky.home.domain.usecases.request.ParkingSpotRequest
 import com.markoid.parky.home.domain.usecases.response.HourRateResponse

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import androidx.core.content.ContextCompat
+import com.markoid.parky.core.presentation.extensions.isServiceRunning
 import com.markoid.parky.core.presentation.notifications.AppNotificationManager
 import com.markoid.parky.home.presentation.receivers.BluetoothReceiver
 import dagger.hilt.android.AndroidEntryPoint
@@ -72,5 +73,8 @@ class BluetoothService : Service() {
             stopIntent.action = ACTION_STOP_SERVICE
             ContextCompat.startForegroundService(context, stopIntent)
         }
+
+        fun isServiceRunning(context: Context): Boolean = context
+            .isServiceRunning(BluetoothService::class.java)
     }
 }

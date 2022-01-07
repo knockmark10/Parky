@@ -4,6 +4,7 @@ enum class AppNotificationType {
     AutoParkingSpotRequiresUserInteraction,
     AutoParkingSpotMissingData,
     AutoParkingSpotSuccessful,
+    AutoArchivedParkingSpot,
     Bluetooth,
     ReminderAlarm
 }

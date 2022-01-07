@@ -9,6 +9,7 @@ import com.markoid.parky.home.presentation.activities.HomeActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
+private const val AUTO_ARCHIVED_PARKING_SPOT_REQUEST_CODE = 1004
 private const val AUTO_PARKING_REQUEST_CODE = 1002
 private const val BLUETOOTH_REQUEST_CODE = 1003
 private const val REMINDER_NOTIFICATION_REQUEST_CODE = 1001
@@ -24,6 +25,7 @@ class NotificationIntentFactory
         type: AppNotificationType,
         request: ParkingSpotRequest? = null
     ): PendingIntent = when (type) {
+        AppNotificationType.AutoArchivedParkingSpot -> getAutoArchivedParkingSpotIntent()
         AppNotificationType.AutoParkingSpotMissingData -> getAutoParkingMissingDataIntent(request!!)
         AppNotificationType.AutoParkingSpotRequiresUserInteraction -> getAutoParkingRequiresUserInteractionIntent()
         AppNotificationType.AutoParkingSpotSuccessful -> getAutoParkingSavedIntent()
@@ -67,6 +69,17 @@ class NotificationIntentFactory
         return PendingIntent.getActivity(
             context,
             AUTO_PARKING_REQUEST_CODE,
+            redirectIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+    }
+
+    private fun getAutoArchivedParkingSpotIntent(): PendingIntent {
+        val redirectIntent = homeActivityIntent
+            .apply { flags = Intent.FLAG_ACTIVITY_CLEAR_TOP }
+        return PendingIntent.getActivity(
+            context,
+            AUTO_ARCHIVED_PARKING_SPOT_REQUEST_CODE,
             redirectIntent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )

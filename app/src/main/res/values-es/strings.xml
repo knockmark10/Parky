@@ -203,6 +203,8 @@
     <string name="auto_parking_missing_data_notification_message">Hacen falta algunos datos para tu lugar de estacionamiento. Presiona aquí para completarlo.</string>
     <string name="auto_parking_requires_user_interaction_title">Interacción del usuario requerida</string>
     <string name="auto_parking_requires_user_interaction_message">Ubicación imprecisa recibida. Por favor haga un guardado manual presionando esta notificación.</string>
+    <string name="auto_archived_parking_spot_title">Lugar de estacionamiento archivado</string>
+    <string name="auto_archived_parking_spot_message">Hemos detectado que has encontrado tu auto. El lugar de estacionamiento ha sido archivado y el servicio de bluetooth se ha detenido.</string>
 
     <!--Exclusion Zones-->
     <string name="exclusion_zones_title">Zonas de Exclusión</string>

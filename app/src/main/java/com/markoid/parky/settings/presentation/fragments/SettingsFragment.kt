@@ -150,8 +150,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setupAutoParkingPreference() {
-        findPreference<SwitchPreference>(getString(R.string.auto_detection_enabled_key))?.let {
-            it.setOnPreferenceChangeListener { _, newValue ->
+        findPreference<SwitchPreference>(getString(R.string.auto_detection_enabled_key))?.apply {
+            // Update the preference according to the service's running state
+            devicePreferences.isAutoParkingDetectionEnabled =
+                BluetoothService.isServiceRunning(requireContext())
+            // Set the state of the switch according to the service's status
+            isChecked = devicePreferences.isAutoParkingDetectionEnabled
+            setOnPreferenceChangeListener { _, newValue ->
                 viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                     val isPermissionGranted: Boolean =
                         permissionController.onRequestPermission(LocationPermissions.BackgroundLocation)
@@ -160,7 +165,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         if (newValue) BluetoothService.startBluetoothService(requireContext())
                         else BluetoothService.stopBluetoothService(requireContext())
                     } else {
-                        it.isChecked = false
+                        isChecked = false
                     }
                 }
                 true

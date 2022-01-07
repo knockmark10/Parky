@@ -5,7 +5,6 @@ import com.markoid.parky.core.domain.usecases.UseCase
 import com.markoid.parky.core.presentation.extensions.minutes
 import com.markoid.parky.core.presentation.extensions.seconds
 import com.markoid.parky.home.data.extensions.latLng
-import com.markoid.parky.home.domain.repositories.ParkingRepository
 import com.markoid.parky.home.domain.usecases.response.HourRateResponse
 import com.markoid.parky.home.presentation.enums.ParkingFloorType
 import org.joda.time.DateTime
@@ -14,12 +13,12 @@ import javax.inject.Inject
 
 class GetHourRateDataUseCase
 @Inject constructor(
-    private val parkingRepository: ParkingRepository,
+    private val getParkingSpotUseCase: GetActiveParkingSpotUseCase,
     private val resources: Resources
 ) : UseCase<HourRateResponse, Unit>() {
 
     override suspend fun onExecute(request: Unit): HourRateResponse {
-        val spot = parkingRepository.getActiveParkingSpot()
+        val spot = getParkingSpotUseCase.onExecute(Unit)
         return HourRateResponse(
             spot.address,
             getFloorLabel(spot.floorNumber, spot.floorType!!),

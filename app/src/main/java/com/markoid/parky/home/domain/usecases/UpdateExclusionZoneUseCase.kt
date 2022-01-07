@@ -1,4 +1,4 @@
-package com.markoid.parky.home.domain
+package com.markoid.parky.home.domain.usecases
 
 import com.markoid.parky.core.domain.usecases.UseCase
 import com.markoid.parky.home.domain.repositories.ExclusionZoneRepository

@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.markoid.parky.R
 import com.markoid.parky.core.presentation.extensions.resolveColor
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoArchivedParkingSpot
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotMissingData
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotRequiresUserInteraction
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotSuccessful
@@ -27,6 +28,7 @@ class NotificationFactory
         channelId: String,
         incompleteRequest: ParkingSpotRequest? = null
     ): NotificationCompat.Builder = when (type) {
+        AutoArchivedParkingSpot -> getAutoArchivedParkingSpotBuilder(channelId)
         AutoParkingSpotMissingData ->
             getAutoParkingMissingDataBuilder(channelId, incompleteRequest!!)
         AutoParkingSpotSuccessful -> getAutoParkingSuccessfulBuilder(channelId)
@@ -96,6 +98,20 @@ class NotificationFactory
             )
             .setContentIntent(pendingIntent)
             .setOngoing(true)
+    }
+
+    private fun getAutoArchivedParkingSpotBuilder(channelId: String): NotificationCompat.Builder {
+        val pendingIntent: PendingIntent = notificationIntentFactory
+            .getPendingIntentByNotificationType(AutoArchivedParkingSpot)
+        return getCommonNotification(channelId, regularVibrationPattern)
+            .setSmallIcon(R.drawable.ic_parking)
+            .setContentTitle(context.getString(R.string.auto_archived_parking_spot_title))
+            .setContentText(context.getString(R.string.auto_archived_parking_spot_message))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(context.getString(R.string.auto_archived_parking_spot_message))
+            )
+            .setContentIntent(pendingIntent)
     }
 
     private fun getReminderAlarmBuilder(channelId: String): NotificationCompat.Builder {

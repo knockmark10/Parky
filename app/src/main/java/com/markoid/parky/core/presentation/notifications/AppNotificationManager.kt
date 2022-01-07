@@ -4,11 +4,13 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.os.Build
 import androidx.core.app.NotificationManagerCompat
+import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoArchivedParkingSpot
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotMissingData
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotRequiresUserInteraction
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.AutoParkingSpotSuccessful
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.Bluetooth
 import com.markoid.parky.core.presentation.notifications.AppNotificationType.ReminderAlarm
+import com.markoid.parky.core.presentation.notifications.NotificationConstants.AUTO_ARCHIVED_PARKING_CHANNEL_ID
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.AUTO_PARKING_CHANNEL_ID
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.BLUETOOTH_CHANNEL_ID
 import com.markoid.parky.core.presentation.notifications.NotificationConstants.REMINDER_ALARM_CHANNEL_ID
@@ -83,6 +85,17 @@ class AppNotificationManager @Inject constructor(
         notificationManagerCompat.notify(generateNewId(), notificationBuilder.build())
     }
 
+    fun displayAutoArchivedParkingSpot() {
+        val channelId = createNotificationChannel(AutoArchivedParkingSpot)
+        val notificationBuilder = notificationFactory.getNotificationBuilderByType(
+            type = AutoArchivedParkingSpot,
+            channelId = channelId
+        )
+
+        // Show a notification
+        notificationManagerCompat.notify(generateNewId(), notificationBuilder.build())
+    }
+
     /**
      * This will be the notification displayed when
      * [com.markoid.parky.home.presentation.services.BluetoothService] is running.
@@ -108,6 +121,7 @@ class AppNotificationManager @Inject constructor(
     private fun getChannelIdByType(type: AppNotificationType): String = when (type) {
         Bluetooth -> BLUETOOTH_CHANNEL_ID
         ReminderAlarm -> REMINDER_ALARM_CHANNEL_ID
+        AutoArchivedParkingSpot -> AUTO_ARCHIVED_PARKING_CHANNEL_ID
         AutoParkingSpotMissingData,
         AutoParkingSpotRequiresUserInteraction,
         AutoParkingSpotSuccessful -> AUTO_PARKING_CHANNEL_ID

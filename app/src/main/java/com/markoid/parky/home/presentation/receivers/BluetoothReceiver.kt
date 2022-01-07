@@ -32,8 +32,10 @@ class BluetoothReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent?.action.equals(BluetoothDevice.ACTION_ACL_CONNECTED, true)) {
             saveBluetoothDeviceName(intent)
+            considerArchivingParkingSpot()
         }
         if (intent?.action.equals(BluetoothDevice.ACTION_ACL_DISCONNECTED, true)) {
+            saveBluetoothDeviceName(intent)
             saveAutoParkingSpot()
         }
     }
@@ -69,5 +71,19 @@ class BluetoothReceiver : BroadcastReceiver() {
             ?.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
             ?.name
             ?: "Unknown device"
+    }
+
+    private fun considerArchivingParkingSpot() {
+        coroutineScope.launch {
+            viewModel.archiveParkingSpotOnConnection(deviceName)
+                .getResult()
+                .collect {
+                    when (it) {
+                        is DataState.Data -> if (it.data)
+                            notificationManager.displayAutoArchivedParkingSpot()
+                        is DataState.Error -> Log.e("BluetoothReceiver", it.error)
+                    }
+                }
+        }
     }
 }

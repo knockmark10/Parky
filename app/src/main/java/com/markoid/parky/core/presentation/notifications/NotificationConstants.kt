@@ -5,9 +5,10 @@ object NotificationConstants {
     /**
      * CHANNEL PARAMETERS
      */
-    const val REMINDER_ALARM_CHANNEL_ID = "ReminderAlarmId"
+    const val AUTO_ARCHIVED_PARKING_CHANNEL_ID = "ArchiveParkingSpotId"
     const val AUTO_PARKING_CHANNEL_ID = "AutoParkingSpotId"
     const val BLUETOOTH_CHANNEL_ID = "BluetoothId"
+    const val REMINDER_ALARM_CHANNEL_ID = "ReminderAlarmId"
 
     /**
      * INTENT ARGUMENT KEYS

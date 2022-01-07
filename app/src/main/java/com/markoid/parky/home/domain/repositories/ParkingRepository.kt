@@ -7,7 +7,7 @@ interface ParkingRepository {
     suspend fun archiveParkingSpot(parkingSpot: ParkingSpotEntity)
     suspend fun deleteParkingSpot(spotId: Long)
     suspend fun finishParking(spotId: Long)
-    suspend fun getActiveParkingSpot(): ParkingSpotEntity
+    suspend fun getActiveParkingSpot(): ParkingSpotEntity?
     suspend fun getAllParkingSpots(): List<ParkingSpotEntity>
     suspend fun getArchivedParkingSpots(): List<ParkingSpotEntity>
     suspend fun saveParkingSpotIntoDatabase(parkingSpot: ParkingSpotRequest): Long

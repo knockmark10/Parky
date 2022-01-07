@@ -18,9 +18,9 @@ class ParkingDataSourceImpl
         parkingSpotDao.updateParkingStatus(parkingSpotId, ParkingSpotStatus.Archived)
     }
 
-    override suspend fun getActiveParkingSpot(): ParkingSpotEntity = this.parkingSpotDao
+    override suspend fun getActiveParkingSpot(): ParkingSpotEntity? = this.parkingSpotDao
         .getParkingSpotByStatus(ParkingSpotStatus.Active.name)
-        ?.firstOrNull() ?: throw IllegalStateException("No parking spot saved into database, ")
+        ?.firstOrNull()
 
     override suspend fun getAllParkingSpots(): List<ParkingSpotEntity> = this.parkingSpotDao
         .getAllParkingSpots() ?: emptyList()

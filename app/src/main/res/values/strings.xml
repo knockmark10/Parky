@@ -204,6 +204,8 @@
     <string name="auto_parking_missing_data_notification_message">Your parking spot is missing some parameters. Tap here to complete it.</string>
     <string name="auto_parking_requires_user_interaction_title">User actions required</string>
     <string name="auto_parking_requires_user_interaction_message">Inaccurate location was received. Please save the parking spot manually by tapping this notification.</string>
+    <string name="auto_archived_parking_spot_title">Parking spot archived</string>
+    <string name="auto_archived_parking_spot_message">We have detected that have found your car. The parking spot was archived and the bluetooth service has stopped.</string>
 
     <!--Exclusion Zones-->
     <string name="exclusion_zones_title">Exclusion Zones</string>

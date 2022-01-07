@@ -1,5 +1,6 @@
 package com.markoid.parky.core.presentation.extensions
 
+import android.app.ActivityManager
 import android.app.AlarmManager
 import android.app.NotificationManager
 import android.content.Context
@@ -15,6 +16,15 @@ val Context.alarmManager: AlarmManager
 
 val Context.notificationManager: NotificationManager
     get() = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+val Context.activityManager: ActivityManager
+    get() = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+
+@Suppress("DEPRECATION") // Deprecated for third party Services.
+fun <T> Context.isServiceRunning(service: Class<T>): Boolean = activityManager
+    .getRunningServices(Integer.MAX_VALUE)
+    ?.find { it.service.className == service.name }
+    ?.foreground == true
 
 fun Context.resolveColor(@ColorRes colorId: Int): Int =
     ContextCompat.getColor(this, colorId)

@@ -26,7 +26,7 @@ class ParkingRepositoryImpl
         parkingDataSource.finishParking(spotId)
     }
 
-    override suspend fun getActiveParkingSpot(): ParkingSpotEntity =
+    override suspend fun getActiveParkingSpot(): ParkingSpotEntity? =
         this.parkingDataSource.getActiveParkingSpot()
 
     override suspend fun getAllParkingSpots(): List<ParkingSpotEntity> =
