@@ -25,11 +25,11 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/add_parking_map_view"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:name="com.markoid.parky.core.presentation.views.MapScrollingView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintDimensionRatio="h, 16:9"
+            app:layout_constraintDimensionRatio="h, 14:9"
             app:layout_constraintTop_toBottomOf="@+id/add_parking_map_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

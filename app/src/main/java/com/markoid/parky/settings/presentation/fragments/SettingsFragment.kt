@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.os.Bundle
 import android.text.InputType
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -28,6 +29,7 @@ import com.markoid.parky.permissions.presentation.enums.LocationPermissions
 import com.markoid.parky.settings.presentation.managers.DevicePreferences
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import java.util.*
 import javax.inject.Inject
 
@@ -69,6 +71,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupHourRatePreference()
 
         setupExclusionZonePreference()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            delay(2000L)
+            findNavController().navigate(SettingsFragmentDirections.actionToExclusionZones())
+        }
     }
 
     private fun setupToolbar() {

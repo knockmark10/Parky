@@ -17,8 +17,9 @@ import com.markoid.parky.core.date.extensions.formatWith
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
 import com.markoid.parky.core.presentation.extensions.dateAndTimePickers
+import com.markoid.parky.core.presentation.extensions.disableScrolling
 import com.markoid.parky.core.presentation.extensions.ensureAdded
-import com.markoid.parky.core.presentation.extensions.findMapById
+import com.markoid.parky.core.presentation.extensions.findScrollingMapById
 import com.markoid.parky.core.presentation.extensions.longToast
 import com.markoid.parky.core.presentation.extensions.toDouble
 import com.markoid.parky.core.presentation.extensions.value
@@ -275,15 +276,17 @@ abstract class ParkingFormBaseFragment : HomeBaseFragment<FragmentAddParkingBind
     }
 
     private fun setupMap() =
-        childFragmentManager.findMapById(R.id.add_parking_map_view)?.getMapAsync {
-            this.mGoogleMap = it
-            it.mapType = GoogleMap.MAP_TYPE_HYBRID
-            when {
-                incompleteRequest != null -> fillIncompleteRequestData(incompleteRequest!!)
-                isEditMode -> fillParkingSpotToEdit(parkingSpotToEdit!!)
-                else -> onGetCurrentLocation()
+        childFragmentManager.findScrollingMapById(R.id.add_parking_map_view)
+            .disableScrolling(binding.contentScroll)
+            .getMapAsync {
+                mGoogleMap = it
+                it.mapType = GoogleMap.MAP_TYPE_HYBRID
+                when {
+                    incompleteRequest != null -> fillIncompleteRequestData(incompleteRequest!!)
+                    isEditMode -> fillParkingSpotToEdit(parkingSpotToEdit!!)
+                    else -> onGetCurrentLocation()
+                }
             }
-        }
 
     private fun handleValidationsSucceeded() {
         // Schedule alarm upon validations success

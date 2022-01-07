@@ -11,7 +11,8 @@ import com.markoid.parky.R
 import com.markoid.parky.core.data.enums.DataState
 import com.markoid.parky.core.presentation.enums.AlertType
 import com.markoid.parky.core.presentation.extensions.appAlert
-import com.markoid.parky.core.presentation.extensions.findMapById
+import com.markoid.parky.core.presentation.extensions.disableScrolling
+import com.markoid.parky.core.presentation.extensions.findScrollingMapById
 import com.markoid.parky.core.presentation.extensions.show
 import com.markoid.parky.core.presentation.extensions.subscribe
 import com.markoid.parky.core.presentation.extensions.verticalLayoutManager
@@ -21,6 +22,7 @@ import com.markoid.parky.home.presentation.fragments.HomeBaseFragment
 import com.markoid.parky.position.presentation.extensions.centerWithLatLngList
 import com.markoid.parky.position.presentation.extensions.drawCircle
 import com.markoid.parky.position.presentation.extensions.setDarkMode
+import com.markoid.parky.position.presentation.extensions.setMarker
 import com.markoid.parky.settings.presentation.adapters.ExclusionZonesAdapter
 import com.markoid.parky.settings.presentation.callbacks.ExclusionZoneDialogCallback
 import com.markoid.parky.settings.presentation.callbacks.ExclusionZonesAdapterCallback
@@ -55,8 +57,11 @@ class ExclusionZoneFragment :
         setupMap()
     }
 
-    private fun setupMap() =
-        childFragmentManager.findMapById(R.id.exclusion_zones_map)?.getMapAsync { handleMap(it) }
+    private fun setupMap() {
+        childFragmentManager.findScrollingMapById(R.id.exclusion_zones_map)
+            .disableScrolling(binding.root)
+            .getMapAsync { handleMap(it) }
+    }
 
     private fun handleMap(map: GoogleMap) {
         this.mGoogleMap = map
@@ -93,11 +98,13 @@ class ExclusionZoneFragment :
         mGoogleMap.clear()
         if (zones.isNotEmpty()) {
             zones.forEach {
+                val coordinates = LatLng(it.latitude, it.longitude)
                 mGoogleMap.drawCircle(
-                    location = LatLng(it.latitude, it.longitude),
+                    location = coordinates,
                     radius = it.radius,
                     fillColor = getResolvedColor(it.color.transparentColorId)
                 )
+                mGoogleMap.setMarker(requireContext(), coordinates, it.color.marker)
             }
             mGoogleMap.centerWithLatLngList(
                 resources,
