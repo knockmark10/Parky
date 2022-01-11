@@ -1,15 +1,18 @@
 package com.markoid.parky.core.presentation.modules
 
 import android.app.Application
+import android.content.Context
 import android.content.res.Resources
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.markoid.parky.R
+import com.markoid.parky.core.domain.interceptors.NetworkInterceptor
 import com.markoid.parky.core.presentation.annotations.AppOkHttp
 import com.markoid.parky.core.presentation.serializers.DateTimeSerializer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -39,14 +42,24 @@ class NetModule {
         return Cache(application.cacheDir, cacheSize)
     }
 
+    @Provides
+    @Singleton
+    fun provideNetworkInterceptor(
+        @ApplicationContext context: Context
+    ): NetworkInterceptor = NetworkInterceptor(context)
+
     @AppOkHttp
     @Provides
     @Singleton
-    fun providesOkHttpClient(cache: Cache): OkHttpClient = OkHttpClient.Builder()
+    fun providesOkHttpClient(
+        cache: Cache,
+        networkInterceptor: NetworkInterceptor
+    ): OkHttpClient = OkHttpClient.Builder()
         .readTimeout(TIMEOUT, TimeUnit.SECONDS)
         .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
         .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .addInterceptor(networkInterceptor)
         .cache(cache)
         .build()
 

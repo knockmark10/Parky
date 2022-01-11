@@ -5,6 +5,7 @@ import android.app.AlarmManager
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.net.ConnectivityManager
 import android.util.TypedValue
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 val Context.alarmManager: AlarmManager
     get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+val Context.connectivityManager: ConnectivityManager
+    get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
 val Context.notificationManager: NotificationManager
     get() = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
